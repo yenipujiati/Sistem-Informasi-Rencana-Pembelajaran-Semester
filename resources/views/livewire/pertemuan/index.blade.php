@@ -6,7 +6,7 @@
                 <th scope="col">MINGGU-KE</th>
                 <th scope="col">KEMAMPUAN AKHIR YANG DIHARAPKAN</th>
                 <th scope="col">BAHAN KAJIAN (MATERI PEMBELAJARAN)</th>
-                <th scope="col">METODE PEMBELAJARAN)</th>
+                <th scope="col">METODE PEMBELAJARAN</th>
                 <th scope="col">WAKTU</th>
                 <th scope="col">PENGALAMAN BELAJAR MAHASISWA</th>
                 <th scope="col">BOBOT NILAI (%)</th>

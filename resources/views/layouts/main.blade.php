@@ -75,7 +75,7 @@
                       <li><a href="{{ route('cplindex') }}">CPL</a></li>
                       <li><a href="{{ route('matakuliahindex') }}">Matakuliah</a></li>
                       <li><a href="{{ route('pertemuanindex') }}">Pertemuan</a></li>
-                      <li><a href="form_wizards.html">RPS</a></li>
+                      <li><a href="{{ route('rpsindex') }}">RPS</a></li>
                     </ul>
                   </li>
                 </ul>

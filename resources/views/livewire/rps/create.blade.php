@@ -34,7 +34,7 @@
                     <div class="col-md-max col-form-label">
                     @csrf
                         <select id="metode_pembelajaran" class="form-control @error('metode_pembelajaran') is-invalid @enderror" name="metode_pembelajaran" wire:model.defer="metode_pembelajaran">
-                            <option selected>Pilih Metode Pembelajaran</option>
+                            <option selected>Pilih Topik</option>
                             <option value="Ceramah">Ceramah</option>
                             <option value="Diskusi">Disusi</option>
                             <option value="Tanya Jawab">Tanya Jawab</option>

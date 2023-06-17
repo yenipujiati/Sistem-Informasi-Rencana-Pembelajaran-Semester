@@ -1,35 +1,40 @@
 <?php
 
-namespace App\Http\Livewire\Pertemuan;
+namespace App\Http\Livewire\Rps;
 
+use App\Models\Matakuliah;
+use App\Models\User;
+use App\Models\CPL;
+use App\Models\Pustaka;
 use App\Models\Pertemuan;
+use App\Models\RP;
 use Livewire\Component;
 
 class Index extends Component
 {
-    public $pertemuan;
+    public $rps;
 
     protected $listeners = [
-        'deletePertemuan'=>'destroy'
+        'deleteRPS'=>'destroy'
     ];
 
     public function render()
     {
         // menampilkan data deleted_at=null
-        $this->pertemuan = Pertemuan::select('id','minggu_ke','kemampuan_akhir','bahan_kajian','metode_pembelajaran','waktu','pengalaman_belajar','bobot_nilai','topik_id')->get();
+        $this->rps = RP::select('id','matakuliah_id','pengembang_id','koordinator_id','kaprodi_id','cpl_id','deskripsi_singkat','pustaka_id','mp_software','mp_hardware','pengampu_id','matakuliah_syarat_id','pertemuan_id')->get();
 
         // tampilkan semua data
-        // $this->pertemuan = Pertemuan::withTrashed()->get();
+        // $this->rps = CPL::withTrashed()->get();
 
         // tampilkan data yg dihapus
-        // $this->pertemuan = Pertemuan::onlyTrashed()->get();
+        // $this->rps = CPL::onlyTrashed()->get();
 
-        return view('livewire.pertemuan.index')->extends('layouts.main')->section('content');
+        return view('livewire.rps.index')->extends('layouts.main')->section('content');
     }
 
     public function destroy($id){
         try{
-            Pertemuan::find($id)->delete();
+            RP::find($id)->delete();
             $this->dispatchBrowserEvent('alert',[
                 'type'=>'success',
                 'message'=>"Deleted Successfully!!"

@@ -1,0 +1,50 @@
+<div>
+    <a href="{{ route('pertemuancreate') }}" class="btn btn-md btn-success mb-3">ADD RPS</a>
+    <table class="table table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">MATAKULIAH</th>
+                <th scope="col">PENGEMBANG</th>
+                <th scope="col">KOORDINATOR</th>
+                <th scope="col">KAPRODI</th>
+                <th scope="col">CAPAIAN PEMBELAJARAN</th>
+                <th scope="col">DESKRIPSI SINGKAT MK</th>
+                <th scope="col">PUSTAKA</th>
+                <th scope="col">MEDIA PEMBELAJARAN (SOFTWARE)</th>
+                <th scope="col">MEDIA PEMBELAJARAN (HARDWARE)</th>
+                <th scope="col">DOSEN PENGAMPU</th>
+                <th scope="col">MATA KULIAH SYARAT</th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach($rps as $post)
+            <tr>
+                <td>{{ $post->matakuliah->nama }}</td>
+                <td>{{ $post->user->name }}</td>
+                <td>{{ $post->user->name }}</td>
+                <td>{{ $post->user->name }}</td>
+                <td>{{ $post->cpl->kode }}</td>
+                <td>{{ $post->deskripsi_singkat }}</td>
+                <td>{{ $post->pustaka->jenis,sumber }}</td>
+                <td>{{ $post->mp_software }}</td>
+                <td>{{ $post->mp_hardware }}</td>
+                <td>{{ $post->user->name }}</td>
+                <td>{{ $post->matakuliah->nama }}</td>
+                <td>{{ $post->pertemuan }}</td>
+                <td>
+                    <a href="{{ route('rpsedit', $post->id) }}" class="btn btn-sm btn-primary">EDIT</a>
+                    <button onclick="deleteRPS({{$post->id}})" class="btn btn-danger btn-sm">DELETE</button>
+                </td>
+            </tr>
+            @endforeach
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+        function deleteRPS(id){
+            if(confirm("Are you sure to delete this record?"))
+                window.livewire.emit('deleteRPS',id);
+        }
+    </script>
+</div>

@@ -34,7 +34,7 @@ class Rp extends Model
 
     public function pertemuan()
     {
-        return $this->belongsToMany(Topik::class);
+        return $this->belongsTo(Topik::class);
     }
 
     public function matakuliah()
@@ -49,7 +49,7 @@ class Rp extends Model
 
     public function cpl()
     {
-        return $this->belongsTo(CPL::class);
+        return $this->belongsToMany(CPL::class);
     }
 
     public function pustaka()

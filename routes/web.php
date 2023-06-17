@@ -24,6 +24,9 @@ use App\Http\Livewire\Matakuliah\edit as Matakuliahedit;
 use App\Http\Livewire\Pertemuan\Index as Pertemuanindex;
 use App\Http\Livewire\Pertemuan\create as Pertemuancreate;
 use App\Http\Livewire\Pertemuan\edit as Pertemuanedit;
+use App\Http\Livewire\RPS\Index as RPSindex;
+use App\Http\Livewire\RPS\create as RPScreate;
+use App\Http\Livewire\RPS\edit as RPSedit;
 
 /*
 |--------------------------------------------------------------------------
@@ -74,5 +77,9 @@ Route::get('/matakuliah/edit/{id}',Matakuliahedit::class)->name('matakuliahedit'
 Route::get('/pertemuan/index',Pertemuanindex::class)->name('pertemuanindex');
 Route::get('/pertemuan/create',Pertemuancreate::class)->name('pertemuancreate');
 Route::get('/pertemuan/edit/{id}',Pertemuanedit::class)->name('pertemuanedit');
+
+Route::get('/rps/index',RPSindex::class)->name('rpsindex');
+Route::get('/rps/create',RPScreate::class)->name('rpscreate');
+Route::get('/rps/edit/{id}',RPSedit::class)->name('rpsedit');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
