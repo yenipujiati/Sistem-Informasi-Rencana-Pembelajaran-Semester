@@ -3,95 +3,190 @@
         <div class="card-body">
             <form wire:submit.prevent="store">
                 <div class="form-group">
-                    <label for="minggu_ke" class="col-md-4 col-form-label text-md-end">{{ __('Minggu-ke') }}</label>
-                    <input id="minggu_ke" type="number" class="form-control @error('minggu_ke') is-invalid @enderror" name="minggu_ke" required autocomplete="minggu_ke" wire:model.defer="minggu_ke">
-                    @error('minggu_ke')
-                         <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                </div>
-                <div class="form-group">
-                    <label for="kemampuan_akhir" class="col-md-4 col-form-label text-md-end">{{ __('Kemampuan akhir mahasiswa') }}</label>
-                    <textarea id="kemampuan_akhir" type="text" class="form-control @error('kemampuan_akhir') is-invalid @enderror" name="kemampuan_akhir" required autocomplete="kemampuan_akhir" cols="30" rows="10" wire:model.defer="kemampuan_akhir"></textarea>
-                    @error('kemampuan_akhir')
-                         <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                </div>
-                <div class="form-group">
-                    <label for="bahan_kajian" class="col-md-4 col-form-label text-md-end">{{ __('Bahan Kajian') }}</label>
-                    <input id="bahan_kajian" type="text" class="form-control @error('bahan_kajian') is-invalid @enderror" name="bahan_kajian" required autocomplete="bahan_kajian" wire:model.defer="bahan_kajian">
-                    @error('bahan_kajian')
-                         <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                </div>
-                <div class="form-group">
-                    <label for="metode_pembelajaran" class="col-md-4 col-form-label text-md-end">{{ __('Metode Pembelajaran') }}</label>
+                @csrf
+                    <label for="matakuliah_id" class="col-md-4 col-form-label text-md-end">{{ __('Matakuliah') }}</label>
                     <div class="col-md-max col-form-label">
-                    @csrf
-                        <select id="metode_pembelajaran" class="form-control @error('metode_pembelajaran') is-invalid @enderror" name="metode_pembelajaran" wire:model.defer="metode_pembelajaran">
-                            <option selected>Pilih Topik</option>
-                            <option value="Ceramah">Ceramah</option>
-                            <option value="Diskusi">Disusi</option>
-                            <option value="Tanya Jawab">Tanya Jawab</option>
-                            <option value="Demonstrasi">Demonstrasi</option>
-                            <option value="Pemecahan Masalah">Pemecahan Masalah</option>
-                            <option value="Proyek">Proyek</option>
-                            <option value="Pembelajaran Kolaboratif">Pembelajaran Kolaboratif</option>
-                            <option value="Pembelajaran Berbasis Masalah">Pembelajaran Berbasis Masalah</option>
-                            <option value="Pembelajaran Berbasis Proyek">Pembelajaran Berbasis Proyek</option>
-                            <option value="Pembelajaran Berbasis Komputer">Pembelajaran Berbasis Komputer</option>
-                        </select>
-                    </div>
-                    @error('metode_pembelajaran')
-                         <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                </div>
-                <div class="form-group">
-                    <label for="waktu" class="col-md-4 col-form-label text-md-end">{{ __('Waktu') }}</label>
-                    <input id="waktu" type="number" class="form-control @error('waktu') is-invalid @enderror" name="waktu" required autocomplete="waktu" wire:model.defer="waktu">
-                    @error('waktu')
-                         <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                </div>
-                <div class="form-group">
-                    <label for="pengalaman_belajar" class="col-md-4 col-form-label text-md-end">{{ __('Pengalaman Belajar Mahasiswa') }}</label>
-                    <textarea id="pengalaman_belajar" type="text" class="form-control @error('pengalaman_belajar') is-invalid @enderror" name="pengalaman_belajar" required autocomplete="pengalaman_belajar" cols="30" rows="10" wire:model.defer="pengalaman_belajar"></textarea>
-                    @error('pengalaman_belajar')
-                         <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                </div>
-                <div class="form-group">
-                    <label for="bobot_nilai" class="col-md-4 col-form-label text-md-end">{{ __('Bobot Nilai (%)') }}</label>
-                    <input id="bobot_nilai" type="number" class="form-control @error('bobot_nilai') is-invalid @enderror" name="bobot_nilai" required autocomplete="bobot_nilai" wire:model.defer="bobot_nilai">
-                    @error('bobot_nilai')
-                         <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                </div>
-                <div class="form-group">
-                    <label for="topik_id" class="col-md-4 col-form-label text-md-end">{{ __('Topik Pembelajaran') }}</label>
-                    <div class="col-md-max col-form-label">
-                    @csrf
-                        <select id="topik_id" class="form-control @error('topik_id') is-invalid @enderror" name="topik_id" wire:model.defer="topik_id">
+                        <select id="matakuliah_id" class="form-control @error('matakuliah_id') is-invalid @enderror" name="matakuliah_id" wire:model.defer="matakuliah_id">
                             <option value="">Pilih</option>
-                                @foreach ($topik as $item)
-                                    <option value="{{ $item->id }}">{{ $item->topik }}</option>
+                                @foreach ($matakuliah as $item)
+                                    <option value="{{ $item->id }}">{{ $item->nama }}</option>
                                 @endforeach
                         </select>
                     </div>
-                    @error('topik_id')
+                    @error('matakuliah_id')
+                         <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+                <div class="form-group">
+                    <label for="pengembang_id" class="col-md-4 col-form-label text-md-end">{{ __('Pengembang RP') }}</label>
+                    <div class="col-md-max col-form-label">
+                        <select id="pengembang_id" class="form-control @error('pengembang_id') is-invalid @enderror" name="pengembang_id" wire:model.defer="pengembang_id">
+                            <option value="">Pilih</option>
+                                @foreach ($user as $item)
+                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                @endforeach
+                        </select>
+                    </div>
+                    @error('pengembang_id')
+                         <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+                <div class="form-group">
+                    <label for="koordinator_id" class="col-md-4 col-form-label text-md-end">{{ __('Koordinator Rumpun RP') }}</label>
+                    <div class="col-md-max col-form-label">
+                        <select id="koordinator_id" class="form-control @error('koordinator_id') is-invalid @enderror" name="koordinator_id" wire:model.defer="koordinator_id">
+                            <option value="">Pilih</option>
+                                @foreach ($user as $item)
+                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                @endforeach
+                        </select>
+                    </div>
+                    @error('koordinator_id')
+                         <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+                <div class="form-group">
+                    <label for="kaprodi_id" class="col-md-4 col-form-label text-md-end">{{ __('Ketua Program Studi') }}</label>
+                    <div class="col-md-max col-form-label">
+                        <select id="kaprodi_id" class="form-control @error('kaprodi_id') is-invalid @enderror" name="kaprodi_id" wire:model.defer="kaprodi_id">
+                            <option value="">Pilih</option>
+                                @foreach ($user as $item)
+                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                @endforeach
+                        </select>
+                    </div>
+                    @error('kaprodi_id')
+                         <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+                <div class="form-group">
+                    <label for="cpl_id" class="col-md-4 col-form-label text-md-end">{{ __('Capaian Pembelajaran') }}</label><br>
+                    <div class="col-md-max col-form-label"><br>
+                    @foreach ($cpl as $item)
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="cpl_id[]" value="{{ $item->id }}" id="cpl_id"  wire:model.defer="cpl_id">
+                            <label class="form-check-label" for="for="cpl_{{ $item->id }}">
+                                {{ $item->kode }}
+                            </label>
+                        </div>
+                    @endforeach
+                    </div>
+                    @error('cpl_id')
+                         <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+                <!-- <div class="form-group">
+                    <label for="cpl_id" class="col-md-4 col-form-label text-md-end">{{ __('Capaian Pemebelajaran') }}</label>
+                    <div class="col-md-max col-form-label">
+                        <select id="cpl_id" class="form-control @error('cpl_id') is-invalid @enderror" name="cpl_id" wire:model.defer="cpl_id">
+                            <option value="">Pilih</option>
+                                @foreach ($cpl as $item)
+                                    <option value="{{ $item->id }}">{{ $item->kode }}</option>
+                                @endforeach
+                        </select>
+                    </div>
+                    @error('cpl_id')
+                         <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div> -->
+                <div class="form-group">
+                    <label for="deskripsi_singkat" class="col-md-4 col-form-label text-md-end">{{ __('Deskripsi Singkat') }}</label>
+                    <textarea id="deskripsi_singkat" type="text" class="form-control @error('deskripsi_singkat') is-invalid @enderror" name="deskripsi_singkat" required autocomplete="deskripsi_singkat" cols="30" rows="10" wire:model.defer="deskripsi_singkat"></textarea>
+                    @error('deskripsi_singkat')
+                         <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+                <div class="form-group">
+                    <label for="pustaka_id" class="col-md-4 col-form-label text-md-end">{{ __('Pustaka') }}</label>
+                    <div class="col-md-max col-form-label">
+                        <select id="pustaka_id" class="form-control @error('pustaka_id') is-invalid @enderror" name="pustaka_id" wire:model.defer="pustaka_id">
+                            <option value="">Pilih</option>
+                                @foreach ($pustaka as $item)
+                                    <option value="{{ $item->id }}">{{ $item->jenis }}</option>
+                                @endforeach
+                        </select>
+                    </div>
+                    @error('pustaka_id')
+                         <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+                <div class="form-group">
+                    <label for="mp_software" class="col-md-4 col-form-label text-md-end">{{ __('Media Pembelajaran (Software)') }}</label>
+                    <input id="mp_software" type="text" class="form-control @error('mp_software') is-invalid @enderror" name="mp_software" required autocomplete="mp_software" wire:model.defer="mp_software">
+                    @error('mp_software')
+                         <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+                <div class="form-group">
+                    <label for="mp_hardware" class="col-md-4 col-form-label text-md-end">{{ __('Media Pembelajaran (Hardware)') }}</label>
+                    <input id="mp_hardware" type="text" class="form-control @error('mp_hardware') is-invalid @enderror" name="mp_hardware" required autocomplete="mp_hardware" wire:model.defer="mp_hardware">
+                    @error('mp_hardware')
+                         <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+                <div class="form-group">
+                    <label for="pengampu_id" class="col-md-4 col-form-label text-md-end">{{ __('Dosen Pengampu') }}</label>
+                    <div class="col-md-max col-form-label">
+                        <select id="pengampu_id" class="form-control @error('pengampu_id') is-invalid @enderror" name="pengampu_id" wire:model.defer="pengampu_id">
+                            <option value="">Pilih</option>
+                                @foreach ($user as $item)
+                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                @endforeach
+                        </select>
+                    </div>
+                    @error('pengampu_id')
+                         <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+                <div class="form-group">
+                    <label for="matakuliah_syarat_id" class="col-md-4 col-form-label text-md-end">{{ __('Mata Kuliah Syarat') }}</label>
+                    <div class="col-md-max col-form-label">
+                        <select id="matakuliah_syarat_id" class="form-control @error('matakuliah_syarat_id') is-invalid @enderror" name="matakuliah_syarat_id" wire:model.defer="matakuliah_syarat_id">
+                            <option value="">Pilih</option>
+                                @foreach ($matakuliah as $item)
+                                    <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                                @endforeach
+                        </select>
+                    </div>
+                    @error('matakuliah_syarat_id')
+                         <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+                <div class="form-group">
+                    <label for="pertemuan_id" class="col-md-4 col-form-label text-md-end">{{ __('Pertemuan') }}</label>
+                    <div class="col-md-max col-form-label">
+                        <select id="pertemuan_id" class="form-control @error('pertemuan_id') is-invalid @enderror" name="pertemuan_id" wire:model.defer="pertemuan_id">
+                            <option value="">Pilih</option>
+                                @foreach ($pertemuan as $item)
+                                    <option value="{{ $item->id }}">{{ $item->minggu_ke }}</option>
+                                @endforeach
+                        </select>
+                    </div>
+                    @error('pertemuan_id')
                          <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>

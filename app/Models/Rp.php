@@ -34,7 +34,7 @@ class Rp extends Model
 
     public function pertemuan()
     {
-        return $this->belongsTo(Topik::class);
+        return $this->belongsTo(Pertemuan::class);
     }
 
     public function matakuliah()
@@ -42,14 +42,29 @@ class Rp extends Model
         return $this->belongsTo(Matakuliah::class);
     }
 
-    public function user()
+    public function pengembang()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function koordinator()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function kaprodi()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function pengampu()
     {
         return $this->belongsTo(User::class);
     }
 
     public function cpl()
     {
-        return $this->belongsToMany(CPL::class);
+        return $this->belongsToMany(CPL::class, 'c_p_l_rp');
     }
 
     public function pustaka()

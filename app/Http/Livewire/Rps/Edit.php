@@ -62,7 +62,7 @@ class Edit extends Component
         $this->validate();
 
         if($this->rpsId) {
-            $pertemuan = RP::find($this->rpsId);
+            $rps = RP::find($this->rpsId);
             if($rps) {
                 $rps->update([
                     'matakuliah_id' => $this->matakuliah_id,
