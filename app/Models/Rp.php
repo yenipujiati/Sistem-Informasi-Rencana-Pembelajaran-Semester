@@ -64,7 +64,7 @@ class Rp extends Model
 
     public function cpl()
     {
-        return $this->belongsToMany(CPL::class, 'c_p_l_rp');
+        return $this->belongsTo(CPL::class);
     }
 
     public function pustaka()

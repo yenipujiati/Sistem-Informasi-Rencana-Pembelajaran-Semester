@@ -25,7 +25,7 @@
                 <td>{{ $post->pengembang->name }}</td>
                 <td>{{ $post->koordinator->name }}</td>
                 <td>{{ $post->kaprodi->name }}</td>
-                <td>{{ $post->cpl }}</td>
+                <td>{{ $post->cpl->kode }}</td>
                 <td>{{ $post->deskripsi_singkat }}</td>
                 <td>{{ $post->pustaka->jenis }}</td>
                 <td>{{ $post->mp_software }}</td>

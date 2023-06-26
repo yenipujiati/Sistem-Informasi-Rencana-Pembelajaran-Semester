@@ -14,7 +14,6 @@ class Create extends Component
 {
     public $matakuliah_id, $pengembang_id, $koordinator_id, $kaprodi_id, $deskripsi_singkat, $pustaka_id, $mp_software, $mp_hardware, $pengampu_id, $matakuliah_syarat_id, $pertemuan_id;
     public $cpl_id = [];
-
     protected $rules = [
         'matakuliah_id'=>'required',
         'pengembang_id'=>'required',
@@ -32,17 +31,22 @@ class Create extends Component
 
     public function store(){
 
+        $t = $this->cpl_id;
+        // dd($t);
         $this->validate();
         // 'cpl_id' => json_encode($this->cpl_id),
 
         try{
-            foreach ($this->cpl_id as $cpl) {
-                RP::create([
+            $d = [];
+            foreach ($t as $cpl) {
+               $d[] = RP::create([
                     'matakuliah_id' => $this->matakuliah_id,
                     'pengembang_id' => $this->pengembang_id,
                     'koordinator_id' => $this->koordinator_id,
                     'kaprodi_id' => $this->kaprodi_id,
                     'cpl_id' => $cpl,
+
+                    // 'cpl_id' => implode(',', $this->cpl_id),
                     'deskripsi_singkat' => $this->deskripsi_singkat,
                     'pustaka_id' => $this->pustaka_id,
                     'mp_software' => $this->mp_software,
@@ -52,6 +56,7 @@ class Create extends Component
                     'pertemuan_id' => $this->pertemuan_id,
                 ]);
             }
+            // dd($d);
 
             $this->dispatchBrowserEvent('alert',[
                 'type'=>'success',

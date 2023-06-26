@@ -21,7 +21,7 @@
                 <td>{{ $post->kemampuan_akhir }}</td>
                 <td>{{ $post->bahan_kajian }}</td>
                 <td>{{ $post->metode_pembelajaran }}</td>
-                <td>{{ $post->waktu }}</td>
+                <td>{{ $post->waktu }}*50</td>
                 <td>{{ $post->pengalaman_belajar }}</td>
                 <td>{{ $post->bobot_nilai }}</td>
                 <td>{{ $post->topik->topik }}</td>

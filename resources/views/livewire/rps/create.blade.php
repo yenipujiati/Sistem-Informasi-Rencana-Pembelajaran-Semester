@@ -85,6 +85,8 @@
                         </span>
                     @enderror
                 </div>
+
+                
                 <!-- <div class="form-group">
                     <label for="cpl_id" class="col-md-4 col-form-label text-md-end">{{ __('Capaian Pemebelajaran') }}</label>
                     <div class="col-md-max col-form-label">
