@@ -35,6 +35,50 @@
         </tbody>
     </table>
 
+    <!-- {{ $pertemuan->links() }} -->
+
+    <!-- Paginasi -->
+    @if ($pertemuan->lastPage() > 1)
+        <ul class="pagination">
+            <!-- Tautan Previous -->
+            @if ($pertemuan->onFirstPage())
+                <li class="page-item disabled" aria-disabled="true">
+                    <span class="page-link">&laquo;</span>
+                </li>
+            @else
+                <li class="page-item">
+                    <a href="{{ $pertemuan->previousPageUrl() }}" rel="prev" class="page-link" aria-label="@lang('pagination.previous')">&laquo;</a>
+                </li>
+            @endif
+
+            <!-- Tautan Halaman -->
+            @for ($i = 1; $i <= $pertemuan->lastPage(); $i++)
+                @if ($i == $pertemuan->currentPage())
+                    <li class="page-item active" aria-current="page">
+                        <span class="page-link">{{ $i }}</span>
+                    </li>
+                @else
+                    <li class="page-item">
+                        <a href="{{ $pertemuan->url($i) }}" class="page-link">{{ $i }}</a>
+                    </li>
+                @endif
+            @endfor
+
+            <!-- Tautan Next -->
+            @if ($pertemuan->hasMorePages())
+                <li class="page-item">
+                    <a href="{{ $pertemuan->nextPageUrl() }}" rel="next" class="page-link" aria-label="@lang('pagination.next')">&raquo;</a>
+                </li>
+            @else
+                <li class="page-item disabled" aria-disabled="true">
+                    <span class="page-link">&raquo;</span>
+                </li>
+            @endif
+        </ul>
+    @endif
+
+    <br>
+    
     <script>
         function deletePertemuan(id){
             if(confirm("Are you sure to delete this record?"))

@@ -4,10 +4,14 @@ namespace App\Http\Livewire\Pertemuan;
 
 use App\Models\Pertemuan;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class Index extends Component
 {
-    public $pertemuan;
+
+    use WithPagination;
+
+    protected $pertemuan;
 
     protected $listeners = [
         'deletePertemuan'=>'destroy'
@@ -16,7 +20,7 @@ class Index extends Component
     public function render()
     {
         // menampilkan data deleted_at=null
-        $this->pertemuan = Pertemuan::select('id','minggu_ke','kemampuan_akhir','bahan_kajian','metode_pembelajaran','waktu','pengalaman_belajar','bobot_nilai','topik_id')->get();
+        $this->pertemuan = Pertemuan::select('id','minggu_ke','kemampuan_akhir','bahan_kajian','metode_pembelajaran','waktu','pengalaman_belajar','bobot_nilai','topik_id')->paginate(5);
 
         // tampilkan semua data
         // $this->pertemuan = Pertemuan::withTrashed()->get();
@@ -24,7 +28,11 @@ class Index extends Component
         // tampilkan data yg dihapus
         // $this->pertemuan = Pertemuan::onlyTrashed()->get();
 
-        return view('livewire.pertemuan.index')->extends('layouts.main')->section('content');
+        return view('livewire.pertemuan.index', [
+            'pertemuan' => $this->pertemuan
+        ])->extends('layouts.main')->section('content');
+
+        // return view('livewire.pertemuan.index')->extends('layouts.main')->section('content');
     }
 
     public function destroy($id){
