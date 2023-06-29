@@ -27,6 +27,9 @@ use App\Http\Livewire\Pertemuan\edit as Pertemuanedit;
 use App\Http\Livewire\RPS\Index as RPSindex;
 use App\Http\Livewire\RPS\create as RPScreate;
 use App\Http\Livewire\RPS\edit as RPSedit;
+use App\Http\Livewire\RpsOnesubmit\Index as RpsOnesubmitindex;
+use App\Http\Livewire\RpsOnesubmit\create as RpsOnesubmitcreate;
+use App\Http\Livewire\RpsOnesubmit\edit as RpsOnesubmitedit;
 
 /*
 |--------------------------------------------------------------------------
@@ -81,5 +84,9 @@ Route::get('/pertemuan/edit/{id}',Pertemuanedit::class)->name('pertemuanedit');
 Route::get('/rps/index',RPSindex::class)->name('rpsindex');
 Route::get('/rps/create',RPScreate::class)->name('rpscreate');
 Route::get('/rps/edit/{id}',RPSedit::class)->name('rpsedit');
+
+Route::get('/rpsonesubmit/index',RpsOnesubmitindex::class)->name('rpsonesubmitindex');
+Route::get('/rpsonesubmit/create',RpsOnesubmitcreate::class)->name('rpsonesubmitcreate');
+Route::get('/rpsonesubmit/edit/{id}',RpsOnesubmitedit::class)->name('rpsonesubmitedit');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

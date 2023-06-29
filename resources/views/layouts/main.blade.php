@@ -6,9 +6,12 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="icon" href="https://sid.ukrim.ac.id/images/ukrim.png" type="image/ico" />
+    <link rel="icon" href="https://sid.ukrim.ac.id/images/ukrim.png" type="image/ico" />
 
     <title>RPS-UKRIM</title>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
 
     <!-- Bootstrap -->
     <link href="{{ asset('assets/vendors/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
@@ -28,7 +31,10 @@
 
     <!-- Custom Theme Style -->
     <link href="{{asset('assets/css/custom.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('wizard.css') }}" rel="stylesheet" id="bootstrap-css">
     @livewireStyles
+
+    
   </head>
 
   <body class="nav-md">
@@ -76,6 +82,7 @@
                       <li><a href="{{ route('matakuliahindex') }}">Matakuliah</a></li>
                       <li><a href="{{ route('pertemuanindex') }}">Pertemuan</a></li>
                       <li><a href="{{ route('rpsindex') }}">RPS</a></li>
+                      <li><a href="{{ route('rpsonesubmitindex') }}">testing rps-one submit</a></li>
                     </ul>
                   </li>
                 </ul>
@@ -134,10 +141,10 @@
 
         <!-- footer content -->
         <footer>
-          <div class="pull-right">
+          <!-- <div class="pull-right">
            Copyright © 2023 <a href="https://ukrim.ac.id/">UKRIM Yogyakarta</a>
           </div>
-          <div class="clearfix"></div>
+          <div class="clearfix"></div> -->
         </footer>
         <!-- /footer content -->
       </div>
