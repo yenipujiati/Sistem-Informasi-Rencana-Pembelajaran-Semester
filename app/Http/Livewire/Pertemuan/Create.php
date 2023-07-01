@@ -56,16 +56,6 @@ class Create extends Component
             foreach ($this->pertemuan as $data) {
                 Pertemuan::create($data);
             }
-            // Pertemuan::create([
-            //     'minggu_ke'=>$this->minggu_ke,
-            //     'kemampuan_akhir'=>$this->kemampuan_akhir,
-            //     'bahan_kajian'=>$this->bahan_kajian,
-            //     'metode_pembelajaran'=>$this->metode_pembelajaran,
-            //     'waktu'=>$this->waktu,
-            //     'pengalaman_belajar'=>$this->pengalaman_belajar,
-            //     'bobot_nilai'=>$this->bobot_nilai,
-            //     'topik_id'=>$this->topik_id,
-            // ]);
             $this->dispatchBrowserEvent('alert',[
                 'type'=>'success',
                 'message'=>"Created Successfully!!"

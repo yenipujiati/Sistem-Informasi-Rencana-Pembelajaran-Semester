@@ -221,16 +221,25 @@
                     <h3> Step 3</h3>
 
                     <div class="form-group">
-                        <label for="pustaka_id" class="col-md-4 col-form-label text-md-end">{{ __('Pustaka') }}</label>
-                        <div class="col-md-max col-form-label">
-                            <select id="pustaka_id" class="form-control @error('pustaka_id') is-invalid @enderror" name="pustaka_id" wire:model.defer="pustaka_id">
-                                <option value="">Pilih</option>
-                                    @foreach ($pustaka as $item)
-                                        <option value="{{ $item->id }}">{{ $item->jenis }}</option>
-                                    @endforeach
-                            </select>
-                        </div>
-                        @error('pustaka_id')
+                    <label for="jenis" class="col-md-4 col-form-label text-md-end">{{ __('Library Type') }}</label>
+                    <div class="col-md-max col-form-label">
+                    @csrf
+                        <select id="jenis" class="form-control @error('jenis') is-invalid @enderror" name="jenis" wire:model.defer="jenis">
+                            <option selected>Select Library Type</option>
+                            <option value="Utama">Utama</option>
+                            <option value="Pendukung">Pendukung</option>
+                        </select>
+                    </div>
+                    @error('jenis')
+                         <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                    </div>
+                    <div class="form-group">
+                        <label for="sumber" class="col-md-4 col-form-label text-md-end">{{ __('Source') }}</label>
+                        <textarea id="sumber" type="text" class="form-control @error('sumber') is-invalid @enderror" name="sumber" required autocomplete="sumber" cols="30" rows="10" wire:model.defer="sumber"></textarea>
+                        @error('sumber')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
@@ -248,24 +257,112 @@
             <div class="col md-3">
                 <div class="col-md-12">
                     <h3> Step 4</h3>
-
-                    <div class="form-group">
-                        <label for="pertemuan_id" class="col-md-4 col-form-label text-md-end">{{ __('Pertemuan') }}</label>
-                        <div class="col-md-max col-form-label">
-                            <select id="pertemuan_id" class="form-control @error('pertemuan_id') is-invalid @enderror" name="pertemuan_id" wire:model.defer="pertemuan_id">
-                                <option value="">Pilih</option>
-                                    @foreach ($pertemuan as $item)
-                                        <option value="{{ $item->id }}">{{ $item->minggu_ke }}</option>
-                                    @endforeach
-                            </select>
+                    <div>
+                        <button type="button" wire:click="addPertemuan" class="btn btn-primary">Input Pertemuan</button>
+                        <div class="card">
+                            <div class="card-body">
+                                @foreach($pertemuan as $index =>$item)
+                                    <div class="border p-3 mb-3">
+                                        <div class="form-group">
+                                            <label for="minggu_ke" class="col-md-4 col-form-label text-md-end">{{ __('Minggu-ke') }}</label>
+                                            <input id="minggu_ke" type="number" class="form-control @error('minggu_ke') is-invalid @enderror" name="minggu_ke" required autocomplete="minggu_ke" wire:model.defer="pertemuan.{{$index}}.minggu_ke">
+                                            @error('minggu_ke')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="kemampuan_akhir" class="col-md-4 col-form-label text-md-end">{{ __('Kemampuan akhir mahasiswa') }}</label>
+                                            <textarea id="kemampuan_akhir" type="text" class="form-control @error('kemampuan_akhir') is-invalid @enderror" name="kemampuan_akhir" required autocomplete="kemampuan_akhir" cols="30" rows="10" wire:model.defer="pertemuan.{{$index}}.kemampuan_akhir"></textarea>
+                                            @error('kemampuan_akhir')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="bahan_kajian" class="col-md-4 col-form-label text-md-end">{{ __('Bahan Kajian') }}</label>
+                                            <input id="bahan_kajian" type="text" class="form-control @error('bahan_kajian') is-invalid @enderror" name="bahan_kajian" required autocomplete="bahan_kajian" wire:model.defer="pertemuan.{{$index}}.bahan_kajian">
+                                            @error('bahan_kajian')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="metode_pembelajaran" class="col-md-4 col-form-label text-md-end">{{ __('Metode Pembelajaran') }}</label>
+                                            <div class="col-md-max col-form-label">
+                                                <select id="metode_pembelajaran" class="form-control @error('metode_pembelajaran') is-invalid @enderror" name="metode_pembelajaran" wire:model.defer="pertemuan.{{$index}}.metode_pembelajaran">
+                                                    <option selected>Pilih Metode Pembelajaran</option>
+                                                    <option value="Ceramah">Ceramah</option>
+                                                    <option value="Diskusi">Diskusi</option>
+                                                    <option value="Tanya Jawab">Tanya Jawab</option>
+                                                    <option value="Demonstrasi">Demonstrasi</option>
+                                                    <option value="Pemecahan Masalah">Pemecahan Masalah</option>
+                                                    <option value="Proyek">Proyek</option>
+                                                    <option value="Pembelajaran Kolaboratif">Pembelajaran Kolaboratif</option>
+                                                    <option value="Pembelajaran Berbasis Masalah">Pembelajaran Berbasis Masalah</option>
+                                                    <option value="Pembelajaran Berbasis Proyek">Pembelajaran Berbasis Proyek</option>
+                                                    <option value="Pembelajaran Berbasis Komputer">Pembelajaran Berbasis Komputer</option>
+                                                </select>
+                                            </div>
+                                            @error('metode_pembelajaran')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="waktu" class="col-md-4 col-form-label text-md-end">{{ __('Waktu') }}</label>
+                                            <input id="waktu" type="number" class="form-control @error('waktu') is-invalid @enderror" name="waktu" required autocomplete="waktu" wire:model.defer="pertemuan.{{$index}}.waktu">
+                                            @error('waktu')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="pengalaman_belajar" class="col-md-4 col-form-label text-md-end">{{ __('Pengalaman Belajar Mahasiswa') }}</label>
+                                            <textarea id="pengalaman_belajar" type="text" class="form-control @error('pengalaman_belajar') is-invalid @enderror" name="pengalaman_belajar" required autocomplete="pengalaman_belajar" cols="30" rows="10" wire:model.defer="pertemuan.{{$index}}.pengalaman_belajar"></textarea>
+                                            @error('pengalaman_belajar')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="bobot_nilai" class="col-md-4 col-form-label text-md-end">{{ __('Bobot Nilai (%)') }}</label>
+                                            <input id="bobot_nilai" type="number" class="form-control @error('bobot_nilai') is-invalid @enderror" name="bobot_nilai" required autocomplete="bobot_nilai" wire:model.defer="pertemuan.{{$index}}.bobot_nilai">
+                                            @error('bobot_nilai')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="topik_id" class="col-md-4 col-form-label text-md-end">{{ __('Topik Pembelajaran') }}</label>
+                                            <div class="col-md-max col-form-label">
+                                                <select id="topik_id" class="form-control @error('topik_id') is-invalid @enderror" name="topik_id" wire:model.defer="pertemuan.{{$index}}.topik_id">
+                                                    <option value="">Pilih</option>
+                                                        @foreach ($topik as $item)
+                                                            <option value="{{ $item->id }}">{{ $item->topik }}</option>
+                                                        @endforeach
+                                                </select>
+                                            </div>
+                                            @error('topik_id')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                        <button type="button" wire:click="removePertemuan({{ $index }})" class="btn btn-danger">DELETE</button>
+                                    </div>
+                                @endforeach
+                            </div>
                         </div>
-                        @error('pertemuan_id')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
                     </div>
-
+                    <br>
                     <button class="btn btn-primary nextBtn btn-lg pull-right" type="button"
                         wire:click="fourthStepSubmit">Next</button>
                     <button class="btn btn-danger nextBtn btn-lg pull-right" type="button"
@@ -276,55 +373,97 @@
     <div class="row setup-content {{ $currentStep != 5 ? 'displayNone' : '' }}" id="step-5">
             <div class="col md-3">
                 <div class="col-md-12">
-                    <h3> Step 5</h3>
-
-                    <table class="table">
-                        <tr>
-                            <td>Matakuliah:</td>
-                            <td><strong>{{$matakuliah_id}}</strong></td>
-                        </tr>
-                        <tr>
-                            <td>Pengembang RP:</td>
-                            <td><strong>{{$pengembang_id}}</strong></td>
-                        </tr>
-                        <tr>
-                            <td>Koordinator:</td>
-                            <td><strong>{{$koordinator_id}}</strong></td>
-                        </tr>
-                        <tr>
-                            <td>Kaprodi:</td>
-                            <td><strong>{{$kaprodi_id}}</strong></td>
-                        </tr>
-                        <tr>
-                            <td>Deskripsi Singkat:</td>
-                            <td><strong>{{$deskripsi_singkat}}</strong></td>
-                        </tr>
-                        <tr>
-                            <td>Pustaka:</td>
-                            <td><strong>{{$pustaka_id}}</strong></td>
-                        </tr>
-                        <tr>
-                            <td>Media Pembelajaran (Hardware):</td>
-                            <td><strong>{{$mp_hardware}}</strong></td>
-                        </tr>
-                        <tr>
-                            <td>Media Pembeajaran (Software):</td>
-                            <td><strong>{{$mp_software}}</strong></td>
-                        </tr>
-                        <tr>
-                            <td>Dosen Pengampu:</td>
-                            <td><strong>{{$pengampu_id}}</strong></td>
-                        </tr>
-                        <tr>
-                            <td>Matakuliah Syarat:</td>
-                            <td><strong>{{$matakuliah_syarat_id}}</strong></td>
-                        </tr>
-                        <tr>
-                            <td>Pertemuan:</td>
-                            <td><strong>{{$pertemuan_id}}</strong></td>
-                        </tr>
-                    </table>
-
+                    <h3><strong>Rencana Pembelajaran Semester</strong></h3>
+                    <div class="container">
+                        <h5>Detail</h5>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>Matakuliah</td>
+                                <td><strong>{{$matakuliah_id}}</strong></td>
+                            </tr>
+                            <tr>
+                                <td>Pengembang RP</td>
+                                <td><strong>{{$pengembang_id}}</strong></td>
+                            </tr>
+                            <tr>
+                                <td>Koordinator</td>
+                                <td><strong>{{$koordinator_id}}</strong></td>
+                            </tr>
+                            <tr>
+                                <td>Kaprodi</td>
+                                <td><strong>{{$kaprodi_id}}</strong></td>
+                            </tr>
+                            <tr>
+                                <td>Capaian Pembelajaran</td>
+                                <td><strong>{{$deskripsi_singkat}}</strong></td>
+                            </tr>
+                            <tr>
+                                <td>Media Pembelajaran (Hardware)</td>
+                                <td><strong>{{$mp_hardware}}</strong></td>
+                            </tr>
+                            <tr>
+                                <td>Media Pembeajaran (Software)</td>
+                                <td><strong>{{$mp_software}}</strong></td>
+                            </tr>
+                            <tr>
+                                <td>Dosen Pengampu</td>
+                                <td><strong>{{$pengampu_id}}</strong></td>
+                            </tr>
+                            <tr>
+                                <td>Matakuliah Syarat</td>
+                                <td><strong>{{$matakuliah_syarat_id}}</strong></td>
+                            </tr>
+                        </table>
+                        <br>
+                    
+                        <div class="row">
+                            <table class="table table-bordered">
+                                <h5>Pustaka</h5>
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th scope="col">Jenis</th>
+                                        <th scope="col">Sumber</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>{{ $jenis }}</td>
+                                        <td>{{ $sumber }}, </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <table class="table table-bordered">
+                                <h5>Pertemuan</h5>
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th scope="col">MINGGU-KE</th>
+                                        <th scope="col">KEMAMPUAN AKHIR YANG DIHARAPKAN</th>
+                                        <th scope="col">BAHAN KAJIAN (MATERI PEMBELAJARAN)</th>
+                                        <th scope="col">METODE PEMBELAJARAN</th>
+                                        <th scope="col">WAKTU</th>
+                                        <th scope="col">PENGALAMAN BELAJAR MAHASISWA</th>
+                                        <th scope="col">BOBOT NILAI (%)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($pertemuan as $post)
+                                    <tr>
+                                        <td>{{ $post['minggu_ke'] }}</td>
+                                        <td>{{ $post['kemampuan_akhir'] }}</td>
+                                        <td>{{ $post['bahan_kajian'] }}</td>
+                                        <td>{{ $post['metode_pembelajaran'] }}</td>
+                                        <td>{{ $post['waktu'] }}*50</td>
+                                        <td>{{ $post['pengalaman_belajar'] }}</td>
+                                        <td>{{ $post['bobot_nilai'] }}</td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                     <button class="btn btn-success btn-lg pull-right" wire:click="store" type="button">Finish!</button>
                     <button class="btn btn-danger nextBtn btn-lg pull-right" type="button"
                         wire:click="back(2)">Back</button>

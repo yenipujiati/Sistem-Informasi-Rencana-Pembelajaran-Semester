@@ -29,5 +29,9 @@ class Pertemuan extends Model
         return $this->belongsTo(Topik::class);
     }
 
+    public function rp()
+    {
+        return $this->hasMany(RP::class);
+    }
     public $timestamps = true;
 }

@@ -140,12 +140,12 @@
         <!-- /page content -->
 
         <!-- footer content -->
-        <footer>
-          <!-- <div class="pull-right">
+        <!-- <footer>
+          <div class="pull-right">
            Copyright © 2023 <a href="https://ukrim.ac.id/">UKRIM Yogyakarta</a>
           </div>
-          <div class="clearfix"></div> -->
-        </footer>
+          <div class="clearfix"></div>
+        </footer> -->
         <!-- /footer content -->
       </div>
     </div>
