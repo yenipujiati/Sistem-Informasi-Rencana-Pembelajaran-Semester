@@ -180,7 +180,7 @@ class Create extends Component
             $dompdf = new Dompdf($options);
             $html = view('livewire.rps-onesubmit.cetakpdf')->with(['data' => $data, 'datas' => $datas])->render();
             $dompdf->loadHTML($html);
-            $dompdf->setPaper('A4', 'potrait');
+            $dompdf->setPaper('A4', 'landscape');
             $dompdf->render();
             $pdfOutput = $dompdf->output();
             $pdfFile = 'Downloads';
