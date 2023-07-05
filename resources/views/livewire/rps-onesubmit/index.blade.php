@@ -13,26 +13,28 @@
                 <th scope="col">MEDIA PEMBELAJARAN (SOFTWARE)</th>
                 <th scope="col">MEDIA PEMBELAJARAN (HARDWARE)</th>
                 <th scope="col">DOSEN PENGAMPU</th>
+                <th scope="col">TOPIK</th>
                 <th scope="col">MATA KULIAH SYARAT</th>
                 <th scope="col">PERTEMUAN</th>
                 <th scope="col">ACTION</th>
             </tr>
         </thead>
         <tbody>
-        @foreach($rps as $post)
+        @foreach($result as $post)
             <tr>
-                <td>{{ $post->matakuliah->nama }}</td>
-                <td>{{ $post->pengembang->name }}</td>
-                <td>{{ $post->koordinator->name }}</td>
-                <td>{{ $post->kaprodi->name }}</td>
-                <td>{{ $post->cpl->kode }}</td>
-                <td>{{ $post->deskripsi_singkat }}</td>
-                <td>{{ $post->pustaka->jenis }}</td>
-                <td>{{ $post->mp_software }}</td>
-                <td>{{ $post->mp_hardware }}</td>
-                <td>{{ $post->pengampu->name }}</td>
-                <td>{{ $post->matakuliah->nama }}</td>
-                <td>{{ $post->pertemuan->minggu_ke }}</td>
+                <td>{{ $post->rp->matakuliah->nama }}</td>
+                <td>{{ $post->rp->pengembang->name }}</td>
+                <td>{{ $post->rp->koordinator->name }}</td>
+                <td>{{ $post->rp->kaprodi->name }}</td>
+                <td>{{ $post->rp->cpl->kode }}</td>
+                <td>{{ $post->rp->deskripsi_singkat }}</td>
+                <td>{{ $post->rp->pustaka->jenis }}</td>
+                <td>{{ $post->rp->mp_software }}</td>
+                <td>{{ $post->rp->mp_hardware }}</td>
+                <td>{{ $post->rp->pengampu->name }}</td>
+                <td>{{ $post->topik->topik }}</td>
+                <td>{{ $post->rp->matakuliah->nama }}</td>
+                <td>{{ $post->minggu_ke }}</td>
                 <td>
                     <a href="{{ route('rpsonesubmitedit', $post->id) }}" class="btn btn-sm btn-primary">EDIT</a>
                     <button onclick="deleteRpsOnesubmit({{$post->id}})" class="btn btn-danger btn-sm">DELETE</button>

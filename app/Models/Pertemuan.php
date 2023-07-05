@@ -22,6 +22,7 @@ class Pertemuan extends Model
         'pengalaman_belajar',
         'bobot_nilai',
         'topik_id',
+        'rps_id'
     ];
 
     public function topik()
@@ -31,7 +32,7 @@ class Pertemuan extends Model
 
     public function rp()
     {
-        return $this->hasMany(RP::class);
+        return $this->belongsTo(RP::class, 'rps_id', 'id');
     }
     public $timestamps = true;
 }

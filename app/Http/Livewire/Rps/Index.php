@@ -22,7 +22,6 @@ class Index extends Component
     {
         // menampilkan data deleted_at=null
         $this->rps = RP::select('id','matakuliah_id','pengembang_id','koordinator_id','kaprodi_id','cpl_id','deskripsi_singkat','pustaka_id','mp_software','mp_hardware','pengampu_id','matakuliah_syarat_id','pertemuan_id')->get();
-
         // tampilkan semua data
         // $this->rps = CPL::withTrashed()->get();
 

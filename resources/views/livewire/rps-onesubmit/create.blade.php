@@ -464,7 +464,7 @@
                             </table>
                         </div>
                     </div>
-                    <button class="btn btn-success btn-lg pull-right" wire:click="store" type="button">Finish!</button>
+                    <button class="btn btn-success btn-lg pull-right" wire:click="store" type="button">Finish and print the PDF!</button>
                     <button class="btn btn-danger nextBtn btn-lg pull-right" type="button"
                         wire:click="back(2)">Back</button>
                 </div>
@@ -473,12 +473,13 @@
     <script>
     $(document).ready(function() {
         $(".btn-primary").click(function() {
-            var $step = $(this).closest(".stepwizard-step");
-            var nextStepId = $step.next().find("a").attr("href");
-            $step.removeClass("btn-primary").addClass("btn-default");
-            $step.next().removeClass("btn-default").addClass("btn-primary");
-            $($step.attr("href")).hide();
-            $(nextStepId).show();
+            // var $step = $(this).closest(".stepwizard-step");
+            // var nextStepId = $step.next().find("a").attr("href");
+            // $step.removeClass("btn-primary").addClass("btn-default");
+            // $step.next().removeClass("btn-default").addClass("btn-primary");
+            // $($step.attr("href")).hide();
+            // $(nextStepId).show();
+            // alert("test");
         });
     });
 </script>

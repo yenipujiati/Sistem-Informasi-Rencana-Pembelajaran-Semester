@@ -32,10 +32,10 @@ class Rp extends Model
         'pertemuan_id',
     ];
 
-    public function pertemuan()
-    {
-        return $this->belongsTo(Pertemuan::class);
-    }
+    // public function pertemuan()
+    // {
+    //     return $this->hasMany(Pertemuan::class);
+    // }
 
     public function matakuliah()
     {
