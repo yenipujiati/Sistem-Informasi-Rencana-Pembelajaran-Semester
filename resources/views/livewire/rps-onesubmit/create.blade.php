@@ -100,24 +100,6 @@
                             </span>
                         @enderror
                     </div>
-
-                    
-                    <!-- <div class="form-group">
-                        <label for="cpl_id" class="col-md-4 col-form-label text-md-end">{{ __('Capaian Pemebelajaran') }}</label>
-                        <div class="col-md-max col-form-label">
-                            <select id="cpl_id" class="form-control @error('cpl_id') is-invalid @enderror" name="cpl_id" wire:model.defer="cpl_id">
-                                <option value="">Pilih</option>
-                                    @foreach ($cpl as $item)
-                                        <option value="{{ $item->id }}">{{ $item->kode }}</option>
-                                    @endforeach
-                            </select>
-                        </div>
-                        @error('cpl_id')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div> -->
                     <div class="form-group">
                         <label for="deskripsi_singkat" class="col-md-4 col-form-label text-md-end">{{ __('Deskripsi Singkat') }}</label>
                         <textarea id="deskripsi_singkat" type="text" class="form-control @error('deskripsi_singkat') is-invalid @enderror" name="deskripsi_singkat" required autocomplete="deskripsi_singkat" cols="30" rows="10" wire:model.defer="deskripsi_singkat"></textarea>

@@ -30,6 +30,7 @@ use App\Http\Livewire\RPS\edit as RPSedit;
 use App\Http\Livewire\RpsOnesubmit\Index as RpsOnesubmitindex;
 use App\Http\Livewire\RpsOnesubmit\create as RpsOnesubmitcreate;
 use App\Http\Livewire\RpsOnesubmit\edit as RpsOnesubmitedit;
+use App\Http\Livewire\RpsOnesubmit\Duplicates as RpsOnesubmitduplicates;
 
 /*
 |--------------------------------------------------------------------------
@@ -88,5 +89,11 @@ Route::get('/rps/edit/{id}',RPSedit::class)->name('rpsedit');
 Route::get('/rpsonesubmit/index',RpsOnesubmitindex::class)->name('rpsonesubmitindex');
 Route::get('/rpsonesubmit/create',RpsOnesubmitcreate::class)->name('rpsonesubmitcreate');
 Route::get('/rpsonesubmit/edit/{id}',RpsOnesubmitedit::class)->name('rpsonesubmitedit');
+
+Route::get('/rpsonesubmit/duplicates',RpsOnesubmitduplicates::class)->name('rpsonesubmitduplicates');
+
+Route::get('/redundancy', function() {
+    return view('livewire/rps-onesubmit/redundancy');
+})->name('redundancy');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

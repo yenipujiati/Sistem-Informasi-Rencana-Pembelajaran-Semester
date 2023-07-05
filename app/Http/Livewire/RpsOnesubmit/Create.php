@@ -19,7 +19,6 @@ class Create extends Component
     //rps
     public $matakuliah_id, $pengembang_id, $koordinator_id, $kaprodi_id, $deskripsi_singkat, $pustaka_id, $mp_software, $mp_hardware, $pengampu_id, $matakuliah_syarat_id;
     public $cpl_id = [];
-    public $pertemuan_id = [];
 
     //pustaka
     public $jenis, $sumber;
@@ -130,7 +129,7 @@ class Create extends Component
                     'pengampu_id' => $this->pengampu_id,
                     'matakuliah_syarat_id' => $this->matakuliah_syarat_id,
                 ]);
-            // dd($this->matakuliah_id);
+
             $pertemuan = [];
             foreach($this->pertemuan as $data){
                 $pertemuans = Pertemuan::create([
@@ -146,8 +145,6 @@ class Create extends Component
                 ]);
                 $pertemuan[] = $pertemuans;
             }
-            
-            // dd($pertemuans);
 
             $data = [
                 'jenis' => $idPustaka->jenis,
@@ -163,13 +160,25 @@ class Create extends Component
                 'mp_hardware' => $rps->mp_hardware,
                 'pengampu_id' => $rps->pengampu_id,
                 'matakuliah_syarat_id' => $rps->matakuliah_syarat_id,
-                'pertemuan' => $this->pertemuan
+                'pertemuan' => $this->pertemuan,
             ];
+
+            $datas = Pertemuan::select(
+                'topik_id', 
+                'rps_id', 
+                'matakuliahs.nama', 
+                'topiks.topik',)
+            ->join('rps', 'rps.id', '=', 'pertemuans.rps_id')
+            ->join('matakuliahs', 'matakuliahs.id' , '=', 'rps.matakuliah_id')
+            ->join('topiks', 'topiks.id', '=', 'pertemuans.topik_id')
+            ->get();
+
+            // dd($datas);
             
             $options = new Options();
             $options->set('defaultFont', 'Arial');
             $dompdf = new Dompdf($options);
-            $html = view('livewire.rps-onesubmit.cetakpdf')->with('data', $data)->render();
+            $html = view('livewire.rps-onesubmit.cetakpdf')->with(['data' => $data, 'datas' => $datas])->render();
             $dompdf->loadHTML($html);
             $dompdf->setPaper('A4', 'potrait');
             $dompdf->render();

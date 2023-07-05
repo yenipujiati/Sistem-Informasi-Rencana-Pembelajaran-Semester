@@ -91,10 +91,5 @@
                                 </tbody>
                             </table>
                         </div>
-                    </div>
-                    <button class="btn btn-success btn-lg pull-right" wire:click="store" type="button">Finish!</button>
-                    <button class="btn btn-danger nextBtn btn-lg pull-right" type="button"
-                        wire:click="back(2)">Back</button>
-                </div>
             </div>
 </div>
