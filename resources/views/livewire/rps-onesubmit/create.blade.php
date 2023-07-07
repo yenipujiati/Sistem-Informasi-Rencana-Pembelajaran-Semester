@@ -178,7 +178,7 @@
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" name="cpl_id[]" value="{{ $item->id }}" id="cpl_id"  wire:model.defer="cpl_id">
                                 <label class="form-check-label" for="for="cpl_{{ $item->id }}">
-                                    {{ $item->kode }}
+                                    {{ $item->kode }}-{{$item->deskripsi}}
                                 </label>
                             </div>
                         @endforeach

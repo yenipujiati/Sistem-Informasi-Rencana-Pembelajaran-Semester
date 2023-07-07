@@ -15,4 +15,9 @@ class Topik extends Model
     protected $fillable = [
         'topik',
     ];
+
+    public function pertemuans()
+    {
+        return $this->belongsTo(Pertemuan::class);
+    }
 }

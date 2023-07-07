@@ -22,7 +22,8 @@ class Pertemuan extends Model
         'pengalaman_belajar',
         'bobot_nilai',
         'topik_id',
-        'rps_id'
+        'rps_id',
+        'matkul_id'
     ];
 
     public function topik()

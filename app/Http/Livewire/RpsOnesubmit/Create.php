@@ -9,10 +9,10 @@ use App\Models\CPL;
 use App\Models\Pustaka;
 use App\Models\Pertemuan;
 use App\Models\RP;
-use Barryvdh\DomPDF\Facade\Pdf;
 use Dompdf\Dompdf;
 use Dompdf\Options;
 use Livewire\Component;
+use Illuminate\Support\Facades\DB;
 
 class Create extends Component
 {
@@ -109,12 +109,21 @@ class Create extends Component
     public function store(){
         
         try{
+            // dd($this->cpl_id);
+            // $string = "";
+            // foreach($this->cpl_id as $id){
+            //     // $string = $string . $id;
+            //     $string .= $id . ",";
+            // }
+            $string = implode(',', $this->cpl_id);
+            // dd($string);
+            
             //pustaka
             $idPustaka = Pustaka::create([
                 'jenis'=>$this->jenis,
                 'sumber'=>$this->sumber
             ]);
-            
+
             $this->pustaka_id = $idPustaka->id;
                 $rps = RP::create([
                     'matakuliah_id' => $this->matakuliah_id,
@@ -128,11 +137,13 @@ class Create extends Component
                     'mp_hardware'=>$this->mp_hardware,
                     'pengampu_id' => $this->pengampu_id,
                     'matakuliah_syarat_id' => $this->matakuliah_syarat_id,
+                    'cpl_ids' => $string,
                 ]);
 
             $pertemuan = [];
             foreach($this->pertemuan as $data){
                 $pertemuans = Pertemuan::create([
+                    'matkul_id' => $this->matakuliah_id,
                     "minggu_ke" => $data['minggu_ke'],
                     "kemampuan_akhir" => $data['kemampuan_akhir'],
                     "bahan_kajian" => $data['bahan_kajian'],
@@ -145,40 +156,66 @@ class Create extends Component
                 ]);
                 $pertemuan[] = $pertemuans;
             }
+            $matakuliah = Matakuliah::where('id', $rps->matakuliah_id)->first();
+            $pengembang = User::where('id', $rps->pengembang_id)->first();
+            $kaprodi = User::where('id', $rps->kaprodi_id)->first();
+            $koordinator = User::where('id', $rps->kaprodi_id)->first();
+            $matakuliah_syarat = Matakuliah::where('id', $rps->matakuliah_syarat_id)->first();
+            $pengampu = User::where('id', $rps->pengampu_id)->first();
+            // dd($matakuliah->nama);
+            $cpls = explode(",", $rps->cpl_ids);
+            $cplData = []; 
+
+            foreach($cpls as $cpl){
+                $CPL = CPL::where('id', $cpl)->first();
+                $cplData[] = $CPL; 
+            }
 
             $data = [
                 'jenis' => $idPustaka->jenis,
                 'sumber' => $idPustaka->sumber,
-                'matakuliah_id' => $rps->matakuliah_id,
-                'pengembang_id' => $rps->pengembang_id,
-                'koordinator_id' => $rps->koordinator_id,
-                'kaprodi_id' => $rps->kaprodi_id,
-                'cpl_id' => $rps->cpl_id,
+                'matakuliah' => $matakuliah,
+                'pengembang' => $pengembang,
+                'koordinator' => $koordinator,
+                'kaprodi' => $kaprodi,
                 'deskripsi_singkat' => $rps->deskripsi_singkat,
                 'pustaka_id' => $rps->pustaka_id,
                 'mp_software' => $rps->mp_software,
                 'mp_hardware' => $rps->mp_hardware,
-                'pengampu_id' => $rps->pengampu_id,
-                'matakuliah_syarat_id' => $rps->matakuliah_syarat_id,
+                'pengampu' => $pengampu,
+                'matakuliah_syarat' => $matakuliah_syarat,
                 'pertemuan' => $this->pertemuan,
+                'cpls' => $cplData,
             ];
 
-            $datas = Pertemuan::select(
-                'topik_id', 
-                'rps_id', 
-                'matakuliahs.nama', 
-                'topiks.topik',)
-            ->join('rps', 'rps.id', '=', 'pertemuans.rps_id')
-            ->join('matakuliahs', 'matakuliahs.id' , '=', 'rps.matakuliah_id')
-            ->join('topiks', 'topiks.id', '=', 'pertemuans.topik_id')
-            ->get();
+            $datas = RP::select(
+                'rumpuns.nama',
+                DB::raw('DATE(rps.created_at) AS created_date'),
+                )
+            ->join('matakuliahs', 'rps.matakuliah_id', '=', 'matakuliahs.id')
+            ->join('rumpuns', 'matakuliahs.rumpun_id' , '=', 'rumpuns.id')
+            ->first();
+
+            // $cplData = DB::table('c_p_l_s')
+            // ->select('c_p_l_s.kode', 'c_p_l_s.deskripsi')
+            // ->whereExists(function ($query) {
+            //     $query->select(DB::raw(1))
+            //         ->from('rps')
+            //         ->whereRaw('rps.cpl_id = c_p_l_s.id');
+            // })
+            // ->get();
 
             // dd($datas);
             
             $options = new Options();
             $options->set('defaultFont', 'Arial');
             $dompdf = new Dompdf($options);
-            $html = view('livewire.rps-onesubmit.cetakpdf')->with(['data' => $data, 'datas' => $datas])->render();
+            $html = view('livewire.rps-onesubmit.cetakpdf')->with(
+                ['data' => $data, 
+                'datas' => $datas, 
+                // 'cplData' => $cplData
+                ]
+                )->render();
             $dompdf->loadHTML($html);
             $dompdf->setPaper('A4', 'landscape');
             $dompdf->render();

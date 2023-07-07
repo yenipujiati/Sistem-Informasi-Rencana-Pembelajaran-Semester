@@ -10,8 +10,33 @@
         padding: 8px;
         text-align: left;
     }
+    th[colspan], td[colspan] {
+        border-right: 1px solid black;
+    }
+    th:last-child, td:last-child {
+        border-right: 1px solid black;
+    }
+    tr:last-child th, tr:last-child td {
+        border-bottom: 1px solid black;
+    }
     .page-break {
         page-break-before: always;
+    }
+    .header {
+        text-align: center;
+    }
+    .logo {
+        display: inline-block;
+        vertical-align: middle;
+    }
+    .text {
+        display: inline-block;
+        vertical-align: middle;
+        margin-left: 10px;
+    }
+    .line {
+        border-top: 1px solid black;
+        margin: 20px 0;
     }
 </style>
 <div>
@@ -20,58 +45,89 @@
             <h3><strong>Rencana Pembelajaran Semester</strong></h3>
             <div class="container">
                 <table class="table table-bordered">
+                    <colgroup>
+                        <col style="width: 15%">
+                        <col style="width: 15%">
+                        <col style="width: 15%">
+                        <col style="width: 15%">
+                        <col style="width: 15%">
+                        <col style="width: 25%">
+                    </colgroup>
                     <tr>
-                        <td>Matakuliah</td>
-                        <td><strong>{{ $data['matakuliah_id'] }}</strong></td>
+                        <th><strong>Matakuliah</strong></th>
+                        <th><strong>Kode</strong></th>
+                        <th><strong>Rumpun MK</strong></th>
+                        <th><strong>Bobot</strong></th>
+                        <th><strong>Semester</strong></th>
+                        <th><strong>Tanggal Penyusunan</strong></th>
                     </tr>
                     <tr>
-                        <td>Pengembang RP</td>
-                        <td><strong>{{ $data['pengembang_id']}}</strong></td>
+                        <td>{{ $data['matakuliah']->nama }}</td>
+                        <td>{{ $data['matakuliah']->kode }}</td>
+                        <td>{{ $datas->nama }}</td>
+                        <td>{{ $data['matakuliah']->bobot }}</td>
+                        <td>{{ $data['matakuliah']->semester }}</td>
+                        <td>{{ $datas->created_date }}</td>
                     </tr>
                     <tr>
-                        <td>Koordinator</td>
-                        <td><strong>{{$data['koordinator_id'] }}</strong></td>
+                        <th rowspan="2"><h5>Otorisasi</h5></th>
+                        <th colspan="2"><strong>Pengembang RP</strong></th>
+                        <th colspan="2"><strong>Koordinator Rumpun MK</strong></th>
+                        <th colspan="2"><strong>Ketua Program Studi</strong></th>
                     </tr>
                     <tr>
-                        <td>Kaprodi</td>
-                        <td><strong>{{$data['kaprodi_id'] }}</strong></td>
+                        <td colspan="2">{{ $data['pengembang']->name }}</td>
+                        <td colspan="2">{{ $data['koordinator']->name }}</td>
+                        <td colspan="2">{{ $data['kaprodi']->name }}</td>
                     </tr>
                     <tr>
-                        <td>Capaian Pembelajaran</td>
-                        <td><strong>{{ $data['deskripsi_singkat'] }}</strong></td>
+                        <th rowspan="{{ count($data['cpls'])+1 }}"><h5>Capaian Pembelajaran</h5></th>
+                        @foreach ($data['cpls'] as $cpl)
+                        <tr>
+                            <td>{{ $cpl->kode }}</td>
+                            <td>{{ $cpl->deskripsi }}</td>
+                        </tr>
+                        @endforeach
                     </tr>
                     <tr>
-                        <td>Media Pembelajaran (Hardware)</td>
-                        <td><strong>{{ $data['mp_hardware'] }}</strong></td>
+                        <th rowspan="2"><h5>Pustaka</h5></th>
+                        <th><strong>Jenis</strong></th>
+                        <td colspan="4">{{ $data['jenis'] }}</td>
                     </tr>
                     <tr>
-                        <td>Media Pembeajaran (Software)</td>
-                        <td><strong>{{ $data['mp_software'] }}</strong></td>
+                        <th><strong>Sumber</strong></th>
+                        <td colspan="4">{{ $data['sumber'] }}</td>
                     </tr>
                     <tr>
-                        <td>Dosen Pengampu</td>
-                        <td><strong>{{ $data['pengampu_id'] }}</strong></td>
+                        <th><strong>Media Pembelajaran (Hardware)</strong></th>
+                        <td colspan="5">{{ $data['mp_hardware'] }}</td>
                     </tr>
                     <tr>
-                        <td>Matakuliah Syarat</td>
-                        <td><strong>{{ $data['matakuliah_syarat_id'] }}</strong></td>
+                        <th><strong>Media Pembelajaran (Software)</strong></th>
+                        <td colspan="5">{{ $data['mp_software'] }}</td>
                     </tr>
                     <tr>
-                        <td colspan="2"><h5>Pustaka</h5></td>
+                        <th><strong>Dosen Pengampu</strong></th>
+                        <td colspan="5">Dosen PengampuDosen Pengampu</td>
                     </tr>
                     <tr>
-                        <td>Jenis</td>
-                        <td>{{ $data['jenis'] }}</td>
-                    </tr>
-                    <tr>
-                        <td>Sumber</td>
-                        <td>{{ $data['sumber'] }}</td>
+                        <th><strong>Matakuliah Syarat</strong></th>
+                        <td colspan="5">{{ $data['matakuliah_syarat']->nama }}</td>
                     </tr>
                 </table>
             </div>
             <br>
             <div class="row page-break">
                 <table class="table table-bordered">
+                    <colgroup>
+                        <col style="width: 10%">
+                        <col style="width: 20%">
+                        <col style="width: 20%">
+                        <col style="width: 15%">
+                        <col style="width: 10%">
+                        <col style="width: 15%">
+                        <col style="width: 10%">
+                    </colgroup>
                     <thead class="thead-dark">
                         <tr>
                             <th scope="col">MINGGU-KE</th>

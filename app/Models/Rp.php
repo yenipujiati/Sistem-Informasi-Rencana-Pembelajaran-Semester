@@ -30,6 +30,7 @@ class Rp extends Model
         'pengampu_id',
         'matakuliah_syarat_id',
         'pertemuan_id',
+        'cpl_ids',
     ];
 
     // public function pertemuan()

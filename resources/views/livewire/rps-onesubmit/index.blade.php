@@ -1,6 +1,6 @@
 <div>
     <a href="{{ route('rpsonesubmitcreate') }}" class="btn btn-md btn-success mb-3">ADD RPS-Onesub</a>
-    <a href="{{ route('rpsonesubmitduplicates') }}" class="btn btn-md btn-success mb-3 pull-right">ADD RPS-Onesub</a>
+    <a href="{{ route('rpsonesubmitduplicates') }}" class="btn btn-md btn-info mb-3">Check redundancy</a>
     <table class="table table-bordered">
         <thead class="thead-dark">
             <tr>
