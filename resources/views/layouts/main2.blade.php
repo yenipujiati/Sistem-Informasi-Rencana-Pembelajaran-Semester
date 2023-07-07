@@ -68,38 +68,9 @@
               <div class="menu_section">
                 <h3>Welcome</h3>
                 <ul class="nav side-menu">
-                  <!-- <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="{{ route('topikindex') }}">Topics</a></li>
-                      <li><a href="{{ route('pustakaindex') }}">References</a></li>
-                      <li><a href="{{ route('rumpunindex') }}">Rumpun Matakuliah</a></li>
-                      <li><a href="{{ route('kategoriindex') }}">CPL Category</a></li>
-                      <li><a href="{{ route('cplindex') }}">CPL</a></li>
-                      <li><a href="{{ route('matakuliahindex') }}">Matakuliah</a></li>
-                      <li><a href="{{ route('pertemuanindex') }}">Pertemuan</a></li>
-                      <li><a href="{{ route('rpsindex') }}">RPS</a></li>
-                    </ul>
-                  </li> -->
-                  <li><a><i class="fa fa-home"></i> Home2 <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="{{ route('topikindex') }}">Topics</a></li>
-                      <!-- <li><a href="{{ route('pustakaindex') }}">References</a></li> -->
-                      <li><a href="{{ route('rumpunindex') }}">Rumpun Matakuliah</a></li>
-                      <li><a href="{{ route('kategoriindex') }}">CPL Category</a></li>
-                      <li><a href="{{ route('cplindex') }}">CPL</a></li>
-                      <li><a href="{{ route('matakuliahindex') }}">Matakuliah</a></li>
-                      <!-- <li><a href="{{ route('pertemuanindex') }}">Pertemuan</a></li> -->
-                      <!-- <li><a href="{{ route('rpsindex') }}">RPS</a></li> -->
-                    </ul>
-                  </li>
                   <li><a><i class="fa fa-edit"></i> RPS <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <!-- <li><a href="{{ route('cplindex') }}">CPL</a></li>
-                      <li><a href="{{ route('matakuliahindex') }}">Matakuliah</a></li>
-                      <li><a href="{{ route('pertemuanindex') }}">Pertemuan</a></li>
-                      <li><a href="{{ route('rpsindex') }}">RPS</a></li> -->
-                      <li><a href="{{ route('rpsonesubmitindex') }}">RPS</a></li>
-                      <!-- <li><a href="{{ route('rpsonesubmitcreate') }}">Testing RPS</a></li> -->
+                      <li><a href="{{ route('dosen.rpsonesubmitcreate') }}">Create RPS</a></li>
                     </ul>
                   </li>
                 </ul>

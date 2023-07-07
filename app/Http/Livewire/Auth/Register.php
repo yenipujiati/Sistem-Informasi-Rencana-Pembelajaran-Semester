@@ -10,7 +10,7 @@ use App\Models\User;
 class Register extends Component
 {
 
-    public $name, $email, $nidn, $password, $password_confirmation;
+    public $name, $email, $nidn, $password, $password_confirmation, $roles;
 
     public function render()
     {
@@ -24,10 +24,11 @@ class Register extends Component
             'email' => ['required','email','unique:users'],
             'nidn' => ['required','unique:users'],
             'password' => ['required','confirmed'],
+            'roles' =>['required'],
         ];
     }
 
-    public function registerDosen() 
+    public function register() 
     {
         $this->validate();
 
@@ -36,8 +37,13 @@ class Register extends Component
             'email' => $this->email,
             'nidn' => $this->nidn,
             'password' => bcrypt($this->password),
+            'roles' => $this->roles,
         ]);
         Auth::login($user, true);
-        return redirect()->to(RouteServiceProvider::HOME);
+        if ($this->roles === 'dosen') {
+            return redirect()->to(RouteServiceProvider::DOSENHOME);
+        } else {
+            return redirect()->to(RouteServiceProvider::HOME);
+        }
     }
 }

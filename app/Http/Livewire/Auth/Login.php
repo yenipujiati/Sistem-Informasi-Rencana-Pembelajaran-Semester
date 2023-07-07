@@ -16,7 +16,7 @@ class Login extends Component
         return view('livewire.auth.login')->extends('layouts.app')->section('content');
     }
 
-    public function loginDosen()
+    public function login()
     {
         $this->validate([
             'nidn'     => 'required',
@@ -24,7 +24,12 @@ class Login extends Component
         ]);
         
         if(Auth::attempt(['nidn' => $this->nidn, 'password'=> $this->password])) {
-            return redirect()->to(RouteServiceProvider::HOME);
+            $user = Auth::user();
+            if($user->roles === 'dosen') {
+                return redirect()->to(RouteServiceProvider::DOSENHOME);
+            }else{
+                return redirect()->to(RouteServiceProvider::HOME);
+            }
         } else {
             session()->flash('error', 'NIDN atau kata sandi yang anda inputkan salah!');
             return redirect()->route('login');

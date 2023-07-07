@@ -4,7 +4,7 @@
             <div class="card">
                 <div class="card-header">Register</div>
                 <div class="card-body">
-                    <form wire:submit.prevent="registerDosen">
+                    <form wire:submit.prevent="register">
                         <div class="row mb-3">
                                 <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Name') }}</label>
 
@@ -38,6 +38,24 @@
                                 <input id="nidn" type="number" class="form-control @error('nidn') is-invalid @enderror" name="nidn" required autocomplete="nidn" wire:model.defer="nidn">
 
                                 @error('nidn')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="roles" class="col-md-4 col-form-label text-md-end">{{ __('Role') }}</label>
+
+                            <div class="col-md-6">
+                                <div class="col-md-max col-form-label">
+                                    <select id="roles" class="form-control @error('roles') is-invalid @enderror" name="roles" wire:model.defer="roles">
+                                        <option selected>select your role</option>
+                                        <option value="dosen">Dosen</option>
+                                        <option value="kaprodi">Kaprodi</option>
+                                    </select>
+                                </div>
+                                @error('roles')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

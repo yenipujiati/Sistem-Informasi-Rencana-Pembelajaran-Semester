@@ -4,7 +4,7 @@
             <div class="card">
                 <div class="card-header">Login</div>
                 <div class="card-body">
-                    <form wire:submit.prevent="loginDosen">
+                    <form wire:submit.prevent="login">
                     <div class="row mb-3">
                             <label for="nidn" class="col-md-4 col-form-label text-md-end">{{ __('NIDN') }}</label>
 
