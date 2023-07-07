@@ -10,35 +10,55 @@
         padding: 8px;
         text-align: left;
     }
+
     th[colspan], td[colspan] {
         border-right: 1px solid black;
     }
+
     th:last-child, td:last-child {
         border-right: 1px solid black;
     }
+
     tr:last-child th, tr:last-child td {
         border-bottom: 1px solid black;
     }
+
     .page-break {
         page-break-before: always;
     }
+
     .header {
         text-align: center;
+        margin-bottom: 10px;
     }
+
+    .header h1, .header p {
+        margin: 5px 0;
+    }
+
     .logo {
         display: inline-block;
         vertical-align: middle;
     }
+
     .text {
         display: inline-block;
         vertical-align: middle;
         margin-left: 10px;
     }
+
     .line {
         border-top: 1px solid black;
         margin: 20px 0;
     }
 </style>
+<div class="header">
+    <h1>UNIVERSITAS KRISTEN IMMANUEL</h1>
+    <p>Jl. Solo Km 11,1, PO BOX 64/YKAP</p>
+    <p>Telepon 0274-49626, Fax: 0274496423</p>
+    <p><a href="http://www.ukrim.ac.id">www.ukrim.ac.id</a> email: <a href="mailto:humas@ukrimuniversity.ac.id">humas@ukrimuniversity.ac.id</a></p>
+</div>
+<div class="line"></div>
 <div>
     <div class="col md-3">
         <div class="col-md-12">
@@ -55,64 +75,69 @@
                     </colgroup>
                     <tr>
                         <th><strong>Matakuliah</strong></th>
-                        <th><strong>Kode</strong></th>
-                        <th><strong>Rumpun MK</strong></th>
-                        <th><strong>Bobot</strong></th>
-                        <th><strong>Semester</strong></th>
-                        <th><strong>Tanggal Penyusunan</strong></th>
+                        <th colspan="2"><strong>Kode</strong></th>
+                        <th colspan="2"><strong>Rumpun MK</strong></th>
+                        <th colspan="1"><strong>Bobot</strong></th>
+                        <th colspan="1"><strong>Semester</strong></th>
+                        <th colspan="2"><strong>Tanggal Penyusunan</strong></th>
                     </tr>
                     <tr>
                         <td>{{ $data['matakuliah']->nama }}</td>
-                        <td>{{ $data['matakuliah']->kode }}</td>
-                        <td>{{ $datas->nama }}</td>
-                        <td>{{ $data['matakuliah']->bobot }}</td>
-                        <td>{{ $data['matakuliah']->semester }}</td>
-                        <td>{{ $datas->created_date }}</td>
+                        <td colspan="2">{{ $data['matakuliah']->kode }}</td>
+                        <td colspan="2">{{ $datas->nama }}</td>
+                        <td colspan="1">{{ $data['matakuliah']->bobot }}</td>
+                        <td colspan="1">{{ $data['matakuliah']->semester }}</td>
+                        <td colspan="2">{{ $datas->created_date }}</td>
                     </tr>
                     <tr>
                         <th rowspan="2"><h5>Otorisasi</h5></th>
                         <th colspan="2"><strong>Pengembang RP</strong></th>
                         <th colspan="2"><strong>Koordinator Rumpun MK</strong></th>
-                        <th colspan="2"><strong>Ketua Program Studi</strong></th>
+                        <th colspan="4"><strong>Ketua Program Studi</strong></th>
                     </tr>
                     <tr>
                         <td colspan="2">{{ $data['pengembang']->name }}</td>
                         <td colspan="2">{{ $data['koordinator']->name }}</td>
-                        <td colspan="2">{{ $data['kaprodi']->name }}</td>
+                        <td colspan="4">{{ $data['kaprodi']->name }}</td>
                     </tr>
                     <tr>
                         <th rowspan="{{ count($data['cpls'])+1 }}"><h5>Capaian Pembelajaran</h5></th>
                         @foreach ($data['cpls'] as $cpl)
                         <tr>
-                            <td>{{ $cpl->kode }}</td>
-                            <td>{{ $cpl->deskripsi }}</td>
+                            <td colspan="2">{{ $cpl->kode }}</td>
+                            <td colspan="6">{{ $cpl->deskripsi }}</td>
                         </tr>
                         @endforeach
                     </tr>
                     <tr>
-                        <th rowspan="2"><h5>Pustaka</h5></th>
-                        <th><strong>Jenis</strong></th>
-                        <td colspan="4">{{ $data['jenis'] }}</td>
+                        <th><strong>Deskripsi Singkat</strong></th>
+                        <td colspan="8">{{ $data['deskripsi_singkat'] }}</td>
                     </tr>
                     <tr>
-                        <th><strong>Sumber</strong></th>
-                        <td colspan="4">{{ $data['sumber'] }}</td>
+                        <th rowspan="2">Pustaka</th>
+                        <th colspan="2"><strong>Jenis</strong></th>
+                        <td colspan="6">{{ $data['jenis'] }}</td>
                     </tr>
                     <tr>
-                        <th><strong>Media Pembelajaran (Hardware)</strong></th>
-                        <td colspan="5">{{ $data['mp_hardware'] }}</td>
+                        <th colspan="2"><strong>Sumber</strong></th>
+                        <td colspan="6">{{ $data['sumber'] }}</td>
                     </tr>
                     <tr>
-                        <th><strong>Media Pembelajaran (Software)</strong></th>
-                        <td colspan="5">{{ $data['mp_software'] }}</td>
+                        <th rowspan="2">Media Pembelajaran</th>
+                        <th colspan="4"><strong>Hardware</strong></th>
+                        <td colspan="4"><strong>Software</strong></td>
+                    </tr>
+                    <tr>
+                        <th colspan="4">{{ $data['mp_hardware'] }}</th>
+                        <td colspan="4">{{ $data['mp_software'] }}</td>
                     </tr>
                     <tr>
                         <th><strong>Dosen Pengampu</strong></th>
-                        <td colspan="5">Dosen PengampuDosen Pengampu</td>
+                        <td colspan="8">Dosen PengampuDosen Pengampu</td>
                     </tr>
                     <tr>
                         <th><strong>Matakuliah Syarat</strong></th>
-                        <td colspan="5">{{ $data['matakuliah_syarat']->nama }}</td>
+                        <td colspan="8">{{ $data['matakuliah_syarat']->nama }}</td>
                     </tr>
                 </table>
             </div>
