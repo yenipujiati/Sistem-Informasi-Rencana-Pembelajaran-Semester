@@ -32,7 +32,7 @@
         .line {
         border-top: 1px solid black;
         margin: 20px 0;
-    }
+        }
     </style>
 </head>
 <body>
@@ -43,10 +43,10 @@
             <p><h3><strong>Terdapat redundansi topik</strong></h3></p>
             <br>
             @foreach($duplicates as $redundancy)
-                <p><h5>Topik: {{ strtoupper($redundancy->topik) }}</h5></p>
-                <p><h5>Matakuliah:</h5></p>
+                <p><h5>Topik    : {{ strtoupper($redundancy->topik) }}</h5></p>
+                <p><h5>Matakuliah   :</h5></p>
                 <ul>
-                    <li><p><h6>{{ $redundancy->nama}}</h6></p></li>
+                    <li><p><h6>{{ $redundancy->matkul_name}}</h6></p></li>
                 </ul>
                 <br>
             @endforeach

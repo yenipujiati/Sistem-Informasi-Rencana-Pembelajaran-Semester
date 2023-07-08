@@ -14,13 +14,13 @@ class Duplicates extends Component
 
     {   
 
-            DB::statement("SET sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))");
-            $duplicates = Pertemuan::select('topik_id',  'matakuliahs.nama', 'topiks.topik' ,DB::raw('COUNT(topik_id) as count')) 
-            ->join('matakuliahs', 'matakuliahs.id' , '=', 'pertemuans.matkul_id') 
-            ->join('topiks', 'topiks.id', '=', 'pertemuans.topik_id') 
-            ->groupBy('topik_id') 
-            ->having('count', '>', 1) 
-            ->get();
+            // DB::statement("SET sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))");
+            // $duplicates = Pertemuan::select('topik_id',  'matakuliahs.nama', 'topiks.topik' ,DB::raw('COUNT(topik_id) as count')) 
+            // ->join('matakuliahs', 'matakuliahs.id' , '=', 'pertemuans.matkul_id') 
+            // ->join('topiks', 'topiks.id', '=', 'pertemuans.topik_id') 
+            // ->groupBy('topik_id') 
+            // ->having('count', '>', 1) 
+            // ->get();
             
             // $duplicates = Pertemuan::select("*", )
             // ->get();
@@ -58,14 +58,13 @@ class Duplicates extends Component
 //     ->select('pertemuans.*', 'topiks.*')
 //     ->get();
 
+    $duplicates = Pertemuan::select('topik_id', 'topiks.topik' ,DB::raw('group_concat(matakuliahs.nama) as matkul_name')) 
+    ->join('matakuliahs', 'matakuliahs.id' , '=', 'pertemuans.matkul_id') 
+    ->join('topiks', 'topiks.id', '=', 'pertemuans.topik_id') 
+    ->groupBy('topik_id', 'topiks.topik') 
+    ->havingRaw(DB::raw('count(topik_id) > 1'))
+    ->get();
 
-
-
-
-        // dd($duplicates);
-
-       
-
-        return view('livewire.rps-onesubmit.duplicates', compact('duplicates'))->extends('layouts.main')->section('content');
+    return view('livewire.rps-onesubmit.duplicates', compact('duplicates'))->extends('layouts.main')->section('content');
     }
 }
