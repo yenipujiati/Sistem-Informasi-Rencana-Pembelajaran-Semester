@@ -40,16 +40,20 @@
     <div class="line"></div>
     <div class="announcement">
         @if($duplicates->isNotEmpty())
-            <p><h3><strong>Terdapat redundansi topik</strong></h3></p>
+            <p><h4><strong>There is topic redundancy</strong></h4></p>
             <br>
-            @foreach($duplicates as $redundancy)
-                <p><h5>Topik    : {{ strtoupper($redundancy->topik) }}</h5></p>
-                <p><h5>Matakuliah   :</h5></p>
-                <ul>
-                    <li><p><h6>{{ $redundancy->matkul_name}}</h6></p></li>
-                </ul>
-                <br>
-            @endforeach
+            <table class="table table-bordered">
+                <tr>
+                    <th><strong>Topik</strong></th>
+                    <th><strong>Matakuliah</strong></th>
+                </tr>
+                @foreach($duplicates as $redundancy)
+                <tr>
+                    <td>{{ $redundancy->topik}}</td>
+                    <td>{{ $redundancy->matkul_name}}</td>
+                </tr>
+                @endforeach
+            </table>
         @else
             <p><h3>No redundancy found.<strong></strong></h3></p>
         @endif

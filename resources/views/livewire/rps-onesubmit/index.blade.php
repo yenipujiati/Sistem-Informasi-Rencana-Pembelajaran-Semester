@@ -17,7 +17,6 @@
                 <th scope="col">TOPIK</th>
                 <th scope="col">MATA KULIAH SYARAT</th>
                 <th scope="col">PERTEMUAN</th>
-                <th scope="col">ACTION</th>
             </tr>
         </thead>
         <tbody>
@@ -36,10 +35,6 @@
                 <td>{{ $post->topik->topik }}</td>
                 <td>{{ $post->rp->matakuliah->nama }}</td>
                 <td>{{ $post->minggu_ke }}</td>
-                <td>
-                    <a href="{{ route('rpsonesubmitedit', $post->id) }}" class="btn btn-sm btn-primary">EDIT</a>
-                    <button onclick="deleteRpsOnesubmit({{$post->id}})" class="btn btn-danger btn-sm">DELETE</button>
-                </td>
             </tr>
             @endforeach
             </tr>

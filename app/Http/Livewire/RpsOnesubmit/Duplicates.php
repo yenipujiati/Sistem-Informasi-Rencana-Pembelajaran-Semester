@@ -65,6 +65,9 @@ class Duplicates extends Component
     ->havingRaw(DB::raw('count(topik_id) > 1'))
     ->get();
 
+    // $string = $duplicates->pluck('matkul_name')->implode(',');
+    // dd($duplicates);
+
     return view('livewire.rps-onesubmit.duplicates', compact('duplicates'))->extends('layouts.main')->section('content');
     }
 }

@@ -116,7 +116,6 @@ class Create extends Component
             //     $string .= $id . ",";
             // }
             $string = implode(',', $this->cpl_id);
-            // dd($string);
             
             //pustaka
             $idPustaka = Pustaka::create([
