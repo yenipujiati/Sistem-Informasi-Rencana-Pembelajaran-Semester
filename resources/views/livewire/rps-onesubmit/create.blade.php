@@ -220,7 +220,7 @@
                     </div>
                     <div class="form-group">
                         <label for="sumber" class="col-md-4 col-form-label text-md-end">{{ __('Source') }}</label>
-                        <textarea id="sumber" type="text" class="form-control @error('sumber') is-invalid @enderror" name="sumber" required autocomplete="sumber" cols="30" rows="10" wire:model.defer="sumber"></textarea>
+                        <textarea id="sumber" type="text" class="form-control @error('sumber') is-invalid @enderror" name="sumber" autocomplete="sumber" cols="30" rows="10" wire:model.defer="sumber"></textarea>
                         @error('sumber')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -355,8 +355,8 @@
     <div class="row setup-content {{ $currentStep != 5 ? 'displayNone' : '' }}" id="step-5">
             <div class="col md-3">
                 <div class="col-md-12">
-                    <h3><strong>Rencana Pembelajaran Semester</strong></h3>
-                    <div class="container">
+                    <!-- <h3><strong>Rencana Pembelajaran Semester</strong></h3> -->
+                    <!-- <div class="container">
                         <h5>Detail</h5>
                         <table class="table table-bordered">
                             <tr>
@@ -445,10 +445,27 @@
                                 </tbody>
                             </table>
                         </div>
-                    </div>
-                    <button class="btn btn-success btn-lg pull-right" wire:click="store" type="button">Finish and print the PDF!</button>
-                    <button class="btn btn-danger nextBtn btn-lg pull-right" type="button"
-                        wire:click="back(2)">Back</button>
+                    </div> -->
+                    <div class="container">
+                        <br>
+                        <center>
+                            <h1>Important Announcement</h1>
+                            <div class="line"></div>
+                            <div class="announcement">
+                                <!-- <h2>Important Announcement</h2> -->
+                                <h2>Please click "Finish and print PDF" button to finish your work. </h2>
+                                <h2>And please press the "Back" button to check your work again.</h2>
+                            </div>
+                        </div>
+                        </center>
+                        <br>
+                        <center>
+                            <!-- <button class="btn btn-success btn-lg" wire:click="store" type="button">Finish and print the PDF!</button> -->
+                            <button class="btn btn-danger nextBtn btn-lg" type="button"
+                                wire:click="back(2)">Back</button>
+                            <button class="btn btn-success btn-lg" wire:click="store" type="button">Finish and print the PDF!</button>
+                        </center>
+                    
                 </div>
             </div>
     </div>
@@ -466,3 +483,9 @@
     });
 </script>
 </div>
+<style>
+    .line {
+        border-top: 1px solid black;
+        margin: 20px 0;
+    }
+</style>

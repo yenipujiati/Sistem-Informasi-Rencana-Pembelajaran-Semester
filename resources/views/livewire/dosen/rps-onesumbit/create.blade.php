@@ -355,100 +355,26 @@
     <div class="row setup-content {{ $currentStep != 5 ? 'displayNone' : '' }}" id="step-5">
             <div class="col md-3">
                 <div class="col-md-12">
-                    <h3><strong>Rencana Pembelajaran Semester</strong></h3>
-                    <div class="container">
-                        <h5>Detail</h5>
-                        <table class="table table-bordered">
-                            <tr>
-                                <td>Matakuliah</td>
-                                <td><strong>{{$matakuliah_id}}</strong></td>
-                            </tr>
-                            <tr>
-                                <td>Pengembang RP</td>
-                                <td><strong>{{$pengembang_id}}</strong></td>
-                            </tr>
-                            <tr>
-                                <td>Koordinator</td>
-                                <td><strong>{{$koordinator_id}}</strong></td>
-                            </tr>
-                            <tr>
-                                <td>Kaprodi</td>
-                                <td><strong>{{$kaprodi_id}}</strong></td>
-                            </tr>
-                            <tr>
-                                <td>Capaian Pembelajaran</td>
-                                <td><strong>{{$deskripsi_singkat}}</strong></td>
-                            </tr>
-                            <tr>
-                                <td>Media Pembelajaran (Hardware)</td>
-                                <td><strong>{{$mp_hardware}}</strong></td>
-                            </tr>
-                            <tr>
-                                <td>Media Pembeajaran (Software)</td>
-                                <td><strong>{{$mp_software}}</strong></td>
-                            </tr>
-                            <tr>
-                                <td>Dosen Pengampu</td>
-                                <td><strong>{{$pengampu_id}}</strong></td>
-                            </tr>
-                            <tr>
-                                <td>Matakuliah Syarat</td>
-                                <td><strong>{{$matakuliah_syarat_id}}</strong></td>
-                            </tr>
-                        </table>
+                <div class="container">
                         <br>
+                        <center>
+                            <h1>Important Announcement</h1>
+                            <div class="line"></div>
+                            <div class="announcement">
+                                <!-- <h2>Important Announcement</h2> -->
+                                <h2>Please click "Finish and print PDF" button to finish your work. </h2>
+                                <h2>And please press the "Back" button to check your work again.</h2>
+                            </div>
+                        </div>
+                        </center>
+                        <br>
+                        <center>
+                            <!-- <button class="btn btn-success btn-lg" wire:click="store" type="button">Finish and print the PDF!</button> -->
+                            <button class="btn btn-danger nextBtn btn-lg" type="button"
+                                wire:click="back(2)">Back</button>
+                            <button class="btn btn-success btn-lg" wire:click="store" type="button">Finish and print the PDF!</button>
+                        </center>
                     
-                        <div class="row">
-                            <table class="table table-bordered">
-                                <h5>Pustaka</h5>
-                                <thead class="thead-dark">
-                                    <tr>
-                                        <th scope="col">Jenis</th>
-                                        <th scope="col">Sumber</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>{{ $jenis }}</td>
-                                        <td>{{ $sumber }}, </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <br>
-                        <div class="row">
-                            <table class="table table-bordered">
-                                <h5>Pertemuan</h5>
-                                <thead class="thead-dark">
-                                    <tr>
-                                        <th scope="col">MINGGU-KE</th>
-                                        <th scope="col">KEMAMPUAN AKHIR YANG DIHARAPKAN</th>
-                                        <th scope="col">BAHAN KAJIAN (MATERI PEMBELAJARAN)</th>
-                                        <th scope="col">METODE PEMBELAJARAN</th>
-                                        <th scope="col">WAKTU</th>
-                                        <th scope="col">PENGALAMAN BELAJAR MAHASISWA</th>
-                                        <th scope="col">BOBOT NILAI (%)</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                @foreach($pertemuan as $post)
-                                    <tr>
-                                        <td>{{ $post['minggu_ke'] }}</td>
-                                        <td>{{ $post['kemampuan_akhir'] }}</td>
-                                        <td>{{ $post['bahan_kajian'] }}</td>
-                                        <td>{{ $post['metode_pembelajaran'] }}</td>
-                                        <td>{{ $post['waktu'] }}*50</td>
-                                        <td>{{ $post['pengalaman_belajar'] }}</td>
-                                        <td>{{ $post['bobot_nilai'] }}</td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <button class="btn btn-success btn-lg pull-right" wire:click="store" type="button">Finish and print the PDF!</button>
-                    <button class="btn btn-danger nextBtn btn-lg pull-right" type="button"
-                        wire:click="back(2)">Back</button>
                 </div>
             </div>
     </div>
@@ -466,3 +392,9 @@
     });
 </script>
 </div>
+<style>
+    .line {
+        border-top: 1px solid black;
+        margin: 20px 0;
+    }
+</style>

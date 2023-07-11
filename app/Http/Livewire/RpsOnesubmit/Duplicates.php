@@ -58,7 +58,10 @@ class Duplicates extends Component
 //     ->select('pertemuans.*', 'topiks.*')
 //     ->get();
 
-    $duplicates = Pertemuan::select('topik_id', 'topiks.topik' ,DB::raw('group_concat(matakuliahs.nama) as matkul_name')) 
+    $duplicates = Pertemuan::select(
+        'topik_id', 
+        'topiks.topik' ,
+        DB::raw('group_concat(matakuliahs.nama) as matkul_name')) 
     ->join('matakuliahs', 'matakuliahs.id' , '=', 'pertemuans.matkul_id') 
     ->join('topiks', 'topiks.id', '=', 'pertemuans.topik_id') 
     ->groupBy('topik_id', 'topiks.topik') 

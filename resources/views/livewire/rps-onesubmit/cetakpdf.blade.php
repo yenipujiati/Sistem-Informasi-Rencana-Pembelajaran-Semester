@@ -142,7 +142,7 @@
                 </table>
             </div>
             <br>
-            <div class="row page-break">
+            <div>
                 <table class="table table-bordered">
                     <colgroup>
                         <col style="width: 10%">
