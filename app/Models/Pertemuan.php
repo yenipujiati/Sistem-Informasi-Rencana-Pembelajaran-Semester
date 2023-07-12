@@ -23,7 +23,8 @@ class Pertemuan extends Model
         'bobot_nilai',
         'topik_id',
         'rps_id',
-        'matkul_id'
+        'matkul_id',
+        'istest'
     ];
 
     public function topik()

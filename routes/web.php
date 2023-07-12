@@ -33,6 +33,7 @@ use App\Http\Livewire\RpsOnesubmit\create as RpsOnesubmitcreate;
 use App\Http\Livewire\RpsOnesubmit\edit as RpsOnesubmitedit;
 use App\Http\Livewire\RpsOnesubmit\Duplicates as RpsOnesubmitduplicates;
 use App\Http\Livewire\Dosen\RpsOnesumbit\Create as DosenRpsOnesubmitcreate;
+use App\Http\Livewire\RpsOnesubmit\Detail as RpsOnesubmitdetail;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,7 +47,7 @@ use App\Http\Livewire\Dosen\RpsOnesumbit\Create as DosenRpsOnesubmitcreate;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/login');
 });
 
 Auth::routes(['login'=>false,'register'=>false]);
@@ -95,6 +96,9 @@ Route::get('/rpsonesubmit/edit/{id}',RpsOnesubmitedit::class)->name('rpsonesubmi
 Route::get('/rpsonesubmit/duplicates',RpsOnesubmitduplicates::class)->name('rpsonesubmitduplicates');
 
 Route::get('/dosenrpsonesubmit/create',DosenRpsOnesubmitcreate::class)->name('dosen.rpsonesubmitcreate');
+
+Route::get('/rpsonesubmit/detail/{id}',RpsOnesubmitdetail::class)->name('rpsonesubmitdetail');
+// Route::get('/rpsonesubmit/detail/{id}',RpsOnesubmitdetail::class)->name('detail');
 
 Route::get('/redundancy', function() {
     return view('livewire/rps-onesubmit/redundancy');

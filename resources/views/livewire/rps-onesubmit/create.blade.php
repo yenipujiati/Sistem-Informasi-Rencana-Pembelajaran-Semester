@@ -34,7 +34,6 @@
         <div class="col md-3">
             <div class="col-md-12">
                 <h3> Step 1</h3>
-
                 <div class="form-group">
                     @csrf
                         <label for="matakuliah_id" class="col-md-4 col-form-label text-md-end">{{ __('Matakuliah') }}</label>
@@ -55,12 +54,8 @@
                     <div class="form-group">
                         <label for="pengembang_id" class="col-md-4 col-form-label text-md-end">{{ __('Pengembang RP') }}</label>
                         <div class="col-md-max col-form-label">
-                            <select id="pengembang_id" class="form-control @error('pengembang_id') is-invalid @enderror" name="pengembang_id" wire:model.defer="pengembang_id">
-                                <option value="">Pilih</option>
-                                    @foreach ($user as $item)
-                                        <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                    @endforeach
-                            </select>
+                            <input id="pengembang_id" type="text" class="form-control @error('pengembang_id') is-invalid @enderror" name="pengembang_id" value="{{ $user2->name }}" readonly>
+                            <input type="hidden" name="pengembang_id" value="{{ $pengembang_id }}">
                         </div>
                         @error('pengembang_id')
                             <span class="invalid-feedback" role="alert">
@@ -231,7 +226,7 @@
                     <button class="btn btn-primary nextBtn btn-lg pull-right" type="button"
                         wire:click="thirdthStepSubmit">Next</button>
                     <button class="btn btn-danger nextBtn btn-lg pull-right" type="button"
-                        wire:click="back(1)">Back</button>
+                        wire:click="back(2)">Back</button>
                 </div>
             </div>
     </div>
@@ -244,10 +239,34 @@
                         <div class="card">
                             <div class="card-body">
                                 @foreach($pertemuan as $index =>$item)
-                                    <div class="border p-3 mb-3">
+                                    <!-- <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="istest" id="istest" value="UTS" wire:model.defer="pertemuan.{{$index}}.istest">
+                                        <label class="form-check-label" for="istest">UTS</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="istest" id="istest" value="UAS" wire:model.defer="pertemuan.{{$index}}.istest">
+                                        <label class="form-check-label" for="istest">UAS</label>
+                                    </div> -->
+                                    <div class="border p-3 mb-3" id="pertemuan-container">
+                                        <div class="form-group">
+                                            <!-- <label for="istest" class="col-md-4 col-form-label text-md-end">{{ __('Apakah sedangminggu ujian?') }}</label> -->
+                                            <div class="col-md-max col-form-label">
+                                                <select id="istest" class="form-control @error('istest') is-invalid @enderror" name="istest" wire:model.defer="pertemuan.{{$index}}.istest">
+                                                    <option selected>Apakah sedang minggu ujian?</option>
+                                                    <option value="UTS">UTS</option>
+                                                    <option value="UAS">UAS</option>
+                                                    <option value="Bukan minggu ujian">Bukan minggu ujian</option>
+                                                </select>
+                                            </div>
+                                            @error('istest')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
                                         <div class="form-group">
                                             <label for="minggu_ke" class="col-md-4 col-form-label text-md-end">{{ __('Minggu-ke') }}</label>
-                                            <input id="minggu_ke" type="number" class="form-control @error('minggu_ke') is-invalid @enderror" name="minggu_ke" required autocomplete="minggu_ke" wire:model.defer="pertemuan.{{$index}}.minggu_ke">
+                                            <input id="minggu_ke"  class="form-control @error('minggu_ke') is-invalid @enderror" name="minggu_ke" autocomplete="minggu_ke" wire:model.defer="pertemuan.{{$index}}.minggu_ke">
                                             @error('minggu_ke')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -256,7 +275,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="kemampuan_akhir" class="col-md-4 col-form-label text-md-end">{{ __('Kemampuan akhir mahasiswa') }}</label>
-                                            <textarea id="kemampuan_akhir" type="text" class="form-control @error('kemampuan_akhir') is-invalid @enderror" name="kemampuan_akhir" required autocomplete="kemampuan_akhir" cols="30" rows="10" wire:model.defer="pertemuan.{{$index}}.kemampuan_akhir"></textarea>
+                                            <textarea id="kemampuan_akhir" type="text" class="form-control @error('kemampuan_akhir') is-invalid @enderror" name="kemampuan_akhir" autocomplete="kemampuan_akhir" cols="30" rows="10" wire:model.defer="pertemuan.{{$index}}.kemampuan_akhir"></textarea>
                                             @error('kemampuan_akhir')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -265,7 +284,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="bahan_kajian" class="col-md-4 col-form-label text-md-end">{{ __('Bahan Kajian') }}</label>
-                                            <input id="bahan_kajian" type="text" class="form-control @error('bahan_kajian') is-invalid @enderror" name="bahan_kajian" required autocomplete="bahan_kajian" wire:model.defer="pertemuan.{{$index}}.bahan_kajian">
+                                            <input id="bahan_kajian" type="text" class="form-control @error('bahan_kajian') is-invalid @enderror" name="bahan_kajian" autocomplete="bahan_kajian" wire:model.defer="pertemuan.{{$index}}.bahan_kajian">
                                             @error('bahan_kajian')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -297,7 +316,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="waktu" class="col-md-4 col-form-label text-md-end">{{ __('Waktu') }}</label>
-                                            <input id="waktu" type="number" class="form-control @error('waktu') is-invalid @enderror" name="waktu" required autocomplete="waktu" wire:model.defer="pertemuan.{{$index}}.waktu">
+                                            <input id="waktu" type="number" class="form-control @error('waktu') is-invalid @enderror" name="waktu" autocomplete="waktu" wire:model.defer="pertemuan.{{$index}}.waktu">
                                             @error('waktu')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -306,7 +325,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="pengalaman_belajar" class="col-md-4 col-form-label text-md-end">{{ __('Pengalaman Belajar Mahasiswa') }}</label>
-                                            <textarea id="pengalaman_belajar" type="text" class="form-control @error('pengalaman_belajar') is-invalid @enderror" name="pengalaman_belajar" required autocomplete="pengalaman_belajar" cols="30" rows="10" wire:model.defer="pertemuan.{{$index}}.pengalaman_belajar"></textarea>
+                                            <textarea id="pengalaman_belajar" type="text" class="form-control @error('pengalaman_belajar') is-invalid @enderror" name="pengalaman_belajar" autocomplete="pengalaman_belajar" cols="30" rows="10" wire:model.defer="pertemuan.{{$index}}.pengalaman_belajar"></textarea>
                                             @error('pengalaman_belajar')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -315,7 +334,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="bobot_nilai" class="col-md-4 col-form-label text-md-end">{{ __('Bobot Nilai (%)') }}</label>
-                                            <input id="bobot_nilai" type="number" class="form-control @error('bobot_nilai') is-invalid @enderror" name="bobot_nilai" required autocomplete="bobot_nilai" wire:model.defer="pertemuan.{{$index}}.bobot_nilai">
+                                            <input id="bobot_nilai" type="number" class="form-control @error('bobot_nilai') is-invalid @enderror" name="bobot_nilai" autocomplete="bobot_nilai" wire:model.defer="pertemuan.{{$index}}.bobot_nilai">
                                             @error('bobot_nilai')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -348,7 +367,7 @@
                     <button class="btn btn-primary nextBtn btn-lg pull-right" type="button"
                         wire:click="fourthStepSubmit">Next</button>
                     <button class="btn btn-danger nextBtn btn-lg pull-right" type="button"
-                        wire:click="back(1)">Back</button>
+                        wire:click="back(3)">Back</button>
                 </div>
             </div>
     </div>
@@ -462,7 +481,7 @@
                         <center>
                             <!-- <button class="btn btn-success btn-lg" wire:click="store" type="button">Finish and print the PDF!</button> -->
                             <button class="btn btn-danger nextBtn btn-lg" type="button"
-                                wire:click="back(2)">Back</button>
+                                wire:click="back(4)">Back</button>
                             <button class="btn btn-success btn-lg" wire:click="store" type="button">Finish and print the PDF!</button>
                         </center>
                     
@@ -481,11 +500,33 @@
             // alert("test");
         });
     });
+
+    $(document).ready(function() {
+        $("#istest").change( function() {
+            if ($("#istest").val("UTS")) {
+                // $('#pertemuan-container .border').addClass('disabled');
+                // $('#pertemuan-container .border input, #pertemuan-container .border textarea, #pertemuan-container .border select, #pertemuan-container .border button').prop('disabled', true);
+                console.log("this jquery running1");
+            } else if ($("#istest").val("UAS")) {
+                console.log("this jquery running2");
+                // $('#pertemuan-container .border').removeClass('disabled');
+                // $('#pertemuan-container .border input, #pertemuan-container .border textarea, #pertemuan-container .border select, #pertemuan-container .border button').prop('disabled', false);
+            }
+        });
+    });
+    // function myFunction() {
+    //     var x  = document.getElementById("istest").value;
+    //     document.getElementById("UTS").innerHTML = "running jquery1";
+    // }
 </script>
 </div>
 <style>
     .line {
         border-top: 1px solid black;
         margin: 20px 0;
+    }
+    .disabled {
+    opacity: 0.5;
+    pointer-events: none;
     }
 </style>
