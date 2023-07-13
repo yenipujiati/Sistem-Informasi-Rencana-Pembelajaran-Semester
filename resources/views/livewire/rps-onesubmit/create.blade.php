@@ -231,7 +231,7 @@
             </div>
     </div>
     <div class="row setup-content {{ $currentStep != 4 ? 'displayNone' : '' }}" id="step-4">
-            <div class="col md-3">
+    <div class="col md-3">
                 <div class="col-md-12">
                     <h3> Step 4</h3>
                     <div>
@@ -239,25 +239,14 @@
                         <div class="card">
                             <div class="card-body">
                                 @foreach($pertemuan as $index =>$item)
-                                    <!-- <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="istest" id="istest" value="UTS" wire:model.defer="pertemuan.{{$index}}.istest">
-                                        <label class="form-check-label" for="istest">UTS</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="istest" id="istest" value="UAS" wire:model.defer="pertemuan.{{$index}}.istest">
-                                        <label class="form-check-label" for="istest">UAS</label>
-                                    </div> -->
-                                    <div class="border p-3 mb-3" id="pertemuan-container">
+                                    <div class="border p-3 mb-3">
                                         <div class="form-group">
-                                            <!-- <label for="istest" class="col-md-4 col-form-label text-md-end">{{ __('Apakah sedangminggu ujian?') }}</label> -->
-                                            <div class="col-md-max col-form-label">
-                                                <select id="istest" class="form-control @error('istest') is-invalid @enderror" name="istest" wire:model.defer="pertemuan.{{$index}}.istest">
-                                                    <option selected>Apakah sedang minggu ujian?</option>
-                                                    <option value="UTS">UTS</option>
-                                                    <option value="UAS">UAS</option>
-                                                    <option value="Bukan minggu ujian">Bukan minggu ujian</option>
-                                                </select>
-                                            </div>
+                                            <select id="istest" class="form-control @error('istest') is-invalid @enderror" name="istest" wire:model.defer="pertemuan.{{$index}}.istest">
+                                                <option selected>Apakah sedang minggu ujian?</option>
+                                                <option value="UTS">UTS</option>
+                                                <option value="UAS">UAS</option>
+                                                <option value="Bukan minggu ujian">Bukan minggu ujian</option>
+                                            </select>
                                             @error('istest')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -266,7 +255,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="minggu_ke" class="col-md-4 col-form-label text-md-end">{{ __('Minggu-ke') }}</label>
-                                            <input id="minggu_ke"  class="form-control @error('minggu_ke') is-invalid @enderror" name="minggu_ke" autocomplete="minggu_ke" wire:model.defer="pertemuan.{{$index}}.minggu_ke">
+                                            <input id="minggu_ke" type="number" class="form-control @error('minggu_ke') is-invalid @enderror" name="minggu_ke" required autocomplete="minggu_ke" wire:model.defer="pertemuan.{{$index}}.minggu_ke">
                                             @error('minggu_ke')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -275,7 +264,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="kemampuan_akhir" class="col-md-4 col-form-label text-md-end">{{ __('Kemampuan akhir mahasiswa') }}</label>
-                                            <textarea id="kemampuan_akhir" type="text" class="form-control @error('kemampuan_akhir') is-invalid @enderror" name="kemampuan_akhir" autocomplete="kemampuan_akhir" cols="30" rows="10" wire:model.defer="pertemuan.{{$index}}.kemampuan_akhir"></textarea>
+                                            <textarea id="kemampuan_akhir" type="text" class="form-control @error('kemampuan_akhir') is-invalid @enderror" name="kemampuan_akhir" required autocomplete="kemampuan_akhir" cols="30" rows="10" wire:model.defer="pertemuan.{{$index}}.kemampuan_akhir"></textarea>
                                             @error('kemampuan_akhir')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -284,7 +273,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="bahan_kajian" class="col-md-4 col-form-label text-md-end">{{ __('Bahan Kajian') }}</label>
-                                            <input id="bahan_kajian" type="text" class="form-control @error('bahan_kajian') is-invalid @enderror" name="bahan_kajian" autocomplete="bahan_kajian" wire:model.defer="pertemuan.{{$index}}.bahan_kajian">
+                                            <input id="bahan_kajian" type="text" class="form-control @error('bahan_kajian') is-invalid @enderror" name="bahan_kajian" required autocomplete="bahan_kajian" wire:model.defer="pertemuan.{{$index}}.bahan_kajian">
                                             @error('bahan_kajian')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -316,7 +305,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="waktu" class="col-md-4 col-form-label text-md-end">{{ __('Waktu') }}</label>
-                                            <input id="waktu" type="number" class="form-control @error('waktu') is-invalid @enderror" name="waktu" autocomplete="waktu" wire:model.defer="pertemuan.{{$index}}.waktu">
+                                            <input id="waktu" type="number" class="form-control @error('waktu') is-invalid @enderror" name="waktu" required autocomplete="waktu" wire:model.defer="pertemuan.{{$index}}.waktu">
                                             @error('waktu')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -325,7 +314,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="pengalaman_belajar" class="col-md-4 col-form-label text-md-end">{{ __('Pengalaman Belajar Mahasiswa') }}</label>
-                                            <textarea id="pengalaman_belajar" type="text" class="form-control @error('pengalaman_belajar') is-invalid @enderror" name="pengalaman_belajar" autocomplete="pengalaman_belajar" cols="30" rows="10" wire:model.defer="pertemuan.{{$index}}.pengalaman_belajar"></textarea>
+                                            <textarea id="pengalaman_belajar" type="text" class="form-control @error('pengalaman_belajar') is-invalid @enderror" name="pengalaman_belajar" required autocomplete="pengalaman_belajar" cols="30" rows="10" wire:model.defer="pertemuan.{{$index}}.pengalaman_belajar"></textarea>
                                             @error('pengalaman_belajar')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -334,7 +323,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="bobot_nilai" class="col-md-4 col-form-label text-md-end">{{ __('Bobot Nilai (%)') }}</label>
-                                            <input id="bobot_nilai" type="number" class="form-control @error('bobot_nilai') is-invalid @enderror" name="bobot_nilai" autocomplete="bobot_nilai" wire:model.defer="pertemuan.{{$index}}.bobot_nilai">
+                                            <input id="bobot_nilai" type="number" class="form-control @error('bobot_nilai') is-invalid @enderror" name="bobot_nilai" required autocomplete="bobot_nilai" wire:model.defer="pertemuan.{{$index}}.bobot_nilai">
                                             @error('bobot_nilai')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -367,104 +356,13 @@
                     <button class="btn btn-primary nextBtn btn-lg pull-right" type="button"
                         wire:click="fourthStepSubmit">Next</button>
                     <button class="btn btn-danger nextBtn btn-lg pull-right" type="button"
-                        wire:click="back(3)">Back</button>
+                        wire:click="back(1)">Back</button>
                 </div>
             </div>
     </div>
     <div class="row setup-content {{ $currentStep != 5 ? 'displayNone' : '' }}" id="step-5">
             <div class="col md-3">
                 <div class="col-md-12">
-                    <!-- <h3><strong>Rencana Pembelajaran Semester</strong></h3> -->
-                    <!-- <div class="container">
-                        <h5>Detail</h5>
-                        <table class="table table-bordered">
-                            <tr>
-                                <td>Matakuliah</td>
-                                <td><strong>{{$matakuliah_id}}</strong></td>
-                            </tr>
-                            <tr>
-                                <td>Pengembang RP</td>
-                                <td><strong>{{$pengembang_id}}</strong></td>
-                            </tr>
-                            <tr>
-                                <td>Koordinator</td>
-                                <td><strong>{{$koordinator_id}}</strong></td>
-                            </tr>
-                            <tr>
-                                <td>Kaprodi</td>
-                                <td><strong>{{$kaprodi_id}}</strong></td>
-                            </tr>
-                            <tr>
-                                <td>Capaian Pembelajaran</td>
-                                <td><strong>{{$deskripsi_singkat}}</strong></td>
-                            </tr>
-                            <tr>
-                                <td>Media Pembelajaran (Hardware)</td>
-                                <td><strong>{{$mp_hardware}}</strong></td>
-                            </tr>
-                            <tr>
-                                <td>Media Pembeajaran (Software)</td>
-                                <td><strong>{{$mp_software}}</strong></td>
-                            </tr>
-                            <tr>
-                                <td>Dosen Pengampu</td>
-                                <td><strong>{{$pengampu_id}}</strong></td>
-                            </tr>
-                            <tr>
-                                <td>Matakuliah Syarat</td>
-                                <td><strong>{{$matakuliah_syarat_id}}</strong></td>
-                            </tr>
-                        </table>
-                        <br>
-                    
-                        <div class="row">
-                            <table class="table table-bordered">
-                                <h5>Pustaka</h5>
-                                <thead class="thead-dark">
-                                    <tr>
-                                        <th scope="col">Jenis</th>
-                                        <th scope="col">Sumber</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>{{ $jenis }}</td>
-                                        <td>{{ $sumber }}, </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <br>
-                        <div class="row">
-                            <table class="table table-bordered">
-                                <h5>Pertemuan</h5>
-                                <thead class="thead-dark">
-                                    <tr>
-                                        <th scope="col">MINGGU-KE</th>
-                                        <th scope="col">KEMAMPUAN AKHIR YANG DIHARAPKAN</th>
-                                        <th scope="col">BAHAN KAJIAN (MATERI PEMBELAJARAN)</th>
-                                        <th scope="col">METODE PEMBELAJARAN</th>
-                                        <th scope="col">WAKTU</th>
-                                        <th scope="col">PENGALAMAN BELAJAR MAHASISWA</th>
-                                        <th scope="col">BOBOT NILAI (%)</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                @foreach($pertemuan as $post)
-                                    <tr>
-                                        <td>{{ $post['minggu_ke'] }}</td>
-                                        <td>{{ $post['kemampuan_akhir'] }}</td>
-                                        <td>{{ $post['bahan_kajian'] }}</td>
-                                        <td>{{ $post['metode_pembelajaran'] }}</td>
-                                        <td>{{ $post['waktu'] }}*50</td>
-                                        <td>{{ $post['pengalaman_belajar'] }}</td>
-                                        <td>{{ $post['bobot_nilai'] }}</td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                    </div> -->
                     <div class="container">
                         <br>
                         <center>
@@ -482,13 +380,13 @@
                             <!-- <button class="btn btn-success btn-lg" wire:click="store" type="button">Finish and print the PDF!</button> -->
                             <button class="btn btn-danger nextBtn btn-lg" type="button"
                                 wire:click="back(4)">Back</button>
-                            <button class="btn btn-success btn-lg" wire:click="store" type="button">Finish and print the PDF!</button>
+                            <button class="btn btn-success btn-lg" wire:click="store" type="button">Finish</button>
                         </center>
                     
                 </div>
             </div>
     </div>
-    <script>
+<script>
     $(document).ready(function() {
         $(".btn-primary").click(function() {
             // var $step = $(this).closest(".stepwizard-step");
@@ -500,24 +398,38 @@
             // alert("test");
         });
     });
+</script>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script>
+    // $(document).ready(function() {
+    //     $(document).on('change', '#istest', function() {
+    //         if ($(this).val() === "UTS" || $(this).val() === "UAS") {
+    //             // Disable elements when 'UTS' or 'UAS' is selected
+    //             $('#pertemuan-container :input, #pertemuan-container option').prop('readonly', true);
+    //             $('#metode_pembelajaran, #topik_id').prop('disabled', true);
+    //             $('#pertemuan-container').val('');
+    //         } else if ($(this).val() === "Bukan minggu ujian") {
+    //             // Enable elements when other options are selected
+    //             $('#pertemuan-container :input').prop('readonly', false);
+    //             $('#metode_pembelajaran, #topik_id').prop('disabled', false);
+    //         }
+    //     });
 
-    $(document).ready(function() {
-        $("#istest").change( function() {
-            if ($("#istest").val("UTS")) {
-                // $('#pertemuan-container .border').addClass('disabled');
-                // $('#pertemuan-container .border input, #pertemuan-container .border textarea, #pertemuan-container .border select, #pertemuan-container .border button').prop('disabled', true);
-                console.log("this jquery running1");
-            } else if ($("#istest").val("UAS")) {
-                console.log("this jquery running2");
-                // $('#pertemuan-container .border').removeClass('disabled');
-                // $('#pertemuan-container .border input, #pertemuan-container .border textarea, #pertemuan-container .border select, #pertemuan-container .border button').prop('disabled', false);
-            }
-        });
-    });
-    // function myFunction() {
-    //     var x  = document.getElementById("istest").value;
-    //     document.getElementById("UTS").innerHTML = "running jquery1";
-    // }
+    //     // Listen for changes in the wire:model.defer binding
+    //     $(document).on('change', 'select[name^="pertemuan."]', function() {
+    //         var index = $(this).attr('name').match(/\d+/)[0]; // Extract the index from the name attribute
+    //         var selectedValue = $(this).val(); // Get the selected value
+
+    //         // Check if the selected value is set
+    //         if (selectedValue) {
+    //             // Enable the elements with the same index as the selected value
+    //             $('input[name="pertemuan.' + index + '.istest"]').prop('disabled', false);
+    //         } else {
+    //             // Disable the elements with the same index as the selected value
+    //             $('input[name="pertemuan.' + index + '.istest"]').prop('disabled', true);
+    //         }
+    //     });
+    // });
 </script>
 </div>
 <style>

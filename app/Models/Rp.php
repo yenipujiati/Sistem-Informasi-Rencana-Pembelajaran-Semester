@@ -31,6 +31,7 @@ class Rp extends Model
         'matakuliah_syarat_id',
         'pertemuan_id',
         'cpl_ids',
+        'istest',
     ];
 
     // public function pertemuan()

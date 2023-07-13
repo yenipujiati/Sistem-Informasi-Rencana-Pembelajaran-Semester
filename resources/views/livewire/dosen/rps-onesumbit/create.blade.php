@@ -34,7 +34,6 @@
         <div class="col md-3">
             <div class="col-md-12">
                 <h3> Step 1</h3>
-
                 <div class="form-group">
                     @csrf
                         <label for="matakuliah_id" class="col-md-4 col-form-label text-md-end">{{ __('Matakuliah') }}</label>
@@ -55,12 +54,8 @@
                     <div class="form-group">
                         <label for="pengembang_id" class="col-md-4 col-form-label text-md-end">{{ __('Pengembang RP') }}</label>
                         <div class="col-md-max col-form-label">
-                            <select id="pengembang_id" class="form-control @error('pengembang_id') is-invalid @enderror" name="pengembang_id" wire:model.defer="pengembang_id">
-                                <option value="">Pilih</option>
-                                    @foreach ($user as $item)
-                                        <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                    @endforeach
-                            </select>
+                            <input id="pengembang_id" type="text" class="form-control @error('pengembang_id') is-invalid @enderror" name="pengembang_id" value="{{ $user2->name }}" readonly>
+                            <input type="hidden" name="pengembang_id" value="{{ $pengembang_id }}">
                         </div>
                         @error('pengembang_id')
                             <span class="invalid-feedback" role="alert">
@@ -220,7 +215,7 @@
                     </div>
                     <div class="form-group">
                         <label for="sumber" class="col-md-4 col-form-label text-md-end">{{ __('Source') }}</label>
-                        <textarea id="sumber" type="text" class="form-control @error('sumber') is-invalid @enderror" name="sumber" required autocomplete="sumber" cols="30" rows="10" wire:model.defer="sumber"></textarea>
+                        <textarea id="sumber" type="text" class="form-control @error('sumber') is-invalid @enderror" name="sumber" autocomplete="sumber" cols="30" rows="10" wire:model.defer="sumber"></textarea>
                         @error('sumber')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -231,12 +226,12 @@
                     <button class="btn btn-primary nextBtn btn-lg pull-right" type="button"
                         wire:click="thirdthStepSubmit">Next</button>
                     <button class="btn btn-danger nextBtn btn-lg pull-right" type="button"
-                        wire:click="back(1)">Back</button>
+                        wire:click="back(2)">Back</button>
                 </div>
             </div>
     </div>
     <div class="row setup-content {{ $currentStep != 4 ? 'displayNone' : '' }}" id="step-4">
-            <div class="col md-3">
+    <div class="col md-3">
                 <div class="col-md-12">
                     <h3> Step 4</h3>
                     <div>
@@ -245,6 +240,19 @@
                             <div class="card-body">
                                 @foreach($pertemuan as $index =>$item)
                                     <div class="border p-3 mb-3">
+                                        <div class="form-group">
+                                            <select id="istest" class="form-control @error('istest') is-invalid @enderror" name="istest" wire:model.defer="pertemuan.{{$index}}.istest">
+                                                <option selected>Apakah sedang minggu ujian?</option>
+                                                <option value="UTS">UTS</option>
+                                                <option value="UAS">UAS</option>
+                                                <option value="Bukan minggu ujian">Bukan minggu ujian</option>
+                                            </select>
+                                            @error('istest')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
                                         <div class="form-group">
                                             <label for="minggu_ke" class="col-md-4 col-form-label text-md-end">{{ __('Minggu-ke') }}</label>
                                             <input id="minggu_ke" type="number" class="form-control @error('minggu_ke') is-invalid @enderror" name="minggu_ke" required autocomplete="minggu_ke" wire:model.defer="pertemuan.{{$index}}.minggu_ke">
@@ -348,14 +356,14 @@
                     <button class="btn btn-primary nextBtn btn-lg pull-right" type="button"
                         wire:click="fourthStepSubmit">Next</button>
                     <button class="btn btn-danger nextBtn btn-lg pull-right" type="button"
-                        wire:click="back(1)">Back</button>
+                        wire:click="back(3)">Back</button>
                 </div>
             </div>
     </div>
     <div class="row setup-content {{ $currentStep != 5 ? 'displayNone' : '' }}" id="step-5">
             <div class="col md-3">
                 <div class="col-md-12">
-                <div class="container">
+                    <div class="container">
                         <br>
                         <center>
                             <h1>Important Announcement</h1>
@@ -371,14 +379,14 @@
                         <center>
                             <!-- <button class="btn btn-success btn-lg" wire:click="store" type="button">Finish and print the PDF!</button> -->
                             <button class="btn btn-danger nextBtn btn-lg" type="button"
-                                wire:click="back(2)">Back</button>
-                            <button class="btn btn-success btn-lg" wire:click="store" type="button">Finish and print the PDF!</button>
+                                wire:click="back(4)">Back</button>
+                            <button class="btn btn-success btn-lg" wire:click="store" type="button">Finish</button>
                         </center>
                     
                 </div>
             </div>
     </div>
-    <script>
+<script>
     $(document).ready(function() {
         $(".btn-primary").click(function() {
             // var $step = $(this).closest(".stepwizard-step");
@@ -391,10 +399,46 @@
         });
     });
 </script>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script>
+    // $(document).ready(function() {
+    //     $(document).on('change', '#istest', function() {
+    //         if ($(this).val() === "UTS" || $(this).val() === "UAS") {
+    //             // Disable elements when 'UTS' or 'UAS' is selected
+    //             $('#pertemuan-container :input, #pertemuan-container option').prop('readonly', true);
+    //             $('#metode_pembelajaran, #topik_id').prop('disabled', true);
+    //             $('#pertemuan-container').val('');
+    //         } else if ($(this).val() === "Bukan minggu ujian") {
+    //             // Enable elements when other options are selected
+    //             $('#pertemuan-container :input').prop('readonly', false);
+    //             $('#metode_pembelajaran, #topik_id').prop('disabled', false);
+    //         }
+    //     });
+
+    //     // Listen for changes in the wire:model.defer binding
+    //     $(document).on('change', 'select[name^="pertemuan."]', function() {
+    //         var index = $(this).attr('name').match(/\d+/)[0]; // Extract the index from the name attribute
+    //         var selectedValue = $(this).val(); // Get the selected value
+
+    //         // Check if the selected value is set
+    //         if (selectedValue) {
+    //             // Enable the elements with the same index as the selected value
+    //             $('input[name="pertemuan.' + index + '.istest"]').prop('disabled', false);
+    //         } else {
+    //             // Disable the elements with the same index as the selected value
+    //             $('input[name="pertemuan.' + index + '.istest"]').prop('disabled', true);
+    //         }
+    //     });
+    // });
+</script>
 </div>
 <style>
     .line {
         border-top: 1px solid black;
         margin: 20px 0;
+    }
+    .disabled {
+    opacity: 0.5;
+    pointer-events: none;
     }
 </style>

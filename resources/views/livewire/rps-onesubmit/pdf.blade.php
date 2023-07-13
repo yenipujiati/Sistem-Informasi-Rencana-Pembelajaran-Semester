@@ -1,14 +1,24 @@
-<div class="header">
-    <h1>UNIVERSITAS KRISTEN IMMANUEL</h1>
-    <p>Jl. Solo Km 11,1, PO BOX 64/YKAP</p>
-    <p>Telepon 0274-49626, Fax: 0274496423</p>
-    <p><a href="http://www.ukrim.ac.id">www.ukrim.ac.id</a> email: <a href="mailto:humas@ukrimuniversity.ac.id">humas@ukrimuniversity.ac.id</a></p>
-</div>
-<div class="line"></div>
+<table>
+  <tr>
+    <td>
+        <center>
+            <img src="https://sid.ukrim.ac.id/images/ukrim.png" width="200" style="display;block; margin:auto;" alt="Logo Universitas">
+        </center>
+    </td>
+    <td>
+      <div class="header">
+        <h1>UNIVERSITAS KRISTEN IMMANUEL</h1>
+        <p>Jl. Solo Km 11,1, PO BOX 64/YKAP</p>
+        <p>Telepon 0274-49626, Fax: 0274496423</p>
+        <p><a href="http://www.ukrim.ac.id">www.ukrim.ac.id</a> email: <a href="mailto:humas@ukrimuniversity.ac.id">humas@ukrimuniversity.ac.id</a></p>
+      </div>
+    </td>
+  </tr>
+</table>
 <div>
+    <br>
     <div class="col md-3">
         <div class="col-md-12">
-            <h3><strong>Rencana Pembelajaran Semester</strong></h3>
             <div class="container">
                 <table class="table table-bordered">
                     <colgroup>
@@ -19,6 +29,13 @@
                         <col style="width: 15%">
                         <col style="width: 25%">
                     </colgroup>
+                    <tr>
+                        <td colspan="9">
+                            <center>
+                                <h3><strong>Rencana Pembelajaran Semester {{ $data['matakuliah']['nama'] }}</strong></h3>
+                            </center>
+                        </td>
+                    </tr>
                     <tr>
                         <th><strong>Matakuliah</strong></th>
                         <th colspan="2"><strong>Kode</strong></th>
@@ -112,15 +129,30 @@
                     </thead>
                     <tbody>
                         @foreach($data['pertemuan'] as $post)
-                            <tr>
-                                <td>{{ $post['minggu_ke'] }}</td>
-                                <td>{{ $post['kemampuan_akhir'] }}</td>
-                                <td>{{ $post['bahan_kajian'] }}</td>
-                                <td>{{ $post['metode_pembelajaran'] }}</td>
-                                <td>{{ $post['waktu'] }}*50</td>
-                                <td>{{ $post['pengalaman_belajar'] }}</td>
-                                <td>{{ $post['bobot_nilai'] }}</td>
-                            </tr>
+                            @if($post['istest'] == "UTS" || $post['istest'] == "UAS")
+                                    <tbody>
+                                        <tr>
+                                            <td>{{ $post['minggu_ke'] }}</td>
+                                            <td colspan="6">
+                                                <center>
+                                                    {{ $post['istest'] }}
+                                                </center>
+                                            </td>
+                                        </tr>
+                                    </tbody> 
+                                @else
+                                    <tbody>
+                                        <tr>
+                                            <td>{{ $post['minggu_ke'] }}</td>
+                                            <td>{{ $post['kemampuan_akhir'] }}</td>
+                                            <td>{{ $post['bahan_kajian'] }}</td>
+                                            <td>{{ $post['metode_pembelajaran'] }}</td>
+                                            <td>{{ $post['waktu'] }}*50</td>
+                                            <td>{{ $post['pengalaman_belajar'] }}</td>
+                                            <td>{{ $post['bobot_nilai'] }}</td>
+                                        </tr>
+                                    </tbody>
+                                @endif
                         @endforeach
                     </tbody>
                 </table>

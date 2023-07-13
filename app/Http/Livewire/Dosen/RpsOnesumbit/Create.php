@@ -9,9 +9,8 @@ use App\Models\CPL;
 use App\Models\Pustaka;
 use App\Models\Pertemuan;
 use App\Models\RP;
-use Dompdf\Dompdf;
-use Dompdf\Options;
 use Livewire\Component;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class Create extends Component
@@ -25,6 +24,7 @@ class Create extends Component
 
     //pertemuan
     public $minggu_ke, $kemampuan_akhir, $bahan_kajian, $metode_pembelajaran, $waktu, $pengalaman_belajar, $bobot_nilai, $topik_id;
+    public $istest;
     public $pertemuan = [];
 
     public $currentStep = 1;
@@ -40,7 +40,7 @@ class Create extends Component
             'mp_software'=>'required',
             'mp_hardware'=>'required',
             'pengampu_id'=>'required',
-            'matakuliah_syarat_id'=>'required',
+            // 'matakuliah_syarat_id'=>'required',
         ]);
   
         $this->currentStep = 2;
@@ -68,15 +68,17 @@ class Create extends Component
     public function fourthStepSubmit()
     {
         $validatedData = $this->validate([
-            'pertemuan.*.minggu_ke'=>'required',
-            'pertemuan.*.kemampuan_akhir'=>'required',
-            'pertemuan.*.bahan_kajian'=>'required',
-            'pertemuan.*.metode_pembelajaran'=>'required',
-            'pertemuan.*.waktu'=>'required',
-            'pertemuan.*.pengalaman_belajar'=>'required',
-            'pertemuan.*.bobot_nilai'=>'required',
-            'pertemuan.*.topik_id'=>'required',
+            // 'pertemuan.*.minggu_ke'=>'required',
+            // 'pertemuan.*.kemampuan_akhir'=>'required',
+            // 'pertemuan.*.bahan_kajian'=>'required',
+            // 'pertemuan.*.metode_pembelajaran'=>'required',
+            // 'pertemuan.*.waktu'=>'required',
+            // 'pertemuan.*.pengalaman_belajar'=>'required',
+            // 'pertemuan.*.bobot_nilai'=>'required',
+            // 'pertemuan.*.topik_id'=>'required',
+            'pertemuan.*.istest'=>'required',
         ]);
+        
    
         $this->currentStep = 5;
     }
@@ -97,6 +99,7 @@ class Create extends Component
             'pengalaman_belajar' => $this->pengalaman_belajar,
             'bobot_nilai' => $this->bobot_nilai,
             'topik_id' => $this->topik_id,
+            'istest' => $this->istest,
         ];
     }
 
@@ -145,82 +148,33 @@ class Create extends Component
                     "pengalaman_belajar" => $data['pengalaman_belajar'],
                     "bobot_nilai" => $data['bobot_nilai'],
                     "topik_id" => $data['topik_id'],
-                    "rps_id" => $rps['id']
+                    "rps_id" => $rps['id'],
+                    "istest" => $data['istest'],
                 ]);
                 $pertemuan[] = $pertemuans;
             }
-            $matakuliah = Matakuliah::where('id', $rps->matakuliah_id)->first();
-            $pengembang = User::where('id', $rps->pengembang_id)->first();
-            $kaprodi = User::where('id', $rps->kaprodi_id)->first();
-            $koordinator = User::where('id', $rps->kaprodi_id)->first();
-            $matakuliah_syarat = Matakuliah::where('id', $rps->matakuliah_syarat_id)->first();
-            $pengampu = User::where('id', $rps->pengampu_id)->first();
-            $cpls = explode(",", $rps->cpl_ids);
-            $cplData = []; 
-
-            foreach($cpls as $cpl){
-                $CPL = CPL::where('id', $cpl)->first();
-                $cplData[] = $CPL; 
-            }
-
-            $data = [
-                'jenis' => $idPustaka->jenis,
-                'sumber' => $idPustaka->sumber,
-                'matakuliah' => $matakuliah,
-                'pengembang' => $pengembang,
-                'koordinator' => $koordinator,
-                'kaprodi' => $kaprodi,
-                'deskripsi_singkat' => $rps->deskripsi_singkat,
-                'pustaka_id' => $rps->pustaka_id,
-                'mp_software' => $rps->mp_software,
-                'mp_hardware' => $rps->mp_hardware,
-                'pengampu' => $pengampu,
-                'matakuliah_syarat' => $matakuliah_syarat,
-                'pertemuan' => $this->pertemuan,
-                'cpls' => $cplData,
-            ];
-
-            $datas = RP::select(
-                'rumpuns.nama',
-                DB::raw('DATE(rps.created_at) AS created_date'),
-                )
-            ->join('matakuliahs', 'rps.matakuliah_id', '=', 'matakuliahs.id')
-            ->join('rumpuns', 'matakuliahs.rumpun_id' , '=', 'rumpuns.id')
-            ->first();
-            
-            $options = new Options();
-            $options->set('defaultFont', 'Arial');
-            $dompdf = new Dompdf($options);
-            $html = view('livewire.rps-onesubmit.cetakpdf')->with(
-                ['data' => $data, 
-                'datas' => $datas,
-                ]
-                )->render();
-            $dompdf->loadHTML($html);
-            $dompdf->setPaper('A4', 'landscape');
-            $dompdf->render();
-            $pdfOutput = $dompdf->output();
-            $pdfFile = 'Downloads';
-            file_put_contents($pdfFile, $pdfOutput);
-            return response()->download($pdfFile, 'RPS-Informatika.pdf');
+            return redirect()->route('dosen.rpsonesubmitindex');
         }catch(\Exception $e){
             dd($e);
             $this->dispatchBrowserEvent('alert',[
                 'type'=>'error',
                 'message'=>"Something goes wrong while creating!!"
             ]);
-            return redirect()->route('rpsonesubmitindex');
+            return redirect()->route('dosen.rpsonesubmitindex');
         }
         $this->currentStep = 1;
     }
+
     public function render()
     {
+        $this->pengembang_id = Auth::id();
+        $user2 = Auth::user();
         $matakuliah = Matakuliah::all();
         $user = User::all();
         $cpl = CPL::all();
         $pustaka = Pustaka::all();
         $pertemuan = Pertemuan::all();
         $topik = Topik::all();
-        return view('livewire.dosen.rps-onesumbit.create', compact('matakuliah','user','cpl','pustaka','pertemuan','topik'))->extends('layouts.main2')->section('content');
+        return view('livewire.dosen.rps-onesumbit.create', compact('user2','matakuliah','user','cpl','pustaka','pertemuan','topik'))->extends('layouts.main2')->section('content');
     }
 }

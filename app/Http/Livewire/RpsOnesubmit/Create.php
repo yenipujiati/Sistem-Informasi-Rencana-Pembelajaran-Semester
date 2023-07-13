@@ -67,16 +67,18 @@ class Create extends Component
 
     public function fourthStepSubmit()
     {
-        // $validatedData = $this->validate([
-        //     'pertemuan.*.minggu_ke'=>'required',
-        //     'pertemuan.*.kemampuan_akhir'=>'required',
-        //     'pertemuan.*.bahan_kajian'=>'required',
-        //     'pertemuan.*.metode_pembelajaran'=>'required',
-        //     'pertemuan.*.waktu'=>'required',
-        //     'pertemuan.*.pengalaman_belajar'=>'required',
-        //     'pertemuan.*.bobot_nilai'=>'required',
-        //     'pertemuan.*.topik_id'=>'required',
-        // ]);
+        $validatedData = $this->validate([
+            // 'pertemuan.*.minggu_ke'=>'required',
+            // 'pertemuan.*.kemampuan_akhir'=>'required',
+            // 'pertemuan.*.bahan_kajian'=>'required',
+            // 'pertemuan.*.metode_pembelajaran'=>'required',
+            // 'pertemuan.*.waktu'=>'required',
+            // 'pertemuan.*.pengalaman_belajar'=>'required',
+            // 'pertemuan.*.bobot_nilai'=>'required',
+            // 'pertemuan.*.topik_id'=>'required',
+            'pertemuan.*.istest'=>'required',
+        ]);
+        
    
         $this->currentStep = 5;
     }

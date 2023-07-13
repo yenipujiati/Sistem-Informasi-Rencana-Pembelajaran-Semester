@@ -80,7 +80,7 @@
                       <li><a href="{{ route('rpsindex') }}">RPS</a></li>
                     </ul>
                   </li> -->
-                  <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fa fa-home"></i> Master Data <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="{{ route('topikindex') }}">Topics</a></li>
                       <!-- <li><a href="{{ route('pustakaindex') }}">References</a></li> -->

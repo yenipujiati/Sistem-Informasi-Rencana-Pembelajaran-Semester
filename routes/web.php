@@ -33,6 +33,8 @@ use App\Http\Livewire\RpsOnesubmit\create as RpsOnesubmitcreate;
 use App\Http\Livewire\RpsOnesubmit\edit as RpsOnesubmitedit;
 use App\Http\Livewire\RpsOnesubmit\Duplicates as RpsOnesubmitduplicates;
 use App\Http\Livewire\Dosen\RpsOnesumbit\Create as DosenRpsOnesubmitcreate;
+use App\Http\Livewire\Dosen\RpsOnesumbit\Index as DosenRpsOnesubmitindex;
+use App\Http\Livewire\Dosen\RpsOnesumbit\Detail as DosenRpsOnesubmitdetail;
 use App\Http\Livewire\RpsOnesubmit\Detail as RpsOnesubmitdetail;
 
 /*
@@ -96,6 +98,8 @@ Route::get('/rpsonesubmit/edit/{id}',RpsOnesubmitedit::class)->name('rpsonesubmi
 Route::get('/rpsonesubmit/duplicates',RpsOnesubmitduplicates::class)->name('rpsonesubmitduplicates');
 
 Route::get('/dosenrpsonesubmit/create',DosenRpsOnesubmitcreate::class)->name('dosen.rpsonesubmitcreate');
+Route::get('/dosenrpsonesubmit/index',DosenRpsOnesubmitindex::class)->name('dosen.rpsonesubmitindex');
+Route::get('/dosenrpsonesubmit/detail/{id}',DosenRpsOnesubmitdetail::class)->name('dosen.rpsonesubmitdetail');
 
 Route::get('/rpsonesubmit/detail/{id}',RpsOnesubmitdetail::class)->name('rpsonesubmitdetail');
 // Route::get('/rpsonesubmit/detail/{id}',RpsOnesubmitdetail::class)->name('detail');
