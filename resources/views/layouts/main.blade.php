@@ -98,6 +98,7 @@
                       <li><a href="{{ route('matakuliahindex') }}">Matakuliah</a></li>
                       <li><a href="{{ route('pertemuanindex') }}">Pertemuan</a></li>
                       <li><a href="{{ route('rpsindex') }}">RPS</a></li> -->
+                      <li><a href="{{ route('rpsonesubmitmyrps') }}">My RPS</a></li>
                       <li><a href="{{ route('rpsonesubmitindex') }}">RPS</a></li>
                       <li><a href="{{ route('rpsonesubmitcreate') }}">Create RPS</a></li>
                       <li><a href="{{ route('rpsonesubmitduplicates') }}">Check Redundancy</a></li>

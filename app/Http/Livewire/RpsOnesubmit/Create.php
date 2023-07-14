@@ -18,6 +18,7 @@ class Create extends Component
     //rps
     public $matakuliah_id, $pengembang_id, $koordinator_id, $kaprodi_id, $deskripsi_singkat, $pustaka_id, $mp_software, $mp_hardware, $pengampu_id, $matakuliah_syarat_id;
     public $cpl_id = [];
+    public $cp_mk;
 
     //pustaka
     public $jenis, $sumber;
@@ -40,7 +41,6 @@ class Create extends Component
             'mp_software'=>'required',
             'mp_hardware'=>'required',
             'pengampu_id'=>'required',
-            // 'matakuliah_syarat_id'=>'required',
         ]);
   
         $this->currentStep = 2;
@@ -50,6 +50,7 @@ class Create extends Component
     {
         $validatedData = $this->validate([
             'cpl_id'=>'required|array',
+            'cp_mk'=>'required',
         ]);
    
         $this->currentStep = 3;
@@ -112,6 +113,7 @@ class Create extends Component
     public function store(){
         
         try{
+            // dd($this->cp_mk);
             $string = implode(',', $this->cpl_id);
             
             //pustaka
@@ -134,6 +136,7 @@ class Create extends Component
                     'pengampu_id' => $this->pengampu_id,
                     'matakuliah_syarat_id' => $this->matakuliah_syarat_id,
                     'cpl_ids' => $string,
+                    'cp_mk' => $this->cp_mk,
                 ]);
 
             $pertemuan = [];

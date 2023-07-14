@@ -165,9 +165,17 @@
             <div class="col md-3">
                 <div class="col-md-12">
                     <h3> Step 2</h3>
-
                     <div class="form-group">
-                        <label for="cpl_id" class="col-md-4 col-form-label text-md-end">{{ __('Capaian Pembelajaran') }}</label><br>
+                        <label for="cp_mk" class="col-md-4 col-form-label text-md-end">{{ __('Capaian Pembelajaran Matakuliah') }}</label>
+                        <textarea id="cp_mk" type="text" class="form-control @error('cp_mk') is-invalid @enderror" name="cp_mk" required autocomplete="cp_mk" cols="30" rows="10" wire:model.defer="cp_mk"></textarea>
+                        @error('cp_mk')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="form-group">
+                        <label for="cpl_id" class="col-md-4 col-form-label text-md-end">{{ __('Capaian Pembelajaran Program Studi') }}</label><br>
                         <div class="col-md-max col-form-label"><br>
                         @foreach ($cpl as $item)
                             <div class="form-check">

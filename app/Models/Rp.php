@@ -32,6 +32,7 @@ class Rp extends Model
         'pertemuan_id',
         'cpl_ids',
         'istest',
+        'cp_mk',
     ];
 
     // public function pertemuan()
