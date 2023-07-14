@@ -68,7 +68,7 @@ class Create extends Component
     public function fourthStepSubmit()
     {
         $validatedData = $this->validate([
-            // 'pertemuan.*.minggu_ke'=>'required',
+            'pertemuan.*.minggu_ke'=>'required',
             // 'pertemuan.*.kemampuan_akhir'=>'required',
             // 'pertemuan.*.bahan_kajian'=>'required',
             // 'pertemuan.*.metode_pembelajaran'=>'required',

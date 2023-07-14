@@ -241,7 +241,7 @@
                                 @foreach($pertemuan as $index =>$item)
                                     <div class="border p-3 mb-3">
                                         <div class="form-group">
-                                            <select id="istest" class="form-control @error('istest') is-invalid @enderror" name="istest" wire:model.defer="pertemuan.{{$index}}.istest">
+                                            <select id="istest" class="form-control @error('istest') is-invalid @enderror" name="istest" required wire:model.defer="pertemuan.{{$index}}.istest">
                                                 <option selected>Apakah sedang minggu ujian?</option>
                                                 <option value="UTS">UTS</option>
                                                 <option value="UAS">UAS</option>
@@ -264,7 +264,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="kemampuan_akhir" class="col-md-4 col-form-label text-md-end">{{ __('Kemampuan akhir mahasiswa') }}</label>
-                                            <textarea id="kemampuan_akhir" type="text" class="form-control @error('kemampuan_akhir') is-invalid @enderror" name="kemampuan_akhir" required autocomplete="kemampuan_akhir" cols="30" rows="10" wire:model.defer="pertemuan.{{$index}}.kemampuan_akhir"></textarea>
+                                            <textarea id="kemampuan_akhir" type="text" class="form-control @error('kemampuan_akhir') is-invalid @enderror" name="kemampuan_akhir" autocomplete="kemampuan_akhir" cols="30" rows="10" wire:model.defer="pertemuan.{{$index}}.kemampuan_akhir"></textarea>
                                             @error('kemampuan_akhir')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -273,7 +273,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="bahan_kajian" class="col-md-4 col-form-label text-md-end">{{ __('Bahan Kajian') }}</label>
-                                            <input id="bahan_kajian" type="text" class="form-control @error('bahan_kajian') is-invalid @enderror" name="bahan_kajian" required autocomplete="bahan_kajian" wire:model.defer="pertemuan.{{$index}}.bahan_kajian">
+                                            <input id="bahan_kajian" type="text" class="form-control @error('bahan_kajian') is-invalid @enderror" name="bahan_kajian" autocomplete="bahan_kajian" wire:model.defer="pertemuan.{{$index}}.bahan_kajian">
                                             @error('bahan_kajian')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -305,7 +305,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="waktu" class="col-md-4 col-form-label text-md-end">{{ __('Waktu') }}</label>
-                                            <input id="waktu" type="number" class="form-control @error('waktu') is-invalid @enderror" name="waktu" required autocomplete="waktu" wire:model.defer="pertemuan.{{$index}}.waktu">
+                                            <input id="waktu" type="number" class="form-control @error('waktu') is-invalid @enderror" name="waktu" autocomplete="waktu" wire:model.defer="pertemuan.{{$index}}.waktu">
                                             @error('waktu')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -314,7 +314,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="pengalaman_belajar" class="col-md-4 col-form-label text-md-end">{{ __('Pengalaman Belajar Mahasiswa') }}</label>
-                                            <textarea id="pengalaman_belajar" type="text" class="form-control @error('pengalaman_belajar') is-invalid @enderror" name="pengalaman_belajar" required autocomplete="pengalaman_belajar" cols="30" rows="10" wire:model.defer="pertemuan.{{$index}}.pengalaman_belajar"></textarea>
+                                            <textarea id="pengalaman_belajar" type="text" class="form-control @error('pengalaman_belajar') is-invalid @enderror" name="pengalaman_belajar" autocomplete="pengalaman_belajar" cols="30" rows="10" wire:model.defer="pertemuan.{{$index}}.pengalaman_belajar"></textarea>
                                             @error('pengalaman_belajar')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -323,7 +323,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="bobot_nilai" class="col-md-4 col-form-label text-md-end">{{ __('Bobot Nilai (%)') }}</label>
-                                            <input id="bobot_nilai" type="number" class="form-control @error('bobot_nilai') is-invalid @enderror" name="bobot_nilai" required autocomplete="bobot_nilai" wire:model.defer="pertemuan.{{$index}}.bobot_nilai">
+                                            <input id="bobot_nilai" type="number" class="form-control @error('bobot_nilai') is-invalid @enderror" name="bobot_nilai" autocomplete="bobot_nilai" wire:model.defer="pertemuan.{{$index}}.bobot_nilai">
                                             @error('bobot_nilai')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -356,7 +356,7 @@
                     <button class="btn btn-primary nextBtn btn-lg pull-right" type="button"
                         wire:click="fourthStepSubmit">Next</button>
                     <button class="btn btn-danger nextBtn btn-lg pull-right" type="button"
-                        wire:click="back(1)">Back</button>
+                        wire:click="back(3)">Back</button>
                 </div>
             </div>
     </div>

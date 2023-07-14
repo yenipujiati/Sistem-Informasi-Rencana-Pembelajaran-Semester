@@ -2,7 +2,7 @@
   <tr>
     <td>
         <center>
-            <img src="https://sid.ukrim.ac.id/images/ukrim.png" width="200" style="display;block; margin:auto;" alt="Logo Universitas">
+            <img src="{{ storage_path('app/public/images/ukrim.jpg') }}" width="200" style="display;block; margin:auto;" alt="Logo Universitas">
         </center>
     </td>
     <td>
