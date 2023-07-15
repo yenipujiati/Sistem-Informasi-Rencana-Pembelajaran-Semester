@@ -3,7 +3,12 @@
         <tr>
         <td style="padding-right: 10px;">
             <center>
-                <img src="{{ public_path('images/ukrim.jpg') }}" width="130" style="display:block; margin:auto;">
+                @php
+                    $imagePath = public_path('images/ukrim.jpg');
+                    $imageData = base64_encode(file_get_contents($imagePath));
+                    $imageSrc = 'data:image/jpeg;base64,' . $imageData;
+                    @endphp
+                    <img src="{{ $imageSrc }}" width="130" style="display:block; margin:auto;">
             </center>
         </td>
         <td>
