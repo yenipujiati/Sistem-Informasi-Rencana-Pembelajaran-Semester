@@ -70,7 +70,8 @@
                 <ul class="nav side-menu">
                   <li><a><i class="fa fa-edit"></i> RPS <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                    <li><a href="{{ route('dosen.rpsonesubmitindex') }}">RPS List</a></li>
+                      <li><a href="{{ route('dosenmyrps') }}">My RPS List</a></li>
+                      <li><a href="{{ route('dosen.rpsonesubmitindex') }}">RPS List</a></li>
                       <li><a href="{{ route('dosen.rpsonesubmitcreate') }}">Create RPS</a></li>
                     </ul>
                   </li>

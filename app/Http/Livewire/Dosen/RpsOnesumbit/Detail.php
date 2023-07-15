@@ -62,6 +62,7 @@ class Detail extends Component
                 'matakuliah_syarat' => $matakuliah_syarat,
                 'pertemuan' => Pertemuan::where('rps_id', $resultrps->id)->get(),
                 'cpls' => $cplData,
+                'cp_mk' => $resultrps->cp_mk,
             ];
 
             $this->datas = RP::select(

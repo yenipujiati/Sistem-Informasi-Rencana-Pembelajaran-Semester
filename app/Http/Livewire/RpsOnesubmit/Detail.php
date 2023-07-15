@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\DB;
 class Detail extends Component
 {
     public $resultrps, $result, $resultpustaka;
-    public $data, $datas;
+    public $data, $datas, $kategorijoin;
     public $rpsId;
 
     public function mount($id)
@@ -63,6 +63,7 @@ class Detail extends Component
                 'matakuliah_syarat' => $matakuliah_syarat,
                 'pertemuan' => Pertemuan::where('rps_id', $resultrps->id)->get(),
                 'cpls' => $cplData,
+                'cp_mk' => $resultrps->cp_mk,
             ];
 
             $this->datas = RP::select(
@@ -72,6 +73,13 @@ class Detail extends Component
                 ->join('matakuliahs', 'rps.matakuliah_id', '=', 'matakuliahs.id')
                 ->join('rumpuns', 'matakuliahs.rumpun_id', '=', 'rumpuns.id')
                 ->first();
+            
+            $this->kategorijoin = RP::select(
+                'kategoris.singkatan',
+            )
+                ->join('c_p_l_s', 'rps.cpl_id', '=', 'c_p_l_s.id')
+                ->join('kategoris', 'c_p_l_s.kategori_id', '=', 'kategoris.id')
+                ->get();
 
             return view('livewire.rps-onesubmit.detail')->extends('layouts.main')->section('content2');
         }

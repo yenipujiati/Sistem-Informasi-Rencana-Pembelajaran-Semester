@@ -47,14 +47,27 @@
                         <td colspan="2">{{ $data['koordinator']->name }}</td>
                         <td colspan="4">{{ $data['kaprodi']->name }}</td>
                     </tr>
+                    @php
+                      $isFirst = true;
+                    @endphp
+                    @foreach ($data['cpls'] as $cpl)
+                    
                     <tr>
-                        <th rowspan="{{ count($data['cpls'])+1 }}"><strong>Capaian Pembelajaran</strong></th>
-                        @foreach ($data['cpls'] as $cpl)
+                        @if($isFirst)
+                        <th rowspan="{{ count($data['cpls'])+2 }}"><strong>Capaian Pembelajaran</strong></th>
+                        @endif
+                        <td colspan="2">{{ $cpl['kode'] }}</td>
+                        <td colspan="6">{{ $cpl['deskripsi'] }}</td>
+                    </tr>
+                    @php
+                    $isFirst = false;
+                  @endphp
+                    @endforeach
+                    <tr>
+                        <th colspan="8"><strong>CP-MK</strong></th>
                         <tr>
-                            <td colspan="2">{{ $cpl->kode }}</td>
-                            <td colspan="6">{{ $cpl->deskripsi }}</td>
+                            <th colspan="8">{{ $data['cp_mk'] ? $data['cp_mk'] : '-' }}</th>
                         </tr>
-                        @endforeach
                     </tr>
                     <tr>
                         <th><strong>Deskripsi Singkat</strong></th>

@@ -40,6 +40,9 @@ use App\Http\Livewire\RpsOnesubmit\Detail as RpsOnesubmitdetail;
 use App\Http\Livewire\RpsOnesubmit\Myrps as RpsOnesubmitmyrps;
 use App\Http\Livewire\RpsOnesubmit\edit as RpsOnesubmitedit;
 
+use App\Http\Livewire\Dosen\Myrps as Dosenmyrps;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -109,6 +112,9 @@ Route::get('/rpsonesubmit/detail/{id}',RpsOnesubmitdetail::class)->name('rpsones
 
 Route::get('/rpsonesubmit/myrps',RpsOnesubmitmyrps::class)->name('rpsonesubmitmyrps');
 Route::get('/rpsonesubmit/edit/{id}',RpsOnesubmitedit::class)->name('rpsonesubmitedit');
+
+Route::get('/dosen/myrps',Dosenmyrps::class)->name('dosenmyrps');
+
 
 Route::get('/redundancy', function() {
     return view('livewire/rps-onesubmit/redundancy');

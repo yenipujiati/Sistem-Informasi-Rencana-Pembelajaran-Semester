@@ -165,24 +165,35 @@
             <div class="col md-3">
                 <div class="col-md-12">
                     <h3> Step 2</h3>
-
                     <div class="form-group">
-                        <label for="cpl_id" class="col-md-4 col-form-label text-md-end">{{ __('Capaian Pembelajaran') }}</label><br>
-                        <div class="col-md-max col-form-label"><br>
-                        @foreach ($cpl as $item)
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="cpl_id[]" value="{{ $item->id }}" id="cpl_id"  wire:model.defer="cpl_id">
-                                <label class="form-check-label" for="for="cpl_{{ $item->id }}">
-                                    {{ $item->kode }}-{{$item->deskripsi}}
-                                </label>
-                            </div>
-                        @endforeach
-                        </div>
-                        @error('cpl_id')
+                        <label for="cp_mk" class="col-md-4 col-form-label text-md-end">{{ __('Capaian Pembelajaran Matakuliah') }}</label>
+                        <textarea id="cp_mk" type="text" class="form-control @error('cp_mk') is-invalid @enderror" name="cp_mk" required autocomplete="cp_mk" cols="30" rows="10" wire:model.defer="cp_mk"></textarea>
+                        @error('cp_mk')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror
+                    </div>
+                    <div class="form-group">
+                        <div class="card-body">
+                            <label for="cpl_id" class="col-md-4 col-form-label text-md-end">{{ __('Capaian Pembelajaran Program Studi') }}</label><br>
+                            <div class="col-md-max col-form-label"><br>
+                            @foreach ($cpl as $item)
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="cpl_id[]" value="{{ $item->id }}" id="cpl_id"  wire:model.defer="cpl_id">
+                                    <label class="form-check-label" for="for="cpl_{{ $item->id }}">
+                                        {{ $item->kode }}-{{$item->deskripsi}}
+                                    </label>
+                                </div>
+                            @endforeach
+                            </div>
+                            @error('cpl_id')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        
                     </div>
 
                     <button class="btn btn-primary nextBtn btn-lg pull-right" type="button"
@@ -235,14 +246,13 @@
                 <div class="col-md-12">
                     <h3> Step 4</h3>
                     <div>
-                        <!-- <button type="button" wire:click="addPertemuan" class="btn btn-primary">Input Pertemuan</button> -->
-                        <div class="card">
-                            <div class="card-body">
+                        {{-- <button type="button" wire:click="addPertemuan" class="btn btn-primary">Input Pertemuan</button> --}}
+                        {{-- <div class="card">
+                            <div class="card-body"> --}}
                                 @foreach($pertemuan as $index =>$item)
-                                <div wire:key="pertemuan{{ $index }}" class="border p-3 mb-3">
                                     <div class="border p-3 mb-3">
                                         <div class="form-group">
-                                            <select id="istest" class="form-control @error('istest') is-invalid @enderror" name="istest" required wire:model.defer="pertemuan.{{$index}}.istest">
+                                            <select id="istest" class="form-control @error('istest') is-invalid @enderror" name="istest" required wire:model.defer="pertemuan.istest">
                                                 <option selected>Apakah sedang minggu ujian?</option>
                                                 <option value="UTS">UTS</option>
                                                 <option value="UAS">UAS</option>
@@ -350,8 +360,8 @@
                                         <button type="button" wire:click="removePertemuan({{ $index }})" class="btn btn-danger">DELETE</button>
                                     </div>
                                 @endforeach
-                            </div>
-                        </div>
+                            {{-- </div>
+                        </div> --}}
                     </div>
                     <br>
                     <button class="btn btn-primary nextBtn btn-lg pull-right" type="button"
@@ -381,7 +391,7 @@
                             <!-- <button class="btn btn-success btn-lg" wire:click="store" type="button">Finish and print the PDF!</button> -->
                             <button class="btn btn-danger nextBtn btn-lg" type="button"
                                 wire:click="back(4)">Back</button>
-                            <button class="btn btn-success btn-lg" wire:click="update" type="button">Finish</button>
+                            <button class="btn btn-success btn-lg" wire:click="store" type="button">Finish</button>
                         </center>
                     
                 </div>

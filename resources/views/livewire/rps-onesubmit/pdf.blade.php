@@ -74,7 +74,7 @@
                     
                     <tr>
                         @if($isFirst)
-                        <th rowspan="{{ count($data['cpls']) }}"><h5>Capaian Pembelajaran</h5></th>
+                        <th rowspan="{{ count($data['cpls'])+2 }}"><h5>Capaian Pembelajaran</h5></th>
                         @endif
                         <td colspan="2">{{ $cpl['kode'] }}</td>
                         <td colspan="6">{{ $cpl['deskripsi'] }}</td>
@@ -83,6 +83,12 @@
                     $isFirst = false;
                   @endphp
                     @endforeach
+                    <tr>
+                        <th colspan="8"><strong>CP-MK</strong></th>
+                        <tr>
+                            <th colspan="8">{{ $data['cp_mk'] ? $data['cp_mk'] : '-' }}</th>
+                        </tr>
+                    </tr>
                     <tr>
                         <th><strong>Deskripsi Singkat</strong></th>
                         <td colspan="8">{{ $data['deskripsi_singkat'] }}</td>

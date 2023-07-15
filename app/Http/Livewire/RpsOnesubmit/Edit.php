@@ -17,7 +17,7 @@ class Edit extends Component
     //rps
     public $matakuliah_id, $pengembang_id, $koordinator_id, $kaprodi_id, $deskripsi_singkat, $pustaka_id, $mp_software, $mp_hardware, $pengampu_id, $matakuliah_syarat_id;
     public $cpl_id = [];
-    public $rpsId;
+    public $rpsId, $cp_mk;
 
     //pustaka
     public $jenis, $sumber;
@@ -135,6 +135,7 @@ class Edit extends Component
             $this->mp_hardware = $rps->mp_hardware;
             $this->pengampu_id = $rps->pengampu_id;
             $this->matakuliah_syarat_id = $rps->matakuliah_syarat_id;
+            $this->cp_mk = $rps->cp_mk;
         }
         if($pustaka) {
             $this->pustakaId = $pustaka->id;
@@ -142,13 +143,24 @@ class Edit extends Component
             $this->sumber = $pustaka->sumber;
         }
         if($pertemuan) {
-            $existingPertemuan = Pertemuan::all();
-            $this->pertemuan = $existingPertemuan->toArray();
+            $this->rpsId = $id;
+            $this->pertemuan = Pertemuan::where('rps_id', $id)->get()->toArray();
+        //     $this->pertemuanId = $pertemuan->id;
+        //     $this->minggu_ke = $pertemuan->minggu_ke;
+        //     $this->istest = $pertemuan->istest;
+        //     $this->bahan_kajian = $pertemuan->bahan_kajian;
+        //     $this->metode_pembelajaran = $pertemuan->metode_pembelajaran;
+        //     $this->waktu = $pertemuan->waktu;
+        //     $this->pengalaman_belajar = $pertemuan->pengalaman_belajar;
+        //     $this->bobot_nilai = $pertemuan->bobot_nilai;
+        //     $this->topik_id = $pertemuan->topik_id;
+        //     $this->istest = $pertemuan->istest;
         }
     }
 
     public function update()
     {
+        dd($this->pertemuan);
         $validatedData = $this->validate([
             'pertemuan.*.minggu_ke'=>'required',
             'pertemuan.*.istest'=>'required',
