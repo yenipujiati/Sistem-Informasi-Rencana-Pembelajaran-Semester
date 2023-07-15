@@ -64,17 +64,16 @@
                       $isFirst = true;
                     @endphp
                     @foreach ($data['cpls'] as $cpl)
-                    
-                    <tr>
-                        @if($isFirst)
-                        <th rowspan="{{ count($data['cpls'])+2 }}"><strong>Capaian Pembelajaran</strong></th>
-                        @endif
-                        <td colspan="2">{{ $cpl['kode'] }}</td>
-                        <td colspan="6">{{ $cpl['deskripsi'] }}</td>
-                    </tr>
-                    @php
-                    $isFirst = false;
-                  @endphp
+                        <tr>
+                            @if($isFirst)
+                            <th rowspan="{{ count($data['cpls'])+2 }}"><strong>Capaian Pembelajaran</strong></th>
+                            @endif
+                            <td colspan="2">{{ $cpl['kode'] }}</td>
+                            <td colspan="6">{{ $cpl['deskripsi'] }}</td>
+                        </tr>
+                        @php
+                            $isFirst = false;
+                        @endphp
                     @endforeach
                     <tr>
                         <th colspan="8"><strong>CP-MK</strong></th>

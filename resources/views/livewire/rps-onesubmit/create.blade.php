@@ -177,22 +177,41 @@
                     <div class="form-group">
                         <label for="cpl_id" class="col-md-4 col-form-label text-md-end">{{ __('Capaian Pembelajaran Program Studi') }}</label><br>
                         <div class="col-md-max col-form-label"><br>
-                        @foreach ($cpl as $item)
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="cpl_id[]" value="{{ $item->id }}" id="cpl_id"  wire:model.defer="cpl_id">
-                                <label class="form-check-label" for="for="cpl_{{ $item->id }}">
-                                    {{ $item->kode }}-{{$item->deskripsi}}
-                                </label>
-                            </div>
-                        @endforeach
-                        </div>
-                        @error('cpl_id')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
+                            @php
+                                $categories = [
+                                    1 => 'CPL-S',
+                                    3 => 'CPL-PP',
+                                    6 => 'CPL-KK',
+                                    7 => 'CPL-KU',
+                                ];
 
+                                $groupedItems = $cpl->groupBy('kategori_id');
+                            @endphp
+                            @foreach ($categories as $categoryId => $categoryLabel)
+                                @if ($groupedItems->has($categoryId))
+                                    <div>
+                                        <label for="{{ $categoryLabel }}">{{ $categoryLabel }}</label>
+                                    </div>
+                                    
+                                    @foreach ($groupedItems[$categoryId] as $item)
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="cpl_id[]" value="{{ $item->id }}" id="cpl_id" wire:model.defer="cpl_id">
+                                            <label class="form-check-label" for="cpl_{{ $item->id }}">
+                                                {{ $item->kode }}-{{ $item->deskripsi }}
+                                            </label>
+                                        </div>
+                                    @endforeach
+
+                                    <br>
+                                @endif
+                            @endforeach
+                            @error('cpl_id')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
                     <button class="btn btn-primary nextBtn btn-lg pull-right" type="button"
                         wire:click="secondStepSubmit">Next</button>
                     <button class="btn btn-danger nextBtn btn-lg pull-right" type="button"

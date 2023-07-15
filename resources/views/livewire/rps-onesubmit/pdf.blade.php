@@ -1,24 +1,54 @@
-<table>
-  <tr>
-    <td>
-        <center>
-            <img src="{{ public_path('images/ukrim.jpg') }}" width="200" style="display;block; margin:auto;">
-        </center>
-    </td>
-    <td>
-      <div class="header">
-        <h1>UNIVERSITAS KRISTEN IMMANUEL</h1>
-        <p>Jl. Solo Km 11,1, PO BOX 64/YKAP</p>
-        <p>Telepon 0274-49626, Fax: 0274496423</p>
-        <p><a href="http://www.ukrim.ac.id">www.ukrim.ac.id</a> email: <a href="mailto:humas@ukrimuniversity.ac.id">humas@ukrimuniversity.ac.id</a></p>
-      </div>
-    </td>
-  </tr>
-</table>
-<div>
-    <br>
-    <div class="col md-3">
-        <div class="col-md-12">
+<div class="header">
+    <table>
+        <tr>
+        <td style="padding-right: 10px;">
+            <center>
+                <img src="{{ public_path('images/ukrim.jpg') }}" width="130" style="display:block; margin:auto;">
+            </center>
+        </td>
+        <td>
+            <center>
+                <h1>UNIVERSITAS KRISTEN IMMANUEL</h1>
+                <p>Jl. Solo Km 11,1, PO BOX 64/YKAP</p>
+                <p>Telepon 0274-49626, Fax: 0274496423</p>
+                <p><a href="http://www.ukrim.ac.id">www.ukrim.ac.id</a> email: <a href="mailto:humas@ukrimuniversity.ac.id">humas@ukrimuniversity.ac.id</a></p>
+            </center>
+        </td>
+        </tr>
+        <tr>
+        <td colspan="2">
+            <center>
+            <h3><strong>RENCANA PEMBELAJARAN SEMESTER (RPS) <br> PROGRAM STUDI SARJANA INFORMATIKA</strong></h3>
+            </center>
+        </td>
+        </tr>
+    </table>
+</div>
+
+<div class="footer">
+    <table>
+        <tr>
+            <td>
+                <center>
+                    <p style="color: blue">
+                        DOKUMEN SISTEM MUTU <br>
+                        UNIVERSITAS KRISTEN IMMANUEL YOGYAKARTA
+                    </p>
+                </center>
+            </td>
+            <td>
+                <center>
+                    <p>
+                        <span style="color: red;">Tidak diperkenankan</span> dengan cara apapun dan alasan apapun membuat
+                        salinan tanpa seijin Ketua Lembaga Penjamin Mutu Internal
+                    </p>
+                </center>
+            </td>
+        </tr>
+    </table>
+</div>
+
+        <div class="content">
             <div class="container">
                 <table class="table table-bordered">
                     <colgroup>
@@ -29,13 +59,6 @@
                         <col style="width: 15%">
                         <col style="width: 25%">
                     </colgroup>
-                    <tr>
-                        <td colspan="9">
-                            <center>
-                                <h3><strong>Rencana Pembelajaran Semester {{ $data['matakuliah']['nama'] }}</strong></h3>
-                            </center>
-                        </td>
-                    </tr>
                     <tr>
                         <th><strong>Matakuliah</strong></th>
                         <th colspan="2"><strong>Kode</strong></th>
@@ -71,7 +94,6 @@
                       $isFirst = true;
                     @endphp
                     @foreach ($data['cpls'] as $cpl)
-                    
                     <tr>
                         @if($isFirst)
                         <th rowspan="{{ count($data['cpls'])+2 }}"><h5>Capaian Pembelajaran</h5></th>
@@ -175,9 +197,11 @@
                 </table>
             </div>
         </div>
-    </div>
-</div>
 <style>
+    @page {
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
     table {
         border-collapse: collapse;
         width: 100%;
@@ -201,25 +225,7 @@
     tr:last-child th, tr:last-child td {
         border-bottom: 1px solid black;
     }
-
-    .page-break {
-        page-break-before: always;
-    }
-
-    .header {
-        text-align: center;
-        margin-bottom: 10px;
-    }
-
-    .header h1, .header p {
-        margin: 5px 0;
-    }
-
-    .logo {
-        display: inline-block;
-        vertical-align: middle;
-    }
-
+    
     .text {
         display: inline-block;
         vertical-align: middle;
@@ -229,5 +235,54 @@
     .line {
         border-top: 1px solid black;
         margin: 20px 0;
+    }
+
+    .header {
+        position: fixed;
+        top: 0;
+        width: 100%;
+    }
+
+    .header table {
+        width: 100%;
+    }
+
+    .header td {
+        padding: 5px;
+    }
+
+    .header h1, .header p {
+        margin: 0;
+    }
+
+    body {
+        margin-top: 250px; /* Adjust the top margin as needed */
+        margin-bottom: 70px; /* Adjust the bottom margin as needed */
+    }
+
+
+    .content {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: calc(100vh - 460px); /* Adjust as needed */
+    }
+
+    .footer {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+    }
+
+    .footer table {
+        width: 100%;
+    }
+
+    .footer td {
+        padding: 5px;
+    }
+
+    .footer p {
+        margin: 0;
     }
 </style>
