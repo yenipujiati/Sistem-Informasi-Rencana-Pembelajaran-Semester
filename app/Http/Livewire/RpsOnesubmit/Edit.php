@@ -139,7 +139,7 @@ class Edit extends Component
             $this->pertemuan = Pertemuan::where('rps_id', $id)->get()->toArray();
         }
         if($pustaka) {
-            $this->pustakaId = $pustaka->id;
+            $this->pustakaId = $rps->pustaka_id;
             $this->jenis = $pustaka->jenis;
             $this->sumber = $pustaka->sumber;
         }
@@ -180,7 +180,7 @@ class Edit extends Component
         if($this->rpsId) {
             $rps = RP::find($this->rpsId);
             $pertemuan = Pertemuan::find($this->pertemuanId);
-            $pustaka = Pustaka::find($this->pustakaId);
+            $pustaka = Pustaka::find($rps->pustaka_id);
             $string = implode(',',$this->cpl_id);
             if($rps) {
                 $rps->update([
@@ -194,13 +194,13 @@ class Edit extends Component
                     'mp_software' => $this->mp_software,
                     'mp_hardware'=>$this->mp_hardware,
                     'pengampu_id' => $this->pengampu_id,
-                    'matakuliah_syarat_id' => $this->matakuliah_syarat_id,
+                    'matakuliah_syarat_id' => $this->matakuliah_syarat_id == "" ? null : $this->matakuliah_syarat_id,
                     'cp_mk' => $this->cp_mk,
                     'cpl_ids' => $string,
                 ]);
             }
-            if($this->pustakaId) {
-                $pustaka = Pustaka::find($this->pustakaId);
+            if($rps->pustaka_id) {
+                $pustaka = Pustaka::find($rps->pustaka_id);
                 if($pustaka) {
                     $pustaka->update([
                         'jenis' => $this->jenis,
