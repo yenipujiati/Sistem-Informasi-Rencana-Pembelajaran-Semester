@@ -14,6 +14,7 @@ class Pertemuan extends Model
     use SoftDeletes;
 
     protected $fillable = [
+        'id',
         'minggu_ke',
         'kemampuan_akhir',
         'bahan_kajian',

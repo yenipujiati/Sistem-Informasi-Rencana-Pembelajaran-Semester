@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\RpsOnesubmit;
+namespace App\Http\Livewire\Dosen;
 
 use App\Models\Matakuliah;
 use App\Models\User;
@@ -114,7 +114,7 @@ class Edit extends Component
         $pustaka = Pustaka::all();
         $pertemuan = Pertemuan::all();
         $topik = Topik::all();
-        return view('livewire.rps-onesubmit.edit', compact('user2','matakuliah','user','cpl','pustaka','pertemuan','topik'))->extends('layouts.main')->section('content');
+        return view('livewire.dosen.edit', compact('user2','matakuliah','user','cpl','pustaka','pertemuan','topik'))->extends('layouts.main2')->section('content');
     }
 
     public function mount($id)
@@ -199,15 +199,6 @@ class Edit extends Component
                     'cpl_ids' => $string,
                 ]);
             }
-            if($this->pustakaId) {
-                $pustaka = Pustaka::find($this->pustakaId);
-                if($pustaka) {
-                    $pustaka->update([
-                        'jenis' => $this->jenis,
-                        'sumber' => $this->sumber
-                    ]);
-                }
-            }
             foreach ($this->pertemuan as $item) {
                 if (isset($item['id'])) {
                     $pertemuan = Pertemuan::find($item['id']);
@@ -241,8 +232,17 @@ class Edit extends Component
                     ]);
                 }
             }
+            if($this->pustakaId) {
+                $pustaka = Pustaka::find($this->pustakaId);
+                if($pustaka) {
+                    $pustaka->update([
+                        'jenis' => $this->jenis,
+                        'sumber' => $this->sumber
+                    ]);
+                }
+            }
         }
         session()->flash('message', 'Updated Successfully!!');
-        return redirect()->route('rpsonesubmitmyrps');
+        return redirect()->route('dosenmyrps');
     }
 }

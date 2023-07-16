@@ -19,7 +19,7 @@
                             <td>{{ $post->pengembang->name }}</td>
                             <td>
                                 <a href="{{ route('dosen.rpsonesubmitdetail', $post->id) }}" class="btn btn-sm btn-info">DETAIL</a>
-                                <a href="{{ route('rpsonesubmitedit', $post->id) }}" class="btn btn-sm btn-primary">EDIT</a>
+                                <a href="{{ route('dosenedit', $post->id) }}" class="btn btn-sm btn-primary">EDIT</a>
                             </td>
                         </tr>
                     @endif
