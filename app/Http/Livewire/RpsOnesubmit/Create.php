@@ -35,12 +35,11 @@ class Create extends Component
         $validatedData = $this->validate([
             'matakuliah_id'=>'required',
             'pengembang_id'=>'required',
-            'koordinator_id'=>'required',
             'kaprodi_id'=>'required',
             'deskripsi_singkat'=>'required',
             'mp_software'=>'required',
             'mp_hardware'=>'required',
-            'pengampu_id'=>'required',
+            // 'pengampu_id'=>'required',
         ]);
   
         $this->currentStep = 2;

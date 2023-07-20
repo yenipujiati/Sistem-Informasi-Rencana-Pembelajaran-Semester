@@ -13,10 +13,10 @@
         </td>
         <td>
             <center>
-                <h1>UNIVERSITAS KRISTEN IMMANUEL</h1>
-                <p>Jl. Solo Km 11,1, PO BOX 64/YKAP</p>
-                <p>Telepon 0274-49626, Fax: 0274496423</p>
-                <p><a href="http://www.ukrim.ac.id">www.ukrim.ac.id</a> email: <a href="mailto:humas@ukrimuniversity.ac.id">humas@ukrimuniversity.ac.id</a></p>
+                <h1>UNIVERSITAS KRISTEN IMMANUEL (UKRIM)</h1> 
+                <p>Jl. Solo Km 11.1 Purwomartani, Kalasan, Kabupaten, Sleman, Daerah Istimewa Yogyakarta (DIY)</p> 
+                <p>Telp (0274) 496256, Fax: (0274) 496423, <a href="http://www.ukrim.ac.id">www.ukrim.ac.id</a></p> 
+                <p> email: <a href="mailto:humas@ukrimuniversity.ac.id">humas@ukrimuniversity.ac.id</a></p> 
             </center>
         </td>
         </tr>
@@ -57,39 +57,39 @@
             <div class="container">
                 <table class="table table-bordered">
                     <colgroup>
+                        {{-- <col style="width: 15%">
                         <col style="width: 15%">
                         <col style="width: 15%">
                         <col style="width: 15%">
                         <col style="width: 15%">
-                        <col style="width: 15%">
-                        <col style="width: 25%">
+                        <col style="width: 25%"> --}}
                     </colgroup>
                     <tr>
                         <th><strong>Matakuliah</strong></th>
-                        <th colspan="2"><strong>Kode</strong></th>
+                        <th><strong>Kode</strong></th>
                         <th colspan="2"><strong>Rumpun MK</strong></th>
                         <th colspan="1"><strong>Bobot</strong></th>
                         <th colspan="1"><strong>Semester</strong></th>
-                        <th colspan="2"><strong>Tanggal Penyusunan</strong></th>
+                        <th colspan="3"><strong>Tanggal Penyusunan</strong></th>
                     </tr>
                     <tr>
                         <td>{{ $data['matakuliah']['nama'] }}</td>
-                        <td colspan="2">{{ $data['matakuliah']['kode'] }}</td>
+                        <td>{{ $data['matakuliah']['kode'] }}</td>
                         <td colspan="2">{{ $datajoin->nama }}</td>
                         <td colspan="1">{{ $data['matakuliah']['bobot'] }}</td>
                         <td colspan="1">{{ $data['matakuliah']['semester'] }}</td>
-                        <td colspan="2">{{ $datajoin->created_date }}</td>
+                        <td colspan="3">{{ $datajoin->created_date }}</td>
                     </tr>
                     <tr>
                         <th rowspan="2"><h5>Otorisasi</h5></th>
-                        <th colspan="2"><strong>Pengembang RP</strong></th>
+                        <th><strong>Pengembang RP</strong></th>
                         <th colspan="2"><strong>Koordinator Rumpun MK</strong></th>
-                        <th colspan="4"><strong>Ketua Program Studi</strong></th>
+                        <th colspan="5"><strong>Ketua Program Studi</strong></th>
                     </tr>
                     <tr>
-                        <td colspan="2">{{ $data['pengembang']['name'] }}</td>
-                        <td colspan="2">{{ $data['koordinator']['name'] }}</td>
-                        <td colspan="4">{{ $data['kaprodi']['name'] }}</td>
+                        <td>{{ $data['pengembang']['name'] }}</td>
+                        <td colspan="2">{{ $data['koordinator']['name'] ?? '-' }}</td>
+                        <td colspan="5">{{ $data['kaprodi']['name'] }}</td>
                     </tr>
                     {{-- <tr>
                         <th rowspan="{{ count($data['cpls'])+1 }}"><h5>Capaian Pembelajaran</h5></th>
@@ -103,8 +103,8 @@
                         @if($isFirst)
                         <th rowspan="{{ count($data['cpls'])+2 }}"><h5>Capaian Pembelajaran</h5></th>
                         @endif
-                        <td colspan="2">{{ $cpl['kode'] }}</td>
-                        <td colspan="6">{{ $cpl['deskripsi'] }}</td>
+                        <td>{{ $cpl['kode'] }}</td>
+                        <td colspan="7">{{ $cpl['deskripsi'] }}</td>
                     </tr>
                     @php
                     $isFirst = false;
@@ -122,12 +122,12 @@
                     </tr>
                     <tr>
                         <th rowspan="2">Pustaka</th>
-                        <th colspan="2"><strong>Jenis</strong></th>
-                        <td colspan="6">{{ $data['pustaka']['jenis'] }}</td>
+                        <th><strong>Jenis</strong></th>
+                        <td colspan="7">{{ $data['pustaka']['jenis'] }}</td>
                     </tr>
                     <tr>
-                        <th colspan="2"><strong>Sumber</strong></th>
-                        <td colspan="6">{{ $data['pustaka']['sumber'] }}</td>
+                        <th><strong>Sumber</strong></th>
+                        <td colspan="7">{{ $data['pustaka']['sumber'] }}</td>
                     </tr>
                     <tr>
                         <th rowspan="2">Media Pembelajaran</th>
@@ -140,7 +140,7 @@
                     </tr>
                     <tr>
                         <th><strong>Dosen Pengampu</strong></th>
-                        <td colspan="8">{{ $data['pengampu']['name']}}</td>
+                        <td colspan="8">{{ $data['pengampu']['name'] ?? '-' }}</td>
                     </tr>
                     <tr>
                         <th><strong>Matakuliah Syarat</strong></th>
@@ -289,5 +289,22 @@
 
     .footer p {
         margin: 0;
+    }
+
+    .otorisasi-header {
+        position: relative;
+    }
+
+    .pengembang-rp {
+        position: absolute;
+        left: 0;
+        width: 50%; /* You can adjust this value based on your needs */
+    }
+
+    .kode-content {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        visibility: visible;
     }
 </style>

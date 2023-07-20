@@ -44,24 +44,36 @@
                     </tr>
                     <tr>
                         <td colspan="2">{{ $data['pengembang']->name }}</td>
-                        <td colspan="2">{{ $data['koordinator']->name }}</td>
+                        <td colspan="2">{{ $data['koordinator'] ? $data['koordinator']->name : '-' }}</td>
                         <td colspan="4">{{ $data['kaprodi']->name }}</td>
                     </tr>
+                    {{-- <tr>
+                        <th rowspan="{{ count($data['cpls'])+1 }}"><strong>Capaian Pembelajaran</strong></th>
+                        @foreach ($data['cpls'] as $cpl)
+                        <tr>
+                            <td colspan="2">{{ $cpl->kode }}</td>
+                            <td colspan="6">{{ $cpl->deskripsi }}</td>
+                        </tr>
+                        @endforeach
+                    </tr> --}}
+                     {{-- <tr>
+                        <th rowspan="{{ count($data['cpls'])+1 }}"><h5>Capaian Pembelajaran</h5></th>
+                        <th colspan="8"></th>
+                    </tr> --}}
                     @php
                       $isFirst = true;
                     @endphp
                     @foreach ($data['cpls'] as $cpl)
-                    
-                    <tr>
-                        @if($isFirst)
-                        <th rowspan="{{ count($data['cpls'])+2 }}"><strong>Capaian Pembelajaran</strong></th>
-                        @endif
-                        <td colspan="2">{{ $cpl['kode'] }}</td>
-                        <td colspan="6">{{ $cpl['deskripsi'] }}</td>
-                    </tr>
-                    @php
-                    $isFirst = false;
-                  @endphp
+                        <tr>
+                            @if($isFirst)
+                            <th rowspan="{{ count($data['cpls'])+2 }}"><strong>Capaian Pembelajaran</strong></th>
+                            @endif
+                            <td colspan="2">{{ $cpl['kode'] }}</td>
+                            <td colspan="6">{{ $cpl['deskripsi'] }}</td>
+                        </tr>
+                        @php
+                            $isFirst = false;
+                        @endphp
                     @endforeach
                     <tr>
                         <th colspan="8"><strong>CP-MK</strong></th>
@@ -93,7 +105,7 @@
                     </tr>
                     <tr>
                         <th><strong>Dosen Pengampu</strong></th>
-                        <td colspan="8">{{ $data['pengampu']->name }}</td>
+                        <td colspan="8">{{ $data['pengampu'] ? $data['pengampu']->name : '-' }}</td>
                     </tr>
                     <tr>
                         <th><strong>Matakuliah Syarat</strong></th>
@@ -122,6 +134,7 @@
                             <th scope="col">WAKTU</th>
                             <th scope="col">PENGALAMAN BELAJAR MAHASISWA</th>
                             <th scope="col">BOBOT NILAI (%)</th>
+                            <th scope="col">TOPIK</th>
                         </tr>
                     </thead>
                         @foreach($data['pertemuan'] as $post)
@@ -146,6 +159,11 @@
                                         <td>{{ $post['waktu'] }}*50</td>
                                         <td>{{ $post['pengalaman_belajar'] }}</td>
                                         <td>{{ $post['bobot_nilai'] }}</td>
+                                        @foreach ($topicsget as $topic)
+                                            @if ($post['topik_id'] == $topic->topik_id)
+                                                <td>{{ $topic->topik }}</td>
+                                            @endif
+                                        @endforeach
                                     </tr>
                                 </tbody>
                             @endif

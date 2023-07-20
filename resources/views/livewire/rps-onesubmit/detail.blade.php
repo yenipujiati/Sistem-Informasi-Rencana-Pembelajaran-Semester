@@ -44,7 +44,7 @@
                     </tr>
                     <tr>
                         <td colspan="2">{{ $data['pengembang']->name }}</td>
-                        <td colspan="2">{{ $data['koordinator']->name }}</td>
+                        <td colspan="2">{{ $data['koordinator'] ? $data['koordinator']->name : '-' }}</td>
                         <td colspan="4">{{ $data['kaprodi']->name }}</td>
                     </tr>
                     {{-- <tr>
@@ -105,7 +105,7 @@
                     </tr>
                     <tr>
                         <th><strong>Dosen Pengampu</strong></th>
-                        <td colspan="8">{{ $data['pengampu']->name }}</td>
+                        <td colspan="8">{{ $data['pengampu'] ? $data['pengampu']->name : '-' }}</td>
                     </tr>
                     <tr>
                         <th><strong>Matakuliah Syarat</strong></th>
@@ -134,6 +134,7 @@
                             <th scope="col">WAKTU</th>
                             <th scope="col">PENGALAMAN BELAJAR MAHASISWA</th>
                             <th scope="col">BOBOT NILAI (%)</th>
+                            <th scope="col">TOPIK</th>
                         </tr>
                     </thead>
                         @foreach($data['pertemuan'] as $post)
@@ -158,6 +159,11 @@
                                         <td>{{ $post['waktu'] }}*50</td>
                                         <td>{{ $post['pengalaman_belajar'] }}</td>
                                         <td>{{ $post['bobot_nilai'] }}</td>
+                                        @foreach ($topicsget as $topic)
+                                            @if ($post['topik_id'] == $topic->topik_id)
+                                                <td>{{ $topic->topik }}</td>
+                                            @endif
+                                        @endforeach
                                     </tr>
                                 </tbody>
                             @endif

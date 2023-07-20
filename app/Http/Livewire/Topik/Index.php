@@ -4,10 +4,13 @@ namespace App\Http\Livewire\Topik;
 
 use Livewire\Component;
 use App\Models\Topik;
+use Livewire\WithPagination;
 
 class Index extends Component
 {
-    public $topik;
+    use WithPagination;
+
+    protected $topik;
 
     protected $listeners = [
         'deleteTopik'=>'destroy'
@@ -15,7 +18,7 @@ class Index extends Component
 
     public function render()
     {
-        $this->topik = Topik::select('id','topik')->get();
+        $this->topik = Topik::select('id','topik')->paginate(5);
 
         // tampilkan semua data
         // $this->topik = Topik::withTrashed()->get();
@@ -23,7 +26,9 @@ class Index extends Component
         // tampilkan data yg dihapus
         // $this->topik = Topik::onlyTrashed()->get();
 
-        return view('livewire.topik.index')->extends('layouts.main')->section('content');
+        return view('livewire.topik.index', [
+            'topik' => $this->topik,
+        ])->extends('layouts.main')->section('content');
     }
 
     public function destroy($id){

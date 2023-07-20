@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\DB;
 class Detail extends Component
 {
     public $resultrps, $result, $resultpustaka;
-    public $data, $datas, $kategorijoin;
+    public $data, $datas, $kategorijoin, $topicsget;
     public $rpsId;
 
     public function mount($id)
@@ -74,12 +74,19 @@ class Detail extends Component
                 ->join('rumpuns', 'matakuliahs.rumpun_id', '=', 'rumpuns.id')
                 ->first();
             
-            $this->kategorijoin = RP::select(
-                'kategoris.singkatan',
+
+            $this->topicsget = Pertemuan::select(
+                'topiks.topik',
+                'pertemuans.topik_id',
             )
-                ->join('c_p_l_s', 'rps.cpl_id', '=', 'c_p_l_s.id')
-                ->join('kategoris', 'c_p_l_s.kategori_id', '=', 'kategoris.id')
-                ->get();
+            ->join('topiks', 'pertemuans.topik_id', '=', 'topiks.id')
+            ->get();
+            // $this->kategorijoin = RP::select(
+            //     'kategoris.singkatan',
+            // )
+            //     ->join('c_p_l_s', 'rps.cpl_id', '=', 'c_p_l_s.id')
+            //     ->join('kategoris', 'c_p_l_s.kategori_id', '=', 'kategoris.id')
+            //     ->get();
 
             return view('livewire.rps-onesubmit.detail')->extends('layouts.main')->section('content2');
         }
@@ -112,12 +119,12 @@ class Detail extends Component
             file_put_contents($pdfFile, $pdfOutput);
             return response()->download($pdfFile, 'RPS-Informatika.pdf');
         } catch (\Exception $e) {
+            dd($e->getMessage());
             // Handle the exception here
             $this->dispatchBrowserEvent('alert',[
                 'type'=>'failed',
                 'message'=>"Something goes wrong!!"
             ]);
-            // dd($e->getMessage());
         }
     }
 }

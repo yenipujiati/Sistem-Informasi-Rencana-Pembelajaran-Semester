@@ -4,10 +4,13 @@ namespace App\Http\Livewire\Matakuliah;
 
 use App\Models\Matakuliah;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class Index extends Component
 {
-    public $matakuliah;
+    use WithPagination;
+
+    protected $matakuliah;
 
     protected $listeners = [
         'deleteMatakuliah'=>'destroy'
@@ -16,7 +19,7 @@ class Index extends Component
     public function render()
     {
         // menampilkan data deleted_at=null
-        $this->matakuliah = Matakuliah::select('id','nama','kode','rumpun_id','bobot','semester','tanggal_penyusunan')->get();
+        $this->matakuliah = Matakuliah::select('id','nama','kode','rumpun_id','bobot','semester','tanggal_penyusunan')->paginate(5);
 
         // tampilkan semua data
         // $this->cpl = CPL::withTrashed()->get();
@@ -24,7 +27,9 @@ class Index extends Component
         // tampilkan data yg dihapus
         // $this->cpl = CPL::onlyTrashed()->get();
 
-        return view('livewire.matakuliah.index')->extends('layouts.main')->section('content');
+        return view('livewire.matakuliah.index', [
+            'matakuliah' => $this->matakuliah,
+        ])->extends('layouts.main')->section('content');
     }
 
     public function destroy($id){

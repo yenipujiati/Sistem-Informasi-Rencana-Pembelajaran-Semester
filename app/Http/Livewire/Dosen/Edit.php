@@ -37,12 +37,12 @@ class Edit extends Component
         $validatedData = $this->validate([
             'matakuliah_id'=>'required',
             'pengembang_id'=>'required',
-            'koordinator_id'=>'required',
+            // 'koordinator_id'=>'required',
             'kaprodi_id'=>'required',
             'deskripsi_singkat'=>'required',
             'mp_software'=>'required',
             'mp_hardware'=>'required',
-            'pengampu_id'=>'required',
+            // 'pengampu_id'=>'required',
         ]);
   
         $this->currentStep = 2;
@@ -120,8 +120,8 @@ class Edit extends Component
     public function mount($id)
     {
         // $pertemuan = Pertemuan::find($id);
-        $pustaka = Pustaka::find($id);
         $rps = RP::find($id);
+        $pustaka = Pustaka::find($rps->pustaka_id);
         if($rps) {
             $this->rpsId = $rps->id;
             $this->matakuliah_id = $rps->matakuliah_id;
@@ -139,7 +139,7 @@ class Edit extends Component
             $this->pertemuan = Pertemuan::where('rps_id', $id)->get()->toArray();
         }
         if($pustaka) {
-            $this->pustakaId = $rps->pustaka_id;
+            $this->pustakaId = $pustaka->id;
             $this->jenis = $pustaka->jenis;
             $this->sumber = $pustaka->sumber;
         }
@@ -169,12 +169,12 @@ class Edit extends Component
             'cpl_id'=>'required|array',
             'matakuliah_id'=>'required',
             'pengembang_id'=>'required',
-            'koordinator_id'=>'required',
+            // 'koordinator_id'=>'required',
             'kaprodi_id'=>'required',
             'deskripsi_singkat'=>'required',
             'mp_software'=>'required',
             'mp_hardware'=>'required',
-            'pengampu_id'=>'required',
+            // 'pengampu_id'=>'required',
         ]);
 
         if($this->rpsId) {
@@ -186,18 +186,27 @@ class Edit extends Component
                 $rps->update([
                     'matakuliah_id' => $this->matakuliah_id,
                     'pengembang_id' => $this->pengembang_id,
-                    'koordinator_id' => $this->koordinator_id,
+                    'koordinator_id' => $this->koordinator_id == "" ? null : $this->koordinator_id,
                     'kaprodi_id' => $this->kaprodi_id,
                     'cpl_id' => $this->cpl_id[0],
                     'deskripsi_singkat' => $this->deskripsi_singkat,
                     'pustaka_id' => $this->pustaka_id,
                     'mp_software' => $this->mp_software,
                     'mp_hardware'=>$this->mp_hardware,
-                    'pengampu_id' => $this->pengampu_id,
+                    'pengampu_id' => $this->pengampu_id == "" ? null : $this->pengampu_id,
                     'matakuliah_syarat_id' => $this->matakuliah_syarat_id == "" ? null : $this->matakuliah_syarat_id,
                     'cp_mk' => $this->cp_mk,
                     'cpl_ids' => $string,
                 ]);
+            }
+            if($rps->pustaka_id) {
+                $pustaka = Pustaka::find($rps->pustaka_id);
+                if($pustaka) {
+                    $pustaka->update([
+                        'jenis' => $this->jenis,
+                        'sumber' => $this->sumber
+                    ]);
+                }
             }
             foreach ($this->pertemuan as $item) {
                 if (isset($item['id'])) {
@@ -229,15 +238,6 @@ class Edit extends Component
                         'bobot_nilai' => $item['bobot_nilai'],
                         'topik_id' => $item['topik_id'],
                         'istest' => $item['istest'],
-                    ]);
-                }
-            }
-            if($rps->pustaka_id) {
-                $pustaka = Pustaka::find($rps->pustaka_id);
-                if($pustaka) {
-                    $pustaka->update([
-                        'jenis' => $this->jenis,
-                        'sumber' => $this->sumber
                     ]);
                 }
             }

@@ -282,7 +282,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="minggu_ke" class="col-md-4 col-form-label text-md-end">{{ __('Minggu-ke') }}</label>
-                                            <input id="minggu_ke" type="number" class="form-control @error('minggu_ke') is-invalid @enderror" name="minggu_ke" required autocomplete="minggu_ke" wire:model.defer="pertemuan.{{$index}}.minggu_ke">
+                                            <input id="minggu_ke" class="form-control @error('minggu_ke') is-invalid @enderror" name="minggu_ke" required autocomplete="minggu_ke" wire:model.defer="pertemuan.{{$index}}.minggu_ke">
                                             @error('minggu_ke')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>

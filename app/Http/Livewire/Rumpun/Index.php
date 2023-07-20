@@ -4,10 +4,13 @@ namespace App\Http\Livewire\Rumpun;
 
 use App\Models\Rumpun;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class Index extends Component
 {
-    public $rumpun;
+    use WithPagination;
+
+    protected $rumpun;
 
     protected $listeners = [
         'deleteRumpun'=>'destroy'
@@ -15,7 +18,7 @@ class Index extends Component
     
     public function render()
     {
-        $this->rumpun = Rumpun::select('id','kode','nama')->get();
+        $this->rumpun = Rumpun::select('id','kode','nama')->paginate(3);
 
         // tampilkan semua data
         // $this->rumpun = Rumpun::withTrashed()->get();
@@ -24,7 +27,9 @@ class Index extends Component
         // $this->rumpun = Rumpun::onlyTrashed()->get();
         
 
-        return view('livewire.rumpun.index')->extends('layouts.main')->section('content');
+        return view('livewire.rumpun.index', [
+            'rumpun' => $this->rumpun,
+        ])->extends('layouts.main')->section('content');
     }
 
     public function destroy($id){

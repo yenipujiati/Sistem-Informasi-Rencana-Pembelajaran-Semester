@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\DB;
 class Detail extends Component
 {
     public $resultrps, $result, $resultpustaka;
-    public $data, $datas;
+    public $data, $datas, $topicsget;
     public $rpsId;
 
     public function mount($id)
@@ -72,6 +72,14 @@ class Detail extends Component
                 ->join('matakuliahs', 'rps.matakuliah_id', '=', 'matakuliahs.id')
                 ->join('rumpuns', 'matakuliahs.rumpun_id', '=', 'rumpuns.id')
                 ->first();
+            
+            $this->topicsget = Pertemuan::select(
+                'topiks.topik',
+                'pertemuans.topik_id',
+            )
+                ->join('topiks', 'pertemuans.topik_id', '=', 'topiks.id')
+                ->get();
+                
             return view('livewire.dosen.rps-onesumbit.detail')->extends('layouts.main2')->section('content2');
         }
     }

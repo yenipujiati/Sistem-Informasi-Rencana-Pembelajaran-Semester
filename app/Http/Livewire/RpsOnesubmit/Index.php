@@ -9,12 +9,17 @@ use App\Models\CPL;
 use App\Models\Pustaka;
 use App\Models\Pertemuan;
 use App\Models\RP;
+use Livewire\WithPagination;
 use Illuminate\Support\Facades\DB;
 
 
 class Index extends Component
 {
-    public $resultrps, $result, $resultpustaka;
+    use WithPagination;
+
+    protected $resultrps;
+    public $result;
+    public $resultpustaka;
     // public $data, $datas;
 
     protected $listeners = [
@@ -32,7 +37,7 @@ class Index extends Component
         // tampilkan data yg dihapus
         // $this->rps = CPL::onlyTrashed()->get();
             $this->result = Pertemuan::with("rp")->get();
-            $this->resultrps = RP::select('*')->get();
+            $this->resultrps = RP::select('*')->paginate(5);
             $this->resultpustaka = Pustaka::select('*')->get();
            
             // $matakuliah = Matakuliah::where('id', $this->resultrps->first()->matakuliah_id)->get();
@@ -78,15 +83,16 @@ class Index extends Component
 
         
         
-        return view('livewire.rps-onesubmit.index', 
+        return view('livewire.rps-onesubmit.index', [
+            'resultrps' => $this->resultrps,
+        ]
         // compact('data','datas')
         // )->with(
             // ['data' => $this->data, 
             // 'datas' => $this->datas, 
         //     // 'cplData' => $cplData
             // ]
-            )
-        ->extends('layouts.main')->section('content');
+            )->extends('layouts.main')->section('content');
     }
 
     public function destroy($id){
