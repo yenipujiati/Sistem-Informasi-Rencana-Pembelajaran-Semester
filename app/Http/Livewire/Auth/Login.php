@@ -19,7 +19,7 @@ class Login extends Component
     public function login()
     {
         $this->validate([
-            'nidn'     => 'required',
+            'nidn'     => 'required|numeric|digits:10',
             'password'  => 'required'
         ]);
         

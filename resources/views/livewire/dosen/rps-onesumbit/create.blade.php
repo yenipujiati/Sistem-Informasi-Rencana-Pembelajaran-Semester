@@ -96,8 +96,8 @@
                         @enderror
                     </div>
                     <div class="form-group">
-                        <label for="deskripsi_singkat" class="col-md-4 col-form-label text-md-end">{{ __('Deskripsi Singkat') }}</label>
-                        <textarea id="deskripsi_singkat" type="text" class="form-control @error('deskripsi_singkat') is-invalid @enderror" name="deskripsi_singkat" required autocomplete="deskripsi_singkat" cols="30" rows="10" wire:model.defer="deskripsi_singkat"></textarea>
+                        <label for="deskripsi_singkat">{{ __('Deskripsi Singkat') }}</label>
+                        <textarea id="deskripsi_singkat" type="text" class="form-control @error('deskripsi_singkat') is-invalid @enderror" name="deskripsi_singkat" autocomplete="deskripsi_singkat" wire:model.defer="deskripsi_singkat"></textarea>
                         @error('deskripsi_singkat')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -413,51 +413,13 @@
                 </div>
             </div>
     </div>
-<script>
-    $(document).ready(function() {
-        $(".btn-primary").click(function() {
-            // var $step = $(this).closest(".stepwizard-step");
-            // var nextStepId = $step.next().find("a").attr("href");
-            // $step.removeClass("btn-primary").addClass("btn-default");
-            // $step.next().removeClass("btn-default").addClass("btn-primary");
-            // $($step.attr("href")).hide();
-            // $(nextStepId).show();
-            // alert("test");
-        });
-    });
-</script>
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script>
-    // $(document).ready(function() {
-    //     $(document).on('change', '#istest', function() {
-    //         if ($(this).val() === "UTS" || $(this).val() === "UAS") {
-    //             // Disable elements when 'UTS' or 'UAS' is selected
-    //             $('#pertemuan-container :input, #pertemuan-container option').prop('readonly', true);
-    //             $('#metode_pembelajaran, #topik_id').prop('disabled', true);
-    //             $('#pertemuan-container').val('');
-    //         } else if ($(this).val() === "Bukan minggu ujian") {
-    //             // Enable elements when other options are selected
-    //             $('#pertemuan-container :input').prop('readonly', false);
-    //             $('#metode_pembelajaran, #topik_id').prop('disabled', false);
-    //         }
-    //     });
-
-    //     // Listen for changes in the wire:model.defer binding
-    //     $(document).on('change', 'select[name^="pertemuan."]', function() {
-    //         var index = $(this).attr('name').match(/\d+/)[0]; // Extract the index from the name attribute
-    //         var selectedValue = $(this).val(); // Get the selected value
-
-    //         // Check if the selected value is set
-    //         if (selectedValue) {
-    //             // Enable the elements with the same index as the selected value
-    //             $('input[name="pertemuan.' + index + '.istest"]').prop('disabled', false);
-    //         } else {
-    //             // Disable the elements with the same index as the selected value
-    //             $('input[name="pertemuan.' + index + '.istest"]').prop('disabled', true);
-    //         }
-    //     });
-    // });
-</script>
+    {{-- <script>
+        ClassicEditor
+            .create( document.querySelector( '#deskripsi_singkat' ) )
+            .catch( error => {
+                console.error( error );
+            } );
+    </script> --}}
 </div>
 <style>
     .line {

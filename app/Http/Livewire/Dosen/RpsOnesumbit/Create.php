@@ -16,9 +16,10 @@ use Illuminate\Support\Facades\DB;
 class Create extends Component
 {
     //rps
-    public $matakuliah_id, $pengembang_id, $koordinator_id, $kaprodi_id, $deskripsi_singkat, $pustaka_id, $mp_software, $mp_hardware, $pengampu_id, $matakuliah_syarat_id;
+    public $matakuliah_id, $pengembang_id, $koordinator_id, $kaprodi_id, $pustaka_id, $mp_software, $mp_hardware, $pengampu_id, $matakuliah_syarat_id;
     public $cpl_id = [];
     public $cp_mk;
+    public $deskripsi_singkat;
 
     //pustaka
     public $jenis, $sumber;
@@ -32,6 +33,7 @@ class Create extends Component
 
     public function firstStepSubmit()
     {
+        // dd($this->matakuliah_id);
         $validatedData = $this->validate([
             'matakuliah_id'=>'required',
             'pengembang_id'=>'required',

@@ -159,11 +159,20 @@
                                         <td>{{ $post['waktu'] }}*50</td>
                                         <td>{{ $post['pengalaman_belajar'] }}</td>
                                         <td>{{ $post['bobot_nilai'] }}</td>
-                                        @foreach ($topicsget as $topic)
-                                            @if ($post['topik_id'] == $topic->topik_id)
-                                                <td>{{ $topic->topik }}</td>
-                                            @endif
-                                        @endforeach
+                                        <td>
+                                            @php
+                                                $displayedTopics = [];
+                                            @endphp
+                                        
+                                            @foreach ($topicsget as $topic)
+                                                @if ($post['topik_id'] == $topic->topik_id && !in_array($topic->topik, $displayedTopics))
+                                                    {{ $topic->topik }}
+                                                    @php
+                                                        $displayedTopics[] = $topic->topik;
+                                                    @endphp
+                                                @endif
+                                            @endforeach
+                                        </td>
                                     </tr>
                                 </tbody>
                             @endif
